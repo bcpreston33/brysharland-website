@@ -2,8 +2,6 @@
 hero_image: /assets/featured-art.jpg
 hero_alt: Colorful original artwork by Bry Sharland
 eyebrow: Art / Pop culture / Queer identity
-hero_title: BRY
-hero_subtitle: Sharland
 slogan_one: Bold art
 slogan_two: Bright colors
 slogan_three: Queer culture
