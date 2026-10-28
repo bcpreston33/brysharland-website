@@ -5,6 +5,6 @@ title: STAR WARS
 description: A gallery of artwork
 title_color: orange
 shadow_color: yellow
-title_font: Anton
+title_font: Barlow Condensed
 title_size: 180
 ---
