@@ -106,3 +106,14 @@ nav a:last-child:hover{background:var(--pink);color:#101010;transform:translate(
 
 /* Remove tinted caption backgrounds while retaining neon 3px rules */
 .gallery .art .info,.gallery .art:hover .info,.gallery .art:focus-visible .info{background:transparent!important;border-bottom:3px solid var(--art-color,var(--purple))!important;transition:none!important}
+
+/* Caption polish: muted color wash and breathing room between rows */
+.gallery{row-gap:52px!important}
+.gallery .art .info,
+.gallery .art:hover .info,
+.gallery .art:focus-visible .info{
+  background:linear-gradient(rgba(8,6,12,.84),rgba(8,6,12,.84)),var(--art-color,var(--purple))!important;
+  border-bottom:3px solid var(--art-color,var(--purple))!important;
+  transition:none!important;
+}
+@media(max-width:600px){.gallery{row-gap:38px!important}}
