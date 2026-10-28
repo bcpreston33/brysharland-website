@@ -1,0 +1,54 @@
+
+media:
+  input: assets/uploads
+  output: /assets/uploads
+
+content:
+  - name: artwork
+    label: Artwork
+    type: collection
+    path: content/artwork
+    format: yaml-frontmatter
+    filename: '{primary}.md'
+    view:
+      fields: [title, category, year, featured]
+      primary: title
+      sort: [title]
+      default:
+        sort: title
+        order: asc
+    fields:
+      - name: title
+        label: Artwork title
+        type: string
+        required: true
+      - name: image
+        label: Artwork image
+        type: image
+        required: true
+      - name: category
+        label: Category
+        type: select
+        required: true
+        options:
+          - { label: Queer, value: queer }
+          - { label: Portraits, value: portraits }
+          - { label: Star Wars, value: star-wars }
+          - { label: Nintendo, value: nintendo }
+          - { label: Miscellaneous, value: miscellaneous }
+      - name: year
+        label: Year
+        type: string
+      - name: medium
+        label: Medium
+        type: string
+      - name: dimensions
+        label: Dimensions
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: featured
+        label: Feature on homepage
+        type: boolean
+        default: false
