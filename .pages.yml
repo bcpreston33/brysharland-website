@@ -1,4 +1,3 @@
-
 media:
   input: assets/uploads
   output: /assets/uploads
@@ -13,9 +12,9 @@ content:
     view:
       fields: [title, category, year, featured, order]
       primary: title
-      sort: [title, order]
+      sort: [order, title]
       default:
-        sort: title
+        sort: order
         order: asc
     fields:
       - name: title
@@ -31,12 +30,7 @@ content:
         type: select
         required: true
         options:
-          values:
-            - Queer
-            - Portraits
-            - Star Wars
-            - Nintendo
-            - Miscellaneous
+          values: [Queer, Portraits, Star Wars, Nintendo, Miscellaneous]
       - name: year
         label: Year
         type: string
@@ -55,4 +49,49 @@ content:
         default: false
       - name: order
         label: Display order
+        type: number
+
+  - name: gallery-pages
+    label: Gallery Page Settings
+    type: collection
+    path: content/gallery-pages
+    format: yaml-frontmatter
+    filename: '{primary}.md'
+    view:
+      fields: [slug, title, title_color]
+      primary: slug
+    fields:
+      - name: slug
+        label: Page ID
+        type: select
+        required: true
+        options:
+          values: [queer, portraits, star-wars, nintendo, miscellaneous]
+      - name: eyebrow
+        label: Small heading
+        type: string
+      - name: title
+        label: Main title
+        type: string
+        required: true
+      - name: description
+        label: Description
+        type: text
+      - name: title_color
+        label: Main title color
+        type: select
+        options:
+          values: [orange, pink, purple, cyan, yellow, white]
+      - name: shadow_color
+        label: Offset layer color
+        type: select
+        options:
+          values: [cyan, pink, purple, orange, yellow, white]
+      - name: title_font
+        label: Main title font
+        type: select
+        options:
+          values: [Barlow Condensed, Anton, Oswald]
+      - name: title_size
+        label: Main title size in pixels (48-180)
         type: number
