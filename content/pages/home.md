@@ -10,10 +10,12 @@ slogan_three: Queer culture
 button_text: Explore the work ↗
 work_heading: "Explore "
 work_heading_accent: the work
-category_note: ""
+star_wars_image: /assets/uploads/Star Wars/Ahsoka-Lothal-LR.jpg
 feature_eyebrow: Featured ongoing project
 feature_title: Pink Triangle Portraits
-feature_description: Giving color and dignity to those who had it stripped away. Visit the separate portrait and biography project.
+feature_description: |-
+  Giving color and dignity to those who had it stripped away. 
+  Visit the separate portrait and biography project.
 feature_button_text: Visit the project ↗
 feature_url: https://www.pinktriangleportraits.com/
 ---
