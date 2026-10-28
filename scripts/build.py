@@ -33,6 +33,7 @@ for p in sorted((ROOT/'content/artwork').glob('*.md')):
     item['category']=category
     item['image']=image
     item['featured']=obj.get('featured') is True
+    item['order']=obj.get('order','')
     items.append(item)
 (DIST/'assets/artwork.json').write_text(json.dumps(items,ensure_ascii=False,indent=2),encoding='utf-8')
 print(f'Built {len(items)} artwork entries into dist/')
