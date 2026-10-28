@@ -43,7 +43,13 @@ settings_dir=ROOT/'content/gallery-pages'
 allowed_colors={'orange':'#ff8618','pink':'#ff27ac','purple':'#a435ff','cyan':'#05dff2','yellow':'#fff023','white':'#ffffff'}
 allowed_fonts={'Barlow Condensed':"'Barlow Condensed',sans-serif",
                'Anton':"'Anton',sans-serif",
-               'Oswald':"'Oswald',sans-serif"}
+               'Oswald':"'Oswald',sans-serif",
+               'Bebas Neue':"'Bebas Neue',sans-serif",
+               'Roboto Condensed':"'Roboto Condensed',sans-serif",
+               'Archivo Black':"'Archivo Black',sans-serif",
+               'Barlow Condensed Italic':"'Barlow Condensed',sans-serif",
+               'Oswald Italic':"'Oswald',sans-serif",
+               'Roboto Condensed Italic':"'Roboto Condensed',sans-serif"}
 for slug in ('queer','portraits','star-wars','nintendo','miscellaneous'):
     target=DIST/(slug+'.html')
     if not target.exists():continue
@@ -52,7 +58,7 @@ for slug in ('queer','portraits','star-wars','nintendo','miscellaneous'):
     obj={}
     if setting_file.exists():
         raw=setting_file.read_text(encoding='utf-8-sig')
-        match=re.match(r'^---\\s*\\n(.*?)\\n---(?:\\s*\\n|$)',raw,re.S)
+        match=re.match(r'^---\s*\n(.*?)\n---(?:\s*\n|$)',raw,re.S)
         if match:
             import yaml
             obj=yaml.safe_load(match.group(1)) or {}
@@ -66,7 +72,8 @@ for slug in ('queer','portraits','star-wars','nintendo','miscellaneous'):
     font=allowed_fonts.get(str(obj.get('title_font') or 'Barlow Condensed'),allowed_fonts['Barlow Condensed'])
     try:size=max(48,min(180,int(obj.get('title_size') or 110)))
     except (ValueError,TypeError):size=110
-    style=f'--heading-color:{color};--heading-shadow:{shadow};--heading-font:{font};--heading-size:clamp(52px,10vw,{size}px)'
+    italic='italic' in str(obj.get('title_font') or '').lower()
+    style=f'--heading-slant:{"italic" if italic else "normal"};--heading-color:{color};--heading-shadow:{shadow};--heading-font:{font};--heading-size:clamp(52px,10vw,{size}px)'
     head=f'<div class="eyebrow">{html.escape(eyebrow)}</div><h1 data-shadow-text="{html.escape(title,quote=True)}" style="{html.escape(style,quote=True)}">{html.escape(title)}</h1>'
     # Preserve existing description unless CMS explicitly provides one.
     if description:head+=f'<p>{html.escape(description)}</p>'
