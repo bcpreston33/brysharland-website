@@ -11,9 +11,9 @@ content:
     format: yaml-frontmatter
     filename: '{primary}.md'
     view:
-      fields: [title, category, year, featured]
+      fields: [title, category, year, featured, order]
       primary: title
-      sort: [title]
+      sort: [title, order]
       default:
         sort: title
         order: asc
@@ -26,7 +26,6 @@ content:
         label: Artwork image
         type: image
         required: true
-      
       - name: category
         label: Category
         type: select
@@ -38,7 +37,6 @@ content:
             - Star Wars
             - Nintendo
             - Miscellaneous
-
       - name: year
         label: Year
         type: string
@@ -55,3 +53,6 @@ content:
         label: Feature on homepage
         type: boolean
         default: false
+      - name: order
+        label: Display order
+        type: number
