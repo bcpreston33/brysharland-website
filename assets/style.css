@@ -98,3 +98,11 @@ nav a:last-child:hover{background:var(--pink);color:#101010;transform:translate(
 .gallery .art:hover .info,.gallery .art:focus-visible .info{background:linear-gradient(rgba(8,6,12,.52),rgba(8,6,12,.52)),var(--art-color,var(--purple));border-bottom-color:var(--art-color,var(--purple))}
 @media(max-width:900px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.gallery .art img{height:310px;max-height:310px}}
 @media(max-width:600px){.gallery{grid-template-columns:minmax(0,1fr)}.gallery .art img{height:350px;max-height:350px}.gallery .art .info{min-height:68px}}
+
+/* Natural artwork proportions; keep captions and rules full card width */
+.gallery .art img{height:auto!important;max-height:none!important;aspect-ratio:auto!important;object-fit:contain!important}
+@media(max-width:900px){.gallery .art img{height:auto!important;max-height:none!important}}
+@media(max-width:600px){.gallery .art img{height:auto!important;max-height:none!important}}
+
+/* Remove tinted caption backgrounds while retaining neon 3px rules */
+.gallery .art .info,.gallery .art:hover .info,.gallery .art:focus-visible .info{background:transparent!important;border-bottom:3px solid var(--art-color,var(--purple))!important;transition:none!important}

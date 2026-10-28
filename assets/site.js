@@ -6,7 +6,7 @@
   const slug=document.body.dataset.category;
   if(slug){
     const gallery=document.querySelector('.gallery');
-    const art=data.filter(x=>x.category===slug && x.image);
+    const art=data.filter(x=>x.category===slug && x.image).sort((a,b)=>{const n=x=>x.order===''||x.order==null?999999:Number(x.order);return n(a)-n(b)||String(a.title).localeCompare(String(b.title))});
     if(gallery){gallery.replaceChildren();
       if(!art.length){const empty=document.createElement('p');empty.className='gallery-empty';empty.textContent='Artwork will appear here as it is added.';gallery.append(empty)}
       // Stable, varied neon color per artwork (does not change on refresh).
