@@ -117,3 +117,19 @@ nav a:last-child:hover{background:var(--pink);color:#101010;transform:translate(
   transition:none!important;
 }
 @media(max-width:600px){.gallery{row-gap:38px!important}}
+
+/* Gallery headings: one offset neon layer, like the buttons */
+body[data-category] .pagehead h1{
+ position:relative;isolation:isolate;display:table;
+ color:var(--heading-color,#ff8618);
+ font-family:var(--heading-font,'Barlow Condensed',sans-serif);
+ font-size:var(--heading-size,clamp(65px,10vw,132px));
+ line-height:.98;
+}
+body[data-category] .pagehead h1::before{
+ content:attr(data-shadow-text);position:absolute;inset:0;z-index:-1;
+ color:var(--heading-shadow,#05dff2);transform:translate(5px,5px);
+ pointer-events:none;
+}
+body[data-category] .pagehead .eyebrow{color:var(--eyebrow-color,#05dff2)}
+body[data-category] .pagehead p{color:var(--description-color,#c8bccb)}
