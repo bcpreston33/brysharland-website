@@ -133,3 +133,7 @@ body[data-category] .pagehead h1::before{
 }
 body[data-category] .pagehead .eyebrow{color:var(--eyebrow-color,#05dff2)}
 body[data-category] .pagehead p{color:var(--description-color,#c8bccb)}
+
+/* Gallery font choices and italic style */
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&family=Bebas+Neue&family=Oswald:ital,wght@0,700;1,700&family=Roboto+Condensed:ital,wght@0,700;0,900;1,700;1,900&display=swap');
+body[data-category] .pagehead h1,body[data-category] .pagehead h1::before{font-style:var(--heading-slant,normal)}
