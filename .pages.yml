@@ -26,16 +26,19 @@ content:
         label: Artwork image
         type: image
         required: true
+      
       - name: category
         label: Category
         type: select
         required: true
         options:
-          - { label: Queer, value: queer }
-          - { label: Portraits, value: portraits }
-          - { label: Star Wars, value: star-wars }
-          - { label: Nintendo, value: nintendo }
-          - { label: Miscellaneous, value: miscellaneous }
+          values:
+            - Queer
+            - Portraits
+            - Star Wars
+            - Nintendo
+            - Miscellaneous
+
       - name: year
         label: Year
         type: string
