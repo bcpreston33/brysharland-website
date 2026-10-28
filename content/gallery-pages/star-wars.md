@@ -6,5 +6,5 @@ description: A gallery of artwork
 title_color: orange
 shadow_color: yellow
 title_font: Oswald
-title_size: 100
+title_size: 180
 ---
