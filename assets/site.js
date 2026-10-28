@@ -9,7 +9,13 @@
     const art=data.filter(x=>x.category===slug && x.image);
     if(gallery){gallery.replaceChildren();
       if(!art.length){const empty=document.createElement('p');empty.className='gallery-empty';empty.textContent='Artwork will appear here as it is added.';gallery.append(empty)}
-      art.forEach(x=>{const b=document.createElement('button');b.className='art';b.type='button';b.dataset.full=x.image;b.dataset.title=x.title;b.dataset.year=x.year||'';b.dataset.medium=x.medium||'';b.dataset.dimensions=x.dimensions||'';b.dataset.description=x.description||'';
+      // Stable, varied neon color per artwork (does not change on refresh).
+      const palette=['#ff29b4','#08e8f4','#ff851a','#f5f323','#a435ff'];
+      art.forEach((x,index)=>{const b=document.createElement('button');
+        const seed=String(x.title||'')+'|'+String(x.image||'');
+        let hash=2166136261;
+        for(let j=0;j<seed.length;j++){hash=Math.imul(hash^seed.charCodeAt(j),16777619)}
+        b.style.setProperty('--art-color',palette[((hash>>>0)+index)%palette.length]);b.className='art';b.type='button';b.dataset.full=x.image;b.dataset.title=x.title;b.dataset.year=x.year||'';b.dataset.medium=x.medium||'';b.dataset.dimensions=x.dimensions||'';b.dataset.description=x.description||'';
         const im=document.createElement('img');im.src=x.image;im.alt=x.title;im.loading='lazy';
         const info=document.createElement('div');info.className='info';const title=document.createElement('strong');title.textContent=x.title;
         const details=document.createElement('small');details.textContent=[x.medium,x.dimensions,x.year].filter(Boolean).join(' · ');
