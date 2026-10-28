@@ -95,3 +95,117 @@ content:
       - name: title_size
         label: Main title size in pixels (48-180)
         type: number
+
+  - name: homepage
+    label: Homepage
+    type: file
+    path: content/pages/home.md
+    format: yaml-frontmatter
+    fields:
+      - name: hero_image
+        label: Hero image
+        type: image
+      - name: hero_alt
+        label: Hero image description
+        type: string
+      - name: eyebrow
+        label: Small intro heading
+        type: string
+      - name: hero_title
+        label: Large hero title
+        type: string
+      - name: hero_subtitle
+        label: Second title line
+        type: string
+      - name: slogan_one
+        label: Slogan line 1
+        type: string
+      - name: slogan_two
+        label: Slogan line 2
+        type: string
+      - name: slogan_three
+        label: Slogan line 3
+        type: string
+      - name: button_text
+        label: Explore button text
+        type: string
+      - name: work_heading
+        label: Artwork section heading
+        type: string
+      - name: work_heading_accent
+        label: Artwork section accent text
+        type: string
+      - name: category_note
+        label: Text below artwork categories (leave blank to hide)
+        type: text
+      - name: queer_image
+        label: Queer category image
+        type: image
+      - name: portraits_image
+        label: Portraits category image
+        type: image
+      - name: star_wars_image
+        label: Star Wars category image
+        type: image
+      - name: nintendo_image
+        label: Nintendo category image
+        type: image
+      - name: miscellaneous_image
+        label: Miscellaneous category image
+        type: image
+      - name: feature_eyebrow
+        label: Featured project small heading
+        type: string
+      - name: feature_title
+        label: Featured project title
+        type: string
+      - name: feature_description
+        label: Featured project description
+        type: text
+      - name: feature_button_text
+        label: Featured project button
+        type: string
+      - name: feature_url
+        label: Featured project URL
+        type: string
+      - name: feature_image
+        label: Featured project image (optional)
+        type: image
+
+  - name: about-page
+    label: About Page
+    type: file
+    path: content/pages/about.md
+    format: yaml-frontmatter
+    fields:
+      - { name: eyebrow, label: Small heading, type: string }
+      - { name: title, label: Page title, type: string }
+      - { name: section_title, label: Content heading, type: string }
+      - { name: body, label: Artist biography, type: rich-text }
+      - { name: image, label: Artist photograph, type: image }
+
+  - name: contact-page
+    label: Contact Page
+    type: file
+    path: content/pages/contact.md
+    format: yaml-frontmatter
+    fields:
+      - { name: eyebrow, label: Small heading, type: string }
+      - { name: title, label: Page title, type: string }
+      - { name: section_title, label: Content heading, type: string }
+      - { name: body, label: Contact description, type: rich-text }
+      - { name: email, label: Public contact email, type: string }
+      - { name: instagram, label: Instagram profile URL, type: string }
+
+  - name: store-page
+    label: Store Page
+    type: file
+    path: content/pages/store.md
+    format: yaml-frontmatter
+    fields:
+      - { name: eyebrow, label: Small heading, type: string }
+      - { name: title, label: Page title, type: string }
+      - { name: section_title, label: Content heading, type: string }
+      - { name: body, label: Store description, type: rich-text }
+      - { name: button_text, label: Store button label, type: string }
+      - { name: store_url, label: External store URL, type: string }
