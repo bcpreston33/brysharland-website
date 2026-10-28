@@ -7,4 +7,5 @@ medium: a
 dimensions: a
 description: a
 featured: false
+order: 30
 ---
