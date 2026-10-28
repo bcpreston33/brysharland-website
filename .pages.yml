@@ -91,7 +91,7 @@ content:
         label: Main title font
         type: select
         options:
-          values: [Barlow Condensed, Anton, Oswald]
+          values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black]
       - name: title_size
         label: Main title size in pixels (48-180)
         type: number
