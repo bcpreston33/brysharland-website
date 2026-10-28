@@ -22,13 +22,15 @@ for p in sorted((ROOT/'content/artwork').glob('*.md')):
         raise SystemExit('Install dependencies: pip install -r requirements.txt') from e
     obj=yaml.safe_load(front)
     if not isinstance(obj,dict):continue
-    category=obj.get('category','')
+    category_raw=str(obj.get('category','')).strip()
+    category=re.sub(r'[^a-z0-9]+','-',category_raw.lower()).strip('-')
     if category not in ('queer','portraits','star-wars','nintendo','miscellaneous'):continue
     image=obj.get('image','')
     if not isinstance(image,str) or not image.startswith('/assets/uploads/') and not image.startswith('assets/uploads/'):
         continue
     image=image.lstrip('/')
     item={k:str(obj.get(k) or '') for k in ('title','category','year','medium','dimensions','description')}
+    item['category']=category
     item['image']=image
     item['featured']=obj.get('featured') is True
     items.append(item)
