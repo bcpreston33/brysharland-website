@@ -124,6 +124,25 @@ if home:
     if img:
         page=sub(r'(<section class="hero"><img )src="[^"]*" alt="[^"]*"',
                  r'\1' if False else '<section class="hero"><img src="'+escape(img,quote=True)+'" alt="'+escape(val(home,'hero_alt','Artwork by Bry Sharland'),quote=True)+'"',page)
+    # Independently uploaded heading graphics, retaining semantic text and a
+    # text-only fallback until an image is supplied.
+    bry_img=safe_image(home.get('bry_heading_image'))
+    sharland_img=safe_image(home.get('sharland_heading_image'))
+    if bry_img or sharland_img:
+        def pct(name,default):
+            try: return min(100,max(10,float(home.get(name) or default)))
+            except (ValueError,TypeError):return default
+        def px(name,default):
+            try:return min(160,max(-80,float(home.get(name) if home.get(name) is not None else default)))
+            except (ValueError,TypeError):return default
+        alignment=str(home.get('heading_alignment') or 'left').lower()
+        if alignment not in ('left','center','right'):alignment='left'
+        def graphic(image,label,kind):
+            if image:
+                return '<span class="hero-name-line '+kind+'"><img src="'+escape(image,quote=True)+'" alt="" loading="eager" decoding="async"></span>'
+            return '<span class="hero-name-line '+kind+' hero-name-text">'+escape(label)+'</span>'
+        markup='<h1 class="hero-name-images" aria-label="Bry Sharland" style="'+            '--bry-desktop:'+str(pct('bry_width_desktop',85))+'%;'+            '--sharland-desktop:'+str(pct('sharland_width_desktop',95))+'%;'+            '--bry-mobile:'+str(pct('bry_width_mobile',100))+'%;'+            '--sharland-mobile:'+str(pct('sharland_width_mobile',100))+'%;'+            '--name-gap-desktop:'+str(px('heading_gap_desktop',0))+'px;'+            '--name-gap-mobile:'+str(px('heading_gap_mobile',0))+'px;'+            '--name-align:'+alignment+'">'+            graphic(bry_img,'BRY','bry')+graphic(sharland_img,'Sharland','sharland')+'</h1>'
+        page=re.sub(r'<h1><b>BRY</b><em>Sharland</em></h1>',lambda m:markup,page,count=1)
     mapping={
       'eyebrow':r'(<section class="hero">.*?<div class="eyebrow">).*?(</div>)',
       'hero_title':r'(<section class="hero">.*?<h1><b>).*?(</b>)',
@@ -140,6 +159,7 @@ if home:
       'feature_button_text':r'(<section class="feature">.*?<a class="outline"[^>]*>).*?(</a>)'
     }
     for field,pattern in mapping.items():
+        if field in ('hero_title','hero_subtitle') and (bry_img or sharland_img):continue
         if field in home and home[field] is not None:
             content=escape(val(home,field))
             if field=='feature_title':content=content.replace('\n','<br>')
