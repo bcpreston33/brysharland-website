@@ -61,3 +61,17 @@ nav a:last-child:hover{background:var(--pink);color:#101010;transform:translate(
 @media(prefers-reduced-motion:reduce){.btn,.outline,nav a:last-child{transition:none}}
 
 .gallery-empty{grid-column:1/-1;padding:48px 20px;color:#c8b9cf;text-align:center;border:2px dashed #684379}.gallery .art{cursor:pointer}
+
+/* Full artwork images and accessible metadata captions */
+.gallery .art img{aspect-ratio:auto!important;object-fit:contain!important;width:100%;height:auto;max-height:540px;background:#130f18}
+.gallery .art{align-self:start;overflow:hidden}
+.gallery{align-items:start}
+.lightbox{overflow-y:auto}
+.lightbox figure{max-width:min(100%,1000px);max-height:calc(100vh - 70px);overflow-y:auto;text-align:center}
+.lightbox img{width:auto;height:auto;max-height:65vh;object-fit:contain}
+.lightbox figcaption{font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.45;max-width:760px;margin:15px auto 0;padding:0 12px 22px;white-space:normal}
+.lightbox figcaption strong{display:block;font:800 27px 'Barlow Condensed',sans-serif;text-transform:uppercase;color:var(--yellow)}
+.lightbox .caption-meta,.lightbox .caption-description,.lightbox .caption-count{display:block;margin-top:5px}
+.lightbox .caption-description{color:#e3d8e7;white-space:pre-line}
+.lightbox .caption-count{font-size:12px;color:#bbaec3;margin-top:12px}
+@media(max-width:600px){.lightbox img{max-height:55vh}.lightbox figcaption strong{font-size:23px}}

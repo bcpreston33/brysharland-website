@@ -9,7 +9,7 @@
     const art=data.filter(x=>x.category===slug && x.image);
     if(gallery){gallery.replaceChildren();
       if(!art.length){const empty=document.createElement('p');empty.className='gallery-empty';empty.textContent='Artwork will appear here as it is added.';gallery.append(empty)}
-      art.forEach(x=>{const b=document.createElement('button');b.className='art';b.type='button';b.dataset.full=x.image;b.dataset.title=x.title;
+      art.forEach(x=>{const b=document.createElement('button');b.className='art';b.type='button';b.dataset.full=x.image;b.dataset.title=x.title;b.dataset.year=x.year||'';b.dataset.medium=x.medium||'';b.dataset.dimensions=x.dimensions||'';b.dataset.description=x.description||'';
         const im=document.createElement('img');im.src=x.image;im.alt=x.title;im.loading='lazy';
         const info=document.createElement('div');info.className='info';const title=document.createElement('strong');title.textContent=x.title;
         const details=document.createElement('small');details.textContent=[x.medium,x.dimensions,x.year].filter(Boolean).join(' · ');
@@ -27,7 +27,7 @@ function setupArtworkLightbox(){
  const lb=document.querySelector('.lightbox');if(!lb)return;
  const items=[...document.querySelectorAll('.gallery [data-full]')];if(!items.length)return;
  let i=0;const large=lb.querySelector('#large'),caption=lb.querySelector('#caption');
- function show(){large.src=items[i].dataset.full;large.alt=items[i].dataset.title;caption.textContent=items[i].dataset.title+' · '+(i+1)+' / '+items.length}
+ function show(){large.src=items[i].dataset.full;large.alt=items[i].dataset.title;caption.replaceChildren();const title=document.createElement('strong');title.textContent=items[i].dataset.title;caption.append(title);const meta=[items[i].dataset.medium,items[i].dataset.dimensions,items[i].dataset.year].filter(Boolean).join(' · ');if(meta){const detail=document.createElement('span');detail.className='caption-meta';detail.textContent=meta;caption.append(detail)}if(items[i].dataset.description){const desc=document.createElement('span');desc.className='caption-description';desc.textContent=items[i].dataset.description;caption.append(desc)}const count=document.createElement('span');count.className='caption-count';count.textContent=(i+1)+' / '+items.length;caption.append(count)}
  function close(){lb.classList.remove('open');large.removeAttribute('src')}
  items.forEach((el,n)=>el.addEventListener('click',()=>{i=n;show();lb.classList.add('open')}));
  lb.querySelector('.close').onclick=close;
