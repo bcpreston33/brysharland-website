@@ -229,7 +229,10 @@ for slug in ('about','contact','store'):
 
 
 # Global appearance and navigation, applied to every generated HTML page.
-appearance=read_page('appearance')
+legacy=read_page('appearance')
+appearance={**legacy,**read_page('global-appearance'),**read_page('navigation-footer')}
+home_appearance=read_page('home-appearance')
+gallery_appearance=read_page('gallery-appearance')
 def hex_color(key):
     raw=str(appearance.get(key) or '').strip()
     return raw if re.fullmatch(r'#[0-9a-fA-F]{6}',raw) else None
@@ -258,10 +261,54 @@ if body_font:styles.append('--site-body-font:'+body_font+';')
 if heading_font:styles.append('--site-heading-font:'+heading_font+';')
 if nav_font:styles.append('--site-nav-font:'+nav_font+';')
 if appearance.get('logo_width'):styles.append('--site-logo-width:'+str(pixel('logo_width',100,60,240))+'px;')
+
+# Page-specific controls: scoped to the homepage or galleries.
+def optional_px(obj,key,lo,hi):
+    if obj.get(key) is None:return None
+    try:return max(lo,min(hi,int(obj[key])))
+    except (ValueError,TypeError):return None
+def optional_percent(obj,key,lo,hi):
+    return optional_px(obj,key,lo,hi)
+page_rules=[]
+def add_rule(selector,properties):
+    if properties:page_rules.append(selector+'{'+''.join(properties)+'}')
+p=[]
+for key,prop,lo,hi in [('hero_min_height','min-height',250,1200)]:
+    v=optional_px(home_appearance,key,lo,hi)
+    if v is not None:p.append(prop+':'+str(v)+'px;')
+add_rule('body:has(.hero) .hero',p)
+p=[]
+v=optional_percent(home_appearance,'hero_image_width',20,100)
+if v is not None:p.append('width:'+str(v)+'%;')
+v=optional_percent(home_appearance,'hero_image_position',0,100)
+if v is not None:p.append('object-position:'+str(v)+'% center;')
+add_rule('body:has(.hero) .hero>img',p)
+v=optional_px(home_appearance,'section_spacing',20,180)
+if v is not None:add_rule('body:has(.hero) .section',['padding-top:'+str(v)+'px;','padding-bottom:'+str(v)+'px;'])
+v=optional_px(home_appearance,'slogan_font_size',16,90)
+if v is not None:add_rule('body:has(.hero) .slogan',['font-size:'+str(v)+'px;'])
+mobile=[]
+v=optional_px(home_appearance,'hero_min_height_mobile',220,1100)
+if v is not None:mobile.append('.hero{min-height:'+str(v)+'px;}')
+v=optional_px(home_appearance,'slogan_font_size_mobile',16,80)
+if v is not None:mobile.append('.slogan{font-size:'+str(v)+'px;}')
+if mobile:page_rules.append('@media(max-width:700px){'+''.join('body:has(.hero) '+rule for rule in mobile)+'}')
+v=optional_px(gallery_appearance,'gallery_gap',0,100)
+if v is not None:add_rule('.gallery',['column-gap:'+str(v)+'px;'])
+v=optional_px(gallery_appearance,'gallery_row_gap',0,140)
+if v is not None:add_rule('.gallery',['row-gap:'+str(v)+'px!important;'])
+v=optional_px(gallery_appearance,'caption_font_size',10,30)
+if v is not None:add_rule('.gallery .art .info',['font-size:'+str(v)+'px;'])
+color=str(gallery_appearance.get('caption_background') or '').strip()
+if re.fullmatch(r'#[0-9a-fA-F]{6}',color):
+    add_rule('.gallery .art .info',['background:'+color+'!important;'])
+v=optional_px(gallery_appearance,'gallery_border_width',0,12)
+if v is not None:add_rule('.gallery .art .info',['border-bottom-width:'+str(v)+'px!important;'])
+
 if styles:
-    (DIST/'assets/appearance.css').write_text(':root{'+''.join(styles)+'}\n',encoding='utf-8')
+    (DIST/'assets/appearance.css').write_text(':root{'+''.join(styles)+'}\n'+'\n'.join(page_rules),encoding='utf-8')
 else:
-    (DIST/'assets/appearance.css').write_text('/* Defaults unchanged */\n',encoding='utf-8')
+    (DIST/'assets/appearance.css').write_text('/* Defaults unchanged */\n'+'\n'.join(page_rules),encoding='utf-8')
 
 for target in DIST.glob('*.html'):
     page=target.read_text(encoding='utf-8')
