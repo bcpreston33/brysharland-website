@@ -239,40 +239,71 @@ content:
       - { name: button_text, label: Store button label, type: string }
       - { name: store_url, label: External store URL, type: string }
 
-  - name: website-appearance
-    label: Website Appearance
+
+  - name: global-appearance
+    label: Global Appearance
     type: file
-    path: content/pages/appearance.md
+    path: content/pages/global-appearance.md
     format: yaml-frontmatter
     fields:
       - { name: site_name, label: Browser tab site name, type: string }
-      - { name: logo_image, label: Navigation logo image, type: image }
-      - { name: logo_width, label: Logo width in pixels (60–240), type: number }
-      - { name: background_color, label: Background color (hex), type: string }
-      - { name: text_color, label: Text color (hex), type: string }
-      - { name: pink, label: Neon pink (hex), type: string }
-      - { name: cyan, label: Neon cyan (hex), type: string }
-      - { name: orange, label: Neon orange (hex), type: string }
-      - { name: yellow, label: Neon yellow (hex), type: string }
-      - { name: purple, label: Neon purple (hex), type: string }
+      - { name: background_color, label: Main background hex, type: string }
+      - { name: text_color, label: Main text hex, type: string }
+      - { name: pink, label: Neon pink hex, type: string }
+      - { name: cyan, label: Neon cyan hex, type: string }
+      - { name: orange, label: Neon orange hex, type: string }
+      - { name: yellow, label: Neon yellow hex, type: string }
+      - { name: purple, label: Neon purple hex, type: string }
       - name: body_font
-        label: Body font
+        label: General body font
         type: select
         options:
           values: [DM Sans, Barlow Condensed, Oswald, Roboto Condensed]
       - name: heading_font
-        label: General headings font
+        label: General heading font
         type: select
         options:
           values: [Barlow Condensed, Anton, Oswald, Bebas Neue, Roboto Condensed, Archivo Black]
+  - name: homepage-appearance
+    label: Homepage Appearance
+    type: file
+    path: content/pages/home-appearance.md
+    format: yaml-frontmatter
+    fields:
+      - { name: hero_min_height, label: Hero minimum height desktop (px), type: number }
+      - { name: hero_min_height_mobile, label: Hero minimum height mobile (px), type: number }
+      - { name: hero_image_width, label: Hero background image width percent desktop, type: number }
+      - { name: hero_image_position, label: Hero background image horizontal position percent, type: number }
+      - { name: section_spacing, label: Homepage section vertical padding (px), type: number }
+      - { name: slogan_font_size, label: Slogan font size desktop (px), type: number }
+      - { name: slogan_font_size_mobile, label: Slogan font size mobile (px), type: number }
+  - name: gallery-appearance
+    label: Gallery Appearance
+    type: file
+    path: content/pages/gallery-appearance.md
+    format: yaml-frontmatter
+    fields:
+      - { name: gallery_gap, label: Artwork horizontal gap (px), type: number }
+      - { name: gallery_row_gap, label: Artwork vertical gap (px), type: number }
+      - { name: caption_font_size, label: Caption text size (px), type: number }
+      - { name: caption_background, label: Caption background hex, type: string }
+      - { name: gallery_border_width, label: Neon separator thickness (px), type: number }
+  - name: navigation-footer
+    label: Navigation & Footer
+    type: file
+    path: content/pages/navigation-footer.md
+    format: yaml-frontmatter
+    fields:
+      - { name: logo_image, label: Header logo image, type: image }
+      - { name: logo_width, label: Header logo width (px), type: number }
       - name: navigation_font
         label: Navigation font
         type: select
         options:
           values: [DM Sans, Barlow Condensed, Oswald, Roboto Condensed]
-      - { name: nav_home, label: Home navigation text, type: string }
-      - { name: nav_artwork, label: Artwork navigation text, type: string }
-      - { name: nav_about, label: About navigation text, type: string }
-      - { name: nav_contact, label: Contact navigation text, type: string }
-      - { name: nav_store, label: Store navigation text, type: string }
-      - { name: footer_text, label: Footer text, type: string }
+      - { name: nav_home, label: Home menu label, type: string }
+      - { name: nav_artwork, label: Artwork menu label, type: string }
+      - { name: nav_about, label: About menu label, type: string }
+      - { name: nav_contact, label: Contact menu label, type: string }
+      - { name: nav_store, label: Store menu label, type: string }
+      - { name: footer_text, label: Footer copyright text, type: string }
