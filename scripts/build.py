@@ -227,4 +227,58 @@ for slug in ('about','contact','store'):
     page=page.replace('</head>','<link rel="stylesheet" href="assets/cms-pages.css"></head>',1)
     target.write_text(page,encoding='utf-8')
 
+
+# Global appearance and navigation, applied to every generated HTML page.
+appearance=read_page('appearance')
+def hex_color(key):
+    raw=str(appearance.get(key) or '').strip()
+    return raw if re.fullmatch(r'#[0-9a-fA-F]{6}',raw) else None
+
+def pixel(key,default,low,high):
+    try:return max(low,min(high,int(appearance.get(key) or default)))
+    except (TypeError,ValueError):return default
+
+body_fonts={'DM Sans':"'DM Sans',sans-serif",'Barlow Condensed':"'Barlow Condensed',sans-serif",
+            'Oswald':"'Oswald',sans-serif",'Roboto Condensed':"'Roboto Condensed',sans-serif"}
+heading_fonts={'Barlow Condensed':"'Barlow Condensed',sans-serif",'Anton':"'Anton',sans-serif",
+               'Oswald':"'Oswald',sans-serif",'Bebas Neue':"'Bebas Neue',sans-serif",
+               'Roboto Condensed':"'Roboto Condensed',sans-serif",'Archivo Black':"'Archivo Black',sans-serif"}
+styles=[]
+for key in ('pink','cyan','orange','yellow','purple'):
+    color=hex_color(key)
+    if color:styles.append('--'+key+':'+color+';')
+background=hex_color('background_color')
+foreground=hex_color('text_color')
+if background:styles.append('--site-background:'+background+';')
+if foreground:styles.append('--site-text:'+foreground+';')
+body_font=body_fonts.get(appearance.get('body_font'))
+heading_font=heading_fonts.get(appearance.get('heading_font'))
+nav_font=body_fonts.get(appearance.get('navigation_font'))
+if body_font:styles.append('--site-body-font:'+body_font+';')
+if heading_font:styles.append('--site-heading-font:'+heading_font+';')
+if nav_font:styles.append('--site-nav-font:'+nav_font+';')
+if appearance.get('logo_width'):styles.append('--site-logo-width:'+str(pixel('logo_width',100,60,240))+'px;')
+if styles:
+    (DIST/'assets/appearance.css').write_text(':root{'+''.join(styles)+'}\n',encoding='utf-8')
+else:
+    (DIST/'assets/appearance.css').write_text('/* Defaults unchanged */\n',encoding='utf-8')
+
+for target in DIST.glob('*.html'):
+    page=target.read_text(encoding='utf-8')
+    page=page.replace('</head>','<link rel="stylesheet" href="assets/cms-pages.css"><link rel="stylesheet" href="assets/appearance.css"></head>',1) if 'assets/cms-pages.css' not in page else page.replace('</head>','<link rel="stylesheet" href="assets/appearance.css"></head>',1)
+    logo=safe_image(appearance.get('logo_image'))
+    if logo:
+        page=re.sub(r'(<header>.*?<img class="logo" src=")[^"]*(")',lambda m:m.group(1)+escape(logo,quote=True)+m.group(2),page,count=1,flags=re.S)
+    nav_labels={'nav_home':'index.html','nav_artwork':'index.html#work','nav_about':'about.html','nav_contact':'contact.html','nav_store':'store.html'}
+    for key,href in nav_labels.items():
+        if appearance.get(key):
+            pattern=r'(<nav\b[^>]*>.*?<a href="'+re.escape(href)+r'"[^>]*>).*?(</a>)'
+            page=re.sub(pattern,lambda m:m.group(1)+escape(str(appearance[key])[:45])+m.group(2),page,count=1,flags=re.S)
+    site_name=str(appearance.get('site_name') or '').strip()
+    if site_name:
+        page=re.sub(r'<title>(.*?)</title>',lambda m:'<title>'+escape(m.group(1).split(' | ')[0]+' | '+site_name[:80])+'</title>',page,count=1)
+    if appearance.get('footer_text'):
+        page=re.sub(r'(<footer\b[^>]*>.*?<div class="wrap">).*?(</div>)',lambda m:m.group(1)+escape(str(appearance['footer_text'])[:250])+m.group(2),page,count=1,flags=re.S)
+    target.write_text(page,encoding='utf-8')
+
 print(f'Built {len(items)} artwork entries into dist/')
