@@ -23,3 +23,11 @@
  .hero-name-line.hero-name-text.bry{font-size:23vw}
  .hero-name-line.hero-name-text.sharland{font-size:12vw}
 }
+
+/* Global appearance: optional controls, with approved design as defaults */
+body{background:var(--site-background,#09080c);color:var(--site-text,#faf6fa);font-family:var(--site-body-font,'DM Sans',sans-serif)}
+header{background:var(--site-background,#09080c)}
+header .logo{width:var(--site-logo-width,100px);height:auto}
+nav a{font-family:var(--site-nav-font,'DM Sans',sans-serif)}
+.section-title,.pagehead h1,.copy h2,.feature h2{font-family:var(--site-heading-font,'Barlow Condensed',sans-serif)}
+/* Existing gallery-specific font choices remain in charge of gallery titles. */
