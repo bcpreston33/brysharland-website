@@ -238,3 +238,41 @@ content:
       - { name: body, label: Store description, type: rich-text }
       - { name: button_text, label: Store button label, type: string }
       - { name: store_url, label: External store URL, type: string }
+
+  - name: website-appearance
+    label: Website Appearance
+    type: file
+    path: content/pages/appearance.md
+    format: yaml-frontmatter
+    fields:
+      - { name: site_name, label: Browser tab site name, type: string }
+      - { name: logo_image, label: Navigation logo image, type: image }
+      - { name: logo_width, label: Logo width in pixels (60–240), type: number }
+      - { name: background_color, label: Background color (hex), type: string }
+      - { name: text_color, label: Text color (hex), type: string }
+      - { name: pink, label: Neon pink (hex), type: string }
+      - { name: cyan, label: Neon cyan (hex), type: string }
+      - { name: orange, label: Neon orange (hex), type: string }
+      - { name: yellow, label: Neon yellow (hex), type: string }
+      - { name: purple, label: Neon purple (hex), type: string }
+      - name: body_font
+        label: Body font
+        type: select
+        options:
+          values: [DM Sans, Barlow Condensed, Oswald, Roboto Condensed]
+      - name: heading_font
+        label: General headings font
+        type: select
+        options:
+          values: [Barlow Condensed, Anton, Oswald, Bebas Neue, Roboto Condensed, Archivo Black]
+      - name: navigation_font
+        label: Navigation font
+        type: select
+        options:
+          values: [DM Sans, Barlow Condensed, Oswald, Roboto Condensed]
+      - { name: nav_home, label: Home navigation text, type: string }
+      - { name: nav_artwork, label: Artwork navigation text, type: string }
+      - { name: nav_about, label: About navigation text, type: string }
+      - { name: nav_contact, label: Contact navigation text, type: string }
+      - { name: nav_store, label: Store navigation text, type: string }
+      - { name: footer_text, label: Footer text, type: string }
