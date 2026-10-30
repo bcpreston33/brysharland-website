@@ -21,46 +21,16 @@
 @media(max-width:650px){.bry-store-grid{grid-template-columns:1fr;gap:22px}.bry-store-directory{padding-top:10px;padding-bottom:48px}.bry-store-card-content{padding:20px}}
 
 
-/* Store cards match the homepage artwork category tiles:
-   artwork fills the card, translucent black caption overlaid at the bottom,
-   and a bright category-color rule at the base. */
-.bry-store-card{
-  position:relative;
-  display:block;
-  overflow:hidden;
-  border:0;
-  border-bottom:4px solid #ff27ac;
-  background:#17111c;
-  min-height:390px;
-}
+
+/* Store cards: image above a separate translucent-black caption, like home tiles. */
+.bry-store-card{position:relative;display:flex;flex-direction:column;overflow:hidden;border:0;border-bottom:2px solid #ff27ac;background:#17111c;min-height:0}
 .bry-store-card:nth-child(3n+2){border-bottom-color:#a435ff}
 .bry-store-card:nth-child(3n){border-bottom-color:#05dff2}
-.bry-store-image{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  aspect-ratio:auto;
-}
-.bry-store-image img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
-.bry-store-card:hover .bry-store-image img{transform:scale(1.045)}
-.bry-store-card-content{
-  position:relative;
-  z-index:1;
-  margin-top:210px;
-  padding:20px 22px 22px;
-  background:rgba(0,0,0,.76);
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  gap:10px;
-  min-height:180px;
-  box-sizing:border-box;
-}
+.bry-store-image{position:relative;inset:auto;aspect-ratio:4/3;width:100%;height:auto;overflow:hidden;flex:none}
+.bry-store-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.bry-store-card:hover .bry-store-image img{transform:scale(1.035)}
+.bry-store-card-content{position:relative;z-index:1;margin:0;padding:18px 20px 20px;background:rgba(0,0,0,.78);display:flex;flex-direction:column;align-items:flex-start;gap:10px;flex:1;min-height:0;box-sizing:border-box}
 .bry-store-card h2{font-size:clamp(28px,2.7vw,40px)}
 .bry-store-card p{color:#f1ebf1;margin:0 0 4px}
-.bry-store-button,.bry-store-coming{margin-top:6px}
-@media(max-width:650px){
-  .bry-store-card{min-height:380px}
-  .bry-store-card-content{margin-top:200px;padding:18px 20px 20px}
-}
+.bry-store-button,.bry-store-coming{margin-top:auto}
+@media(max-width:650px){.bry-store-card-content{padding:18px 20px 20px}}
