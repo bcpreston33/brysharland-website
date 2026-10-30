@@ -541,3 +541,32 @@ for target in DIST.glob('*.html'):
     target.write_text(page,encoding='utf-8')
 
 print(f'Built {len(items)} artwork entries into dist/')
+
+
+# Interior-page hero/content separation (homepage and About deliberately excluded).
+# Move the contact/store introductory copy into the heading area, then place a
+# container-width divider between the page introduction and the main content.
+for slug in ('contact','store','queer','portraits','star-wars','nintendo','miscellaneous'):
+    target=DIST/(slug+'.html')
+    if not target.exists():continue
+    page=target.read_text(encoding='utf-8')
+    if slug=='contact':
+        # The CMS contact intro belongs with the title, not the form/social area.
+        m=re.search(r'<p class="bry-contact-intro">.*?</p>',page,re.S)
+        if m:
+            intro=m.group(0)
+            page=page[:m.start()]+page[m.end():]
+            page=page.replace('</section>',intro+'</section>',1) if '<section class="pagehead wrap">' in page else page
+    elif slug=='store':
+        # Move the optional CMS store introduction above the rule.
+        m=re.search(r'<div class="bry-store-intro">.*?</div>',page,re.S)
+        if m:
+            intro=m.group(0)
+            page=page[:m.start()]+page[m.end():]
+            page=page.replace('</section>',intro+'</section>',1) if '<section class="pagehead wrap">' in page else page
+    page,n=re.subn(r'(</section>)(\s*)(?=<(?:section|div)\b)',
+       lambda m:m.group(1)+'<div class="bry-interior-divider wrap" aria-hidden="true"><span></span></div>'+m.group(2),
+       page,count=1) if '<section class="pagehead wrap">' in page else (page,0)
+    if n:
+        page=page.replace('</head>','<link rel="stylesheet" href="assets/interior-divider.css"></head>',1)
+    target.write_text(page,encoding='utf-8')
