@@ -2,8 +2,8 @@
 eyebrow: Let's connect
 title: Get in Touch
 eyebrow_color: yellow
-title_color: cyan
-shadow_color: purple
+title_color: pink
+shadow_color: cyan
 section_color: purple
 section_shadow_color: yellow
 form_heading: Send a Message
