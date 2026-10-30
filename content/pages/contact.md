@@ -4,8 +4,8 @@ title: Get in Touch
 eyebrow_color: yellow
 title_color: pink
 shadow_color: cyan
-section_color: pink
-section_shadow_color: cyan
+section_color: cyan
+section_shadow_color: pink
 form_heading: Send a Message
 form_intro: Interested in a custom portrait, original artwork, an exhibition, or
   a collaboration? Send Bry a message or connect with him on social media.
