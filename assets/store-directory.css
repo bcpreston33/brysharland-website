@@ -62,3 +62,6 @@
 @media(prefers-reduced-motion:reduce){
   .bry-store-card,.bry-store-card-content,.bry-store-image img{transition:none}
 }
+
+/* Store nav button already has its own hover treatment; no active-page underline. */
+nav a:last-child[aria-current="page"]::after{display:none!important;content:none!important}
