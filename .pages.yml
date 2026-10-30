@@ -116,35 +116,9 @@ content:
       - name: hero_image
         label: Hero image
         type: image
-      - name: bry_heading_image
-        label: BRY heading image (transparent PNG or WebP)
+      - name: name_heading_image
+        label: BRY SHARLAND combined heading image (transparent PNG or WebP)
         type: image
-      - name: sharland_heading_image
-        label: SHARLAND heading image (transparent PNG or WebP)
-        type: image
-      - name: bry_width_desktop
-        label: BRY width desktop (percent, 10-100)
-        type: number
-      - name: sharland_width_desktop
-        label: SHARLAND width desktop (percent, 10-100)
-        type: number
-      - name: bry_width_mobile
-        label: BRY width mobile (percent, 10-100)
-        type: number
-      - name: sharland_width_mobile
-        label: SHARLAND width mobile (percent, 10-100)
-        type: number
-      - name: heading_gap_desktop
-        label: Space between images desktop (pixels)
-        type: number
-      - name: heading_gap_mobile
-        label: Space between images mobile (pixels)
-        type: number
-      - name: heading_alignment
-        label: Heading alignment
-        type: select
-        options:
-          values: [left, center, right]
       - name: hero_alt
         label: Hero image description
         type: string
