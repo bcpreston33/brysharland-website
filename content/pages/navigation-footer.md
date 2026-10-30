@@ -1,5 +1,5 @@
 ---
-navigation_font: Barlow Condensed
+navigation_font: Oswald
 nav_home: HOME
 nav_artwork: ARTWORK
 nav_about: ABOUT
