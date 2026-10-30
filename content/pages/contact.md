@@ -1,9 +1,11 @@
 ---
 eyebrow: Let's connect
 title: Get in Touch
-eyebrow_color: orange
+eyebrow_color: yellow
 title_color: pink
 shadow_color: purple
+section_color: yellow
+section_shadow_color: cyan
 form_heading: Send a Message
 form_intro: Interested in a custom portrait, original artwork, an exhibition, or
   a collaboration? Send Bry a message or connect with him on social media.
