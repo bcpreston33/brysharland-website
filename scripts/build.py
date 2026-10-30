@@ -259,7 +259,7 @@ for slug in ('about','contact','store'):
         if not re.fullmatch(r'[a-zA-Z0-9-]{20,80}',key):key=''
         intro=escape(val(obj,'form_intro','Interested in a commission, original artwork, collaboration, or just want to say hello? Send Bry a message.'))
         heading=escape(val(obj,'form_heading','SEND A MESSAGE'))
-        social_heading=escape(val(obj,'social_heading','FIND BRY ONLINE'))
+        social_heading='FOLLOW ME'
         topics=['Commission / Custom Artwork','Artwork Purchase','Exhibition / Collaboration','General Question']
         options=''.join('<option value="'+escape(t,quote=True)+'">'+escape(t)+'</option>' for t in topics)
         form='''<form class="bry-contact-form" action="https://api.web3forms.com/submit" method="POST">
@@ -452,6 +452,8 @@ for target in DIST.glob('*.html'):
     layout_values = [pixel('content_padding_desktop',60,0,180), pixel('content_padding_tablet',32,0,120), pixel('content_padding_mobile',20,0,80)]
     layout_vars = ';'.join('--layout-side-'+key+':'+str(val)+'px' for key,val in zip(('desktop','tablet','mobile'),layout_values))
     page=page.replace('</head>','<style>:root{'+layout_vars+'}</style><link rel="stylesheet" href="assets/layout-spacing.css"><link rel="stylesheet" href="assets/homepage-refinements.css"></head>',1)
+    if slug=='contact':
+        page=page.replace('</head>','<link rel="stylesheet" href="assets/global-socials.css"></head>',1)
     # Shared social links: use Contact Page CMS values across the website.
     # Contact already displays these links above its form, so avoid duplication.
     if slug != 'contact' and '<footer' in page:
@@ -469,7 +471,7 @@ for target in DIST.glob('*.html'):
             if url:
                 social_buttons.append('<a class="bry-global-social" href="'+escape(url,quote=True)+'" target="_blank" rel="noopener noreferrer"><span>'+label+'</span><span aria-hidden="true">↗</span></a>')
         if social_buttons:
-            socials_markup='<section class="bry-global-socials wrap" aria-label="Bry Sharland social media"><h2>FIND BRY ONLINE</h2><div class="bry-global-social-grid">'+''.join(social_buttons)+'</div></section>'
+            socials_markup='<section class="bry-global-socials wrap" aria-label="Bry Sharland social media"><h2>FOLLOW ME</h2><div class="bry-global-social-grid">'+''.join(social_buttons)+'</div></section>'
             page=page.replace('<footer',socials_markup+'<footer',1)
             page=page.replace('</head>','<link rel="stylesheet" href="assets/global-socials.css"></head>',1)
     target.write_text(page,encoding='utf-8')
