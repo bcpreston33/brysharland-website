@@ -1,0 +1,4 @@
+/* Keep EXPLORE THE WORK legible at all browser widths. */
+body:has(.hero) .section-title{font-size:clamp(38px,6.6vw,94px)!important;line-height:.95!important}
+body:has(.hero) .section-title em{font-size:.58em!important;line-height:1!important}
+@media(max-width:700px){body:has(.hero) .section-title{font-size:clamp(36px,8vw,58px)!important}}

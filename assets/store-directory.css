@@ -1,0 +1,21 @@
+/* Storefront directory; no checkout or product data is hosted here. */
+.bry-store-directory{padding-top:24px;padding-bottom:75px;box-sizing:border-box}
+.bry-store-intro{max-width:790px;margin-bottom:34px;color:#ded2e0;font-size:18px;line-height:1.55}
+.bry-store-intro p{margin:0 0 12px}
+.bry-store-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px;align-items:stretch}
+.bry-store-card{min-width:0;background:#19131d;border:1px solid #594064;display:flex;flex-direction:column}
+.bry-store-image{aspect-ratio:4/3;overflow:hidden;background:#27132c}
+.bry-store-image img{display:block;width:100%;height:100%;object-fit:cover}
+.bry-store-image-empty{display:grid;place-items:center;background:linear-gradient(140deg,#3d1b49,#14101a 65%,#123a40)}
+.bry-store-image-empty span{font:900 clamp(30px,4vw,60px)/1 'Barlow Condensed',sans-serif;color:#ff27ac;transform:rotate(-8deg)}
+.bry-store-card-content{padding:24px;display:flex;flex-direction:column;align-items:flex-start;flex:1;gap:12px}
+.bry-store-card h2{font:900 clamp(29px,3vw,42px)/1 'Barlow Condensed',sans-serif;text-transform:uppercase;color:#fff023;margin:0;overflow-wrap:anywhere}
+.bry-store-card:nth-child(2) h2{color:#ff27ac}
+.bry-store-card:nth-child(3) h2{color:#05dff2}
+.bry-store-card p{font-size:15px;line-height:1.5;color:#d7cbd9;margin:0 0 10px}
+.bry-store-button,.bry-store-coming{margin-top:auto;display:inline-flex;gap:15px;align-items:center;justify-content:space-between;padding:13px 18px;min-height:46px;box-sizing:border-box;font:800 13px 'DM Sans',sans-serif;letter-spacing:.035em;text-decoration:none;text-transform:uppercase}
+.bry-store-button{background:#ff27ac;color:#140c18;box-shadow:4px 4px 0 #05dff2}
+.bry-store-button:hover,.bry-store-button:focus-visible{transform:translate(-2px,-2px);box-shadow:6px 6px 0 #05dff2}
+.bry-store-coming{color:#bdb0c0;border:1px solid #66516c}
+@media(max-width:980px){.bry-store-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.bry-store-grid{grid-template-columns:1fr;gap:22px}.bry-store-directory{padding-top:10px;padding-bottom:48px}.bry-store-card-content{padding:20px}}
