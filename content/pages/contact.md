@@ -2,7 +2,7 @@
 eyebrow: Let's connect
 title: Get in Touch
 eyebrow_color: yellow
-title_color: pink
+title_color: cyan
 shadow_color: yellow
 section_color: yellow
 section_shadow_color: cyan
