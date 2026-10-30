@@ -1,0 +1,12 @@
+/* Consistent page introduction / main-content divider. */
+.bry-interior-divider.wrap{box-sizing:border-box;margin-top:60px;margin-bottom:60px;padding-top:0;padding-bottom:0}
+.bry-interior-divider span{display:block;height:2px;width:100%;background:var(--accent,#ff27ac)}
+/* Keep the rule exactly within the same content column as page headings. */
+.bry-interior-divider.wrap{max-width:var(--max,none)}
+/* Tighter descriptive copy below the heading, especially on Contact. */
+.pagehead.wrap > p,.pagehead.wrap > .bry-contact-intro,.pagehead.wrap > .bry-store-intro{position:relative;margin-top:calc(0px - 15px)}
+.pagehead.wrap > .bry-contact-intro{max-width:800px;line-height:1.6}
+.pagehead.wrap > .bry-store-intro{max-width:790px;margin-bottom:0}
+/* Remove the previous top offset because the divider supplies the spacing. */
+.bry-interior-divider + .bry-store-directory,.bry-interior-divider + .bry-contact-content{padding-top:0}
+@media(max-width:700px){.bry-interior-divider.wrap{margin-top:38px;margin-bottom:38px}}
