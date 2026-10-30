@@ -78,6 +78,7 @@ content:
         label: Description
         type: text
       - { name: intro_brush, label: Intro phrase (brush font; leave blank to hide), type: string }
+      - { name: intro_brush_color, label: Intro phrase color, type: select, options: { values: [pink, orange, purple, cyan, yellow, white] } }
       - { name: eyebrow_color, label: Small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
       - { name: eyebrow_font, label: Small heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
       - { name: eyebrow_size, label: Small heading size (px), type: number }
@@ -196,6 +197,7 @@ content:
       - { name: eyebrow, label: Small heading, type: string }
       - { name: title, label: Page title, type: string }
       - { name: intro_brush, label: Intro phrase (brush font; leave blank to hide), type: string }
+      - { name: intro_brush_color, label: Intro phrase color, type: select, options: { values: [pink, orange, purple, cyan, yellow, white] } }
       - { name: eyebrow_color, label: Small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
       - { name: eyebrow_font, label: Small heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
       - { name: eyebrow_size, label: Small heading size (px), type: number }
@@ -222,6 +224,7 @@ content:
       - { name: eyebrow, label: Small heading, type: string }
       - { name: title, label: Page title, type: string }
       - { name: intro_brush, label: Intro phrase (brush font; leave blank to hide), type: string }
+      - { name: intro_brush_color, label: Intro phrase color, type: select, options: { values: [pink, orange, purple, cyan, yellow, white] } }
       - { name: eyebrow_color, label: Small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
       - { name: eyebrow_font, label: Small heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
       - { name: eyebrow_size, label: Small heading size (px), type: number }
@@ -272,6 +275,7 @@ content:
       - { name: eyebrow, label: Small heading, type: string }
       - { name: title, label: Page title, type: string }
       - { name: intro_brush, label: Intro phrase (brush font; leave blank to hide), type: string }
+      - { name: intro_brush_color, label: Intro phrase color, type: select, options: { values: [pink, orange, purple, cyan, yellow, white] } }
       - { name: eyebrow_color, label: Small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
       - { name: eyebrow_font, label: Small heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
       - { name: eyebrow_size, label: Small heading size (px), type: number }
