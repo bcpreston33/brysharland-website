@@ -16,4 +16,5 @@ feature_description: |-
   Visit the separate portrait and biography project.
 feature_button_text: Visit the project ↗
 feature_url: https://www.pinktriangleportraits.com/
+feature_image: /assets/uploads/PTP-Image.jpg
 ---
