@@ -498,7 +498,8 @@ for target in DIST.glob('*.html'):
         if 'intro_brush' in cfg:
             intro=str(cfg.get('intro_brush') or '').strip()[:100]
         if intro:
-            label='<div class="bry-page-intro">'+escape(intro)+'</div>'
+            intro_color=allowed_colors.get(str(cfg.get('intro_brush_color') or 'pink').lower(),allowed_colors['pink'])
+            label='<div class="bry-page-intro" style="--bry-intro-color:'+intro_color+'">'+escape(intro)+'</div>'
             page=re.sub(r'(<section class="pagehead wrap">)\s*<div class="eyebrow">.*?</div>',lambda m:m.group(1)+label,page,count=1,flags=re.S)
         else:
             page=re.sub(r'(<section class="pagehead wrap">)\s*<div class="eyebrow">.*?</div>',r'\1',page,count=1,flags=re.S)
