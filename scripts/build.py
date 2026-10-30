@@ -214,11 +214,33 @@ for slug in ('about','contact','store'):
         img=safe_image(obj.get('image'))
         if img:extras='<img class="cms-portrait" src="'+escape(img,quote=True)+'" alt="Bry Sharland">'
     if slug=='contact':
-        email=val(obj,'email').strip()
-        if re.fullmatch(r'[^@\s]+@[^@\s]+\.[^@\s]+',email):
-            extras+='<p><a href="mailto:'+escape(email,quote=True)+'">'+escape(email)+'</a></p>'
-        instagram=safe_url(obj.get('instagram'))
-        if instagram:extras+='<p><a href="'+escape(instagram,quote=True)+'" rel="noopener" target="_blank">Instagram ↗</a></p>'
+        key=val(obj,'web3forms_access_key','e7d707fb-6527-4cb2-9d1d-f559d029fcb0').strip()
+        if not re.fullmatch(r'[a-zA-Z0-9-]{20,80}',key):key=''
+        intro=escape(val(obj,'form_intro','Interested in a commission, original artwork, collaboration, or just want to say hello? Send Bry a message.'))
+        heading=escape(val(obj,'form_heading','SEND A MESSAGE'))
+        social_heading=escape(val(obj,'social_heading','FIND BRY ONLINE'))
+        topics=['Commission / Custom Artwork','Artwork Purchase','Exhibition / Collaboration','General Question']
+        options=''.join('<option value="'+escape(t,quote=True)+'">'+escape(t)+'</option>' for t in topics)
+        form='''<form class="bry-contact-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="{key}">
+          <input type="hidden" name="subject" value="New Message from Bry Sharland Website">
+          <input type="checkbox" name="botcheck" class="bry-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="bry-form-grid"><label>Your name<input name="name" type="text" autocomplete="name" required maxlength="120"></label>
+          <label>Email address<input name="email" type="email" autocomplete="email" required maxlength="254"></label></div>
+          <label>What are you contacting Bry about?<select name="inquiry_type" required><option value="" selected disabled>Choose a subject</option>{options}</select></label>
+          <label>Your message<textarea name="message" rows="7" required maxlength="10000" placeholder="Tell Bry a little about what you have in mind..."></textarea></label>
+          <button class="bry-submit" type="submit">SEND MESSAGE <span aria-hidden="true">→</span></button>
+          <p class="bry-form-status" role="status" aria-live="polite"></p>
+          </form>'''.format(key=escape(key,quote=True),options=options) if key else '<p>Contact form setup is pending.</p>'
+        socials=[]
+        for label,field in [('DeviantArt','deviantart'),('Instagram','instagram'),('Bluesky','bluesky')]:
+            url=safe_url(obj.get(field))
+            if url:socials.append('<a class="bry-social" href="'+escape(url,quote=True)+'" target="_blank" rel="noopener noreferrer"><span>'+label+'</span><span aria-hidden="true">↗</span></a>')
+        social_html='<div class="bry-socials"><h2>'+social_heading+'</h2><div class="bry-social-grid">'+''.join(socials)+'</div></div>' if socials else ''
+        section='<section class="copy wrap bry-contact-content"><p class="bry-contact-intro">'+intro+'</p><div class="bry-contact-panel"><h2>'+heading+'</h2>'+form+'</div>'+social_html+'</section>'
+        page=re.sub(r'<section class="copy wrap">.*?</section>',lambda m:section,page,count=1,flags=re.S)
+        page=page.replace('</head>','<link rel="stylesheet" href="assets/contact.css"></head>',1)
+        page=page.replace('</body>','<script src="assets/contact.js" defer></script></body>',1)
     if slug=='store':
         store=safe_url(obj.get('store_url'))
         if store:extras+='<p><a class="btn" href="'+escape(store,quote=True)+'" rel="noopener" target="_blank">'+escape(val(obj,'button_text','Visit the store'))+'</a></p>'
