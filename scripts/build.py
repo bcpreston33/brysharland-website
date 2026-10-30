@@ -348,6 +348,57 @@ for target in DIST.glob('*.html'):
         page=re.sub(r'<title>(.*?)</title>',lambda m:'<title>'+escape(m.group(1).split(' | ')[0]+' | '+site_name[:80])+'</title>',page,count=1)
     if appearance.get('footer_text'):
         page=re.sub(r'(<footer\b[^>]*>.*?<div class="wrap">).*?(</div>)',lambda m:m.group(1)+escape(str(appearance['footer_text'])[:250])+m.group(2),page,count=1,flags=re.S)
+    # Page-level typography controls, independent of the global theme.
+    slug=target.stem
+    cfg=read_page(slug) if slug in ('about','contact','store') else (read_page('home') if slug=='index' else {})
+    if slug in ('queer','portraits','star-wars','nintendo','miscellaneous'):
+        cfg=read_page('unused')
+        gp=ROOT/'content/gallery-pages'/(slug+'.md')
+        if gp.exists():
+            m=re.match(r'^---\s*\n(.*?)\n---(?:\s*\n|$)',gp.read_text(encoding='utf-8-sig'),re.S)
+            if m:
+                data=yaml.safe_load(m.group(1)) or {}
+                if isinstance(data,dict):cfg=data
+    def color_setting(key):
+        return allowed_colors.get(str(cfg.get(key) or '').lower())
+    def font_setting(key):
+        return allowed_fonts.get(str(cfg.get(key) or ''))
+    def size_setting(key,lo=10,hi=180):
+        try:return str(max(lo,min(hi,int(cfg[key]))))+'px' if cfg.get(key) is not None else None
+        except (ValueError,TypeError):return None
+    def cssprops(spec):
+        return ';'.join('--'+prop+':'+str(value) for prop,value in spec.items() if value is not None)
+    if slug!='index':
+        # Set variables on the page heading container, so existing inline gallery title settings still work.
+        props=cssprops({'eyebrow-custom-color':color_setting('eyebrow_color'),
+          'eyebrow-custom-font':font_setting('eyebrow_font'),
+          'eyebrow-custom-size':size_setting('eyebrow_size',10,48),
+          'heading-color':color_setting('title_color'),
+          'heading-shadow':color_setting('shadow_color'),
+          'heading-font':font_setting('title_font'),
+          'heading-size':size_setting('title_size',48,180),
+          'section-custom-color':color_setting('section_color'),
+          'section-custom-shadow':color_setting('section_shadow_color'),
+          'section-custom-font':font_setting('section_font'),
+          'section-custom-size':size_setting('section_size',20,100)})
+        if props:
+            page=page.replace('<body','<body style="'+escape(props,quote=True)+'"',1)
+        # Section headings must get their own text labels for the offset effect.
+        def add_section_label(m):
+            attrs,content=m.group(1),m.group(2)
+            label=html.unescape(re.sub(r'<[^>]+>','',content)).strip()
+            return '<h2'+attrs+' data-shadow-text="'+escape(label,quote=True)+'">'+content+'</h2>'
+        page=re.sub(r'<h2([^>]*)>(.*?)</h2>',add_section_label,page,flags=re.S)
+    else:
+        props=cssprops({'eyebrow-custom-color':color_setting('eyebrow_color'),
+          'eyebrow-custom-size':size_setting('eyebrow_size',10,48),
+          'home-work-color':color_setting('work_heading_color'),
+          'home-work-shadow':color_setting('work_heading_shadow'),
+          'home-work-size':size_setting('work_heading_size',20,110),
+          'home-feature-color':color_setting('feature_heading_color'),
+          'home-feature-shadow':color_setting('feature_heading_shadow'),
+          'home-feature-size':size_setting('feature_heading_size',20,110)})
+        if props:page=page.replace('<body','<body style="'+escape(props,quote=True)+'"',1)
     # Restore layered headings for all gallery and ordinary pages, including CMS-edited titles.
     def heading_text(match):
         attrs, content = match.group(1), match.group(2)
@@ -356,7 +407,7 @@ for target in DIST.glob('*.html'):
             attrs += ' data-shadow-text="'+escape(label,quote=True)+'"'
         return '<h1'+attrs+'>'+content+'</h1>'
     page=re.sub(r'<h1([^>]*)>(.*?)</h1>', heading_text, page, count=1, flags=re.S) if 'class="pagehead wrap"' in page else page
-    page=page.replace('</head>','<link rel="stylesheet" href="assets/heading-restoration.css"></head>',1)
+    page=page.replace('</head>','<link rel="stylesheet" href="assets/heading-restoration.css"><link rel="stylesheet" href="assets/page-heading-controls.css"></head>',1)
     target.write_text(page,encoding='utf-8')
 
 print(f'Built {len(items)} artwork entries into dist/')
