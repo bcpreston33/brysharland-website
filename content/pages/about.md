@@ -2,5 +2,5 @@
 eyebrow: Bry Sharland
 title: About
 section_title: About
-body: Bry’s artist biography and statement will go here.
+collage_mobile: /assets/uploads/Bry-Site-About-Header-Image-Mobile-1.png
 ---
