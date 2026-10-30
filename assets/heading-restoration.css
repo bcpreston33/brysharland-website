@@ -1,0 +1,4 @@
+/* Restored double-color offset heading treatment, loaded last. */
+.pagehead h1{position:relative;isolation:isolate;display:table;max-width:100%;font-family:var(--heading-font,'Barlow Condensed',Impact,sans-serif);font-style:var(--heading-slant,normal);font-size:var(--heading-size,clamp(75px,12vw,165px));line-height:.9;color:var(--heading-color,var(--orange,#ff851a));text-transform:uppercase;overflow:visible;z-index:0}
+.pagehead h1::before{content:attr(data-shadow-text);position:absolute;inset:0;z-index:-1;white-space:pre-wrap;color:var(--heading-shadow,var(--cyan,#08e8f4));transform:translate(5px,6px);pointer-events:none;font:inherit;line-height:inherit;text-transform:inherit}
+@media(max-width:600px){.pagehead h1::before{transform:translate(3px,4px)}}
