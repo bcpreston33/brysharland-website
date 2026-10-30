@@ -12,7 +12,7 @@
   line-height:1.12;
   letter-spacing:0;
   text-transform:uppercase;
-  color:#ff27ac;
+  color:var(--bry-intro-color, #ff27ac);
   text-shadow:none;
 }
 @media(max-width:700px){.pagehead.wrap .bry-page-intro{font-size:clamp(20px,5vw,27px);margin-bottom:3px}}
