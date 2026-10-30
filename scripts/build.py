@@ -620,3 +620,13 @@ for slug in ('contact','store','queer','portraits','star-wars','nintendo','misce
     if n:
         page=page.replace('</head>','<link rel="stylesheet" href="assets/interior-divider.css"></head>',1)
     target.write_text(page,encoding='utf-8')
+
+# Responsive site navigation. Add the same accessible mobile menu on every page
+# without changing existing desktop links, page content, or navigation styling.
+for target in DIST.glob('*.html'):
+    page = target.read_text(encoding='utf-8')
+    if 'assets/mobile-navigation.css' not in page:
+        page = page.replace('</head>', '<link rel="stylesheet" href="assets/mobile-navigation.css"></head>', 1)
+    if 'assets/mobile-navigation.js' not in page:
+        page = page.replace('</body>', '<script src="assets/mobile-navigation.js" defer></script></body>', 1)
+    target.write_text(page, encoding='utf-8')
