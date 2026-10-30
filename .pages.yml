@@ -77,6 +77,7 @@ content:
       - name: description
         label: Description
         type: text
+      - { name: intro_brush, label: Intro phrase (brush font; leave blank to hide), type: string }
       - { name: eyebrow_color, label: Small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
       - { name: eyebrow_font, label: Small heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
       - { name: eyebrow_size, label: Small heading size (px), type: number }
@@ -194,6 +195,7 @@ content:
     fields:
       - { name: eyebrow, label: Small heading, type: string }
       - { name: title, label: Page title, type: string }
+      - { name: intro_brush, label: Intro phrase (brush font; leave blank to hide), type: string }
       - { name: eyebrow_color, label: Small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
       - { name: eyebrow_font, label: Small heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
       - { name: eyebrow_size, label: Small heading size (px), type: number }
@@ -219,6 +221,7 @@ content:
     fields:
       - { name: eyebrow, label: Small heading, type: string }
       - { name: title, label: Page title, type: string }
+      - { name: intro_brush, label: Intro phrase (brush font; leave blank to hide), type: string }
       - { name: eyebrow_color, label: Small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
       - { name: eyebrow_font, label: Small heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
       - { name: eyebrow_size, label: Small heading size (px), type: number }
@@ -238,6 +241,28 @@ content:
       - { name: bluesky, label: Bluesky URL, type: string }
       - { name: web3forms_access_key, label: Web3Forms public access key, type: string }
 
+  - name: storefronts
+    label: Storefronts
+    type: collection
+    path: content/stores
+    format: yaml-frontmatter
+    filename: '{primary}.md'
+    view:
+      fields: [title, order, visible]
+      primary: title
+      sort: [order, title]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - { name: title, label: Store name, type: string, required: true }
+      - { name: image, label: Store card image, type: image }
+      - { name: description, label: Short description, type: text }
+      - { name: url, label: Square storefront URL, type: string }
+      - { name: button_text, label: Button text, type: string }
+      - { name: order, label: Display order (lower first), type: number }
+      - { name: visible, label: Show this storefront, type: boolean, default: true }
+
   - name: store-page
     label: Store Page
     type: file
@@ -246,6 +271,7 @@ content:
     fields:
       - { name: eyebrow, label: Small heading, type: string }
       - { name: title, label: Page title, type: string }
+      - { name: intro_brush, label: Intro phrase (brush font; leave blank to hide), type: string }
       - { name: eyebrow_color, label: Small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
       - { name: eyebrow_font, label: Small heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
       - { name: eyebrow_size, label: Small heading size (px), type: number }
