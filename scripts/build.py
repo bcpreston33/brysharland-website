@@ -124,11 +124,16 @@ if home:
     if img:
         page=sub(r'(<section class="hero"><img )src="[^"]*" alt="[^"]*"',
                  r'\1' if False else '<section class="hero"><img src="'+escape(img,quote=True)+'" alt="'+escape(val(home,'hero_alt','Artwork by Bry Sharland'),quote=True)+'"',page)
+    # Single combined name graphic takes precedence over legacy split uploads.
+    combined_name_img=safe_image(home.get('name_heading_image'))
+    if combined_name_img:
+        combined_markup='<h1 class="hero-name-combined" aria-label="Bry Sharland"><img src="'+escape(combined_name_img,quote=True)+'" alt="" loading="eager" decoding="async"></h1>'
+        page=re.sub(r'<h1><b>BRY</b><em>Sharland</em></h1>',lambda m:combined_markup,page,count=1)
     # Independently uploaded heading graphics, retaining semantic text and a
     # text-only fallback until an image is supplied.
     bry_img=safe_image(home.get('bry_heading_image'))
     sharland_img=safe_image(home.get('sharland_heading_image'))
-    if bry_img or sharland_img:
+    if (bry_img or sharland_img) and not combined_name_img:
         def pct(name,default):
             try: return min(100,max(10,float(home.get(name) or default)))
             except (ValueError,TypeError):return default
@@ -159,7 +164,7 @@ if home:
       'feature_button_text':r'(<section class="feature">.*?<a class="outline"[^>]*>).*?(</a>)'
     }
     for field,pattern in mapping.items():
-        if field in ('hero_title','hero_subtitle') and (bry_img or sharland_img):continue
+        if field in ('hero_title','hero_subtitle') and (bry_img or sharland_img or combined_name_img):continue
         if field in home and home[field] is not None:
             content=escape(val(home,field))
             if field=='feature_title':content=content.replace('\n','<br>')
@@ -415,7 +420,7 @@ for target in DIST.glob('*.html'):
     page=page.replace('</head>','<link rel="stylesheet" href="assets/heading-restoration.css"><link rel="stylesheet" href="assets/page-heading-controls.css"></head>',1)
     layout_values = [pixel('content_padding_desktop',60,0,180), pixel('content_padding_tablet',32,0,120), pixel('content_padding_mobile',20,0,80)]
     layout_vars = ';'.join('--layout-side-'+key+':'+str(val)+'px' for key,val in zip(('desktop','tablet','mobile'),layout_values))
-    page=page.replace('</head>','<style>:root{'+layout_vars+'}</style><link rel="stylesheet" href="assets/layout-spacing.css"></head>',1)
+    page=page.replace('</head>','<style>:root{'+layout_vars+'}</style><link rel="stylesheet" href="assets/layout-spacing.css"><link rel="stylesheet" href="assets/homepage-refinements.css"></head>',1)
     target.write_text(page,encoding='utf-8')
 
 print(f'Built {len(items)} artwork entries into dist/')
