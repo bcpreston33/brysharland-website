@@ -77,6 +77,9 @@ content:
       - name: description
         label: Description
         type: text
+      - { name: eyebrow_color, label: Small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: eyebrow_font, label: Small heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: eyebrow_size, label: Small heading size (px), type: number }
       - name: title_color
         label: Main title color
         type: select
@@ -102,6 +105,14 @@ content:
     path: content/pages/home.md
     format: yaml-frontmatter
     fields:
+      - { name: eyebrow_color, label: Hero small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: eyebrow_size, label: Hero small heading size (px), type: number }
+      - { name: work_heading_color, label: Artwork section heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: work_heading_shadow, label: Artwork section offset color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: work_heading_size, label: Artwork section heading size (px), type: number }
+      - { name: feature_heading_color, label: Featured project heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: feature_heading_shadow, label: Featured project offset color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: feature_heading_size, label: Featured project heading size (px), type: number }
       - name: hero_image
         label: Hero image
         type: image
@@ -209,6 +220,17 @@ content:
     fields:
       - { name: eyebrow, label: Small heading, type: string }
       - { name: title, label: Page title, type: string }
+      - { name: eyebrow_color, label: Small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: eyebrow_font, label: Small heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: eyebrow_size, label: Small heading size (px), type: number }
+      - { name: title_color, label: Page title front color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: shadow_color, label: Page title offset color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: title_font, label: Page title font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: title_size, label: Page title size (px), type: number }
+      - { name: section_color, label: Section heading front color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: section_shadow_color, label: Section heading offset color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: section_font, label: Section heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: section_size, label: Section heading size (px), type: number }
       - { name: section_title, label: Content heading, type: string }
       - { name: body, label: Artist biography, type: rich-text }
       - { name: image, label: Artist photograph, type: image }
@@ -221,6 +243,17 @@ content:
     fields:
       - { name: eyebrow, label: Small heading, type: string }
       - { name: title, label: Page title, type: string }
+      - { name: eyebrow_color, label: Small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: eyebrow_font, label: Small heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: eyebrow_size, label: Small heading size (px), type: number }
+      - { name: title_color, label: Page title front color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: shadow_color, label: Page title offset color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: title_font, label: Page title font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: title_size, label: Page title size (px), type: number }
+      - { name: section_color, label: Section heading front color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: section_shadow_color, label: Section heading offset color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: section_font, label: Section heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: section_size, label: Section heading size (px), type: number }
       - { name: form_heading, label: Contact form heading, type: string }
       - { name: form_intro, label: Contact page introduction, type: text }
       - { name: social_heading, label: Social links heading, type: string }
@@ -237,6 +270,17 @@ content:
     fields:
       - { name: eyebrow, label: Small heading, type: string }
       - { name: title, label: Page title, type: string }
+      - { name: eyebrow_color, label: Small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: eyebrow_font, label: Small heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: eyebrow_size, label: Small heading size (px), type: number }
+      - { name: title_color, label: Page title front color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: shadow_color, label: Page title offset color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: title_font, label: Page title font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: title_size, label: Page title size (px), type: number }
+      - { name: section_color, label: Section heading front color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: section_shadow_color, label: Section heading offset color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: section_font, label: Section heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: section_size, label: Section heading size (px), type: number }
       - { name: section_title, label: Content heading, type: string }
       - { name: body, label: Store description, type: rich-text }
       - { name: button_text, label: Store button label, type: string }
