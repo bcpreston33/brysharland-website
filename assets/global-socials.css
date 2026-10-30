@@ -1,0 +1,11 @@
+/* Shared social section above footer. Page content retains its normal margins. */
+.bry-global-socials{box-sizing:border-box;padding-top:52px;padding-bottom:64px}
+.bry-global-socials h2{font-family:'Barlow Condensed',sans-serif;font-size:clamp(30px,5vw,52px);line-height:1.05;text-transform:uppercase;color:var(--cyan,#05dff2);margin:0 0 28px}
+.bry-global-social-grid{display:flex;flex-wrap:wrap;align-items:flex-start;gap:22px;padding:4px 8px 10px 0}
+.bry-global-social{display:inline-flex;justify-content:center;align-items:center;gap:18px;min-height:54px;box-sizing:border-box;padding:15px 24px;background:var(--pink,#ff29b4);color:#100b14;text-decoration:none;box-shadow:5px 5px 0 var(--cyan,#08e8f4);font:800 13px/1.1 'DM Sans',sans-serif;letter-spacing:.035em;text-transform:uppercase;transition:transform .18s,box-shadow .18s}
+.bry-global-social:nth-child(2){background:var(--cyan,#08e8f4);box-shadow:5px 5px 0 var(--purple,#a435ff)}
+.bry-global-social:nth-child(3){background:var(--purple,#a435ff);box-shadow:5px 5px 0 var(--yellow,#f5f323);color:#fff}
+.bry-global-social:hover,.bry-global-social:focus-visible{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--cyan,#08e8f4)}
+.bry-global-social:nth-child(2):hover,.bry-global-social:nth-child(2):focus-visible{box-shadow:7px 7px 0 var(--purple,#a435ff)}
+.bry-global-social:nth-child(3):hover,.bry-global-social:nth-child(3):focus-visible{box-shadow:7px 7px 0 var(--yellow,#f5f323)}
+@media(max-width:700px){.bry-global-socials{padding-top:36px;padding-bottom:48px}.bry-global-social-grid{display:grid;grid-template-columns:1fr;gap:16px}.bry-global-social{justify-content:space-between}}
