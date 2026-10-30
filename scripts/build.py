@@ -211,8 +211,13 @@ for slug in ('about','contact','store'):
         page=re.sub(r'(<section class="copy wrap"><h2>.*?</h2>).*?(</section>)',lambda m:m.group(1)+'<div class="cms-body">'+formatted+'</div>'+m.group(2),page,count=1,flags=re.S)
     extras=''
     if slug=='about':
-        img=safe_image(obj.get('image'))
-        if img:extras='<img class="cms-portrait" src="'+escape(img,quote=True)+'" alt="Bry Sharland">'
+        desktop=safe_image(obj.get('collage_desktop')) or 'assets/uploads/Bry-Site-About-Header-Image-Monitor.png'
+        mobile=safe_image(obj.get('collage_mobile')) or 'assets/uploads/Bry-Site-About-Header-Image-Mobile.png'
+        if desktop:
+            mobile_source='<source media="(max-width: 700px)" srcset="'+escape(mobile,quote=True)+'">' if mobile else ''
+            collage='<div class="bry-about-collage wrap"><picture>'+mobile_source+'<img src="'+escape(desktop,quote=True)+'" alt="Collage of Bry Sharland self-portraits and artwork" decoding="async"></picture></div>'
+            page=page.replace('<section class="copy wrap">',collage+'<section class="copy wrap">',1)
+            page=page.replace('</head>','<link rel="stylesheet" href="assets/about-collage.css"></head>',1)
     if slug=='contact':
         key=val(obj,'web3forms_access_key','e7d707fb-6527-4cb2-9d1d-f559d029fcb0').strip()
         if not re.fullmatch(r'[a-zA-Z0-9-]{20,80}',key):key=''
