@@ -413,6 +413,9 @@ for target in DIST.glob('*.html'):
         return '<h1'+attrs+'>'+content+'</h1>'
     page=re.sub(r'<h1([^>]*)>(.*?)</h1>', heading_text, page, count=1, flags=re.S) if 'class="pagehead wrap"' in page else page
     page=page.replace('</head>','<link rel="stylesheet" href="assets/heading-restoration.css"><link rel="stylesheet" href="assets/page-heading-controls.css"></head>',1)
+    layout_values = [pixel('content_padding_desktop',60,0,180), pixel('content_padding_tablet',32,0,120), pixel('content_padding_mobile',20,0,80)]
+    layout_vars = ';'.join('--layout-side-'+key+':'+str(val)+'px' for key,val in zip(('desktop','tablet','mobile'),layout_values))
+    page=page.replace('</head>','<style>:root{'+layout_vars+'}</style><link rel="stylesheet" href="assets/layout-spacing.css"></head>',1)
     target.write_text(page,encoding='utf-8')
 
 print(f'Built {len(items)} artwork entries into dist/')
