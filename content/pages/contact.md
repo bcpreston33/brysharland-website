@@ -1,6 +1,7 @@
 ---
 eyebrow: Let's connect
 title: Get in Touch
+intro_brush_color: yellow
 eyebrow_color: yellow
 title_color: pink
 shadow_color: cyan
