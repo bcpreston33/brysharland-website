@@ -1,8 +1,11 @@
 ---
-eyebrow: Bry Sharland
-title: Contact
-section_title: Contact
-body: Contact details can be added here.
-email: ""
-instagram: ""
+eyebrow: Let's connect
+title: Get in Touch
+form_heading: Send a Message
+form_intro: Interested in a custom portrait, original artwork, an exhibition, or a collaboration? Send Bry a message or connect with him on social media.
+social_heading: Find Bry Online
+deviantart: https://www.deviantart.com/brysharland
+instagram: https://www.instagram.com/brysharlandart/
+bluesky: https://bsky.app/profile/brysharlandart.bsky.social
+web3forms_access_key: e7d707fb-6527-4cb2-9d1d-f559d029fcb0
 ---
