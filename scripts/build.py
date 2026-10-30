@@ -43,7 +43,7 @@ try:
 except ImportError as exc:
     raise SystemExit('Pillow is required: add Pillow>=10,<13 to requirements.txt') from exc
 
-MAX_ARTWORK_SIDE = 1000
+MAX_ARTWORK_SIDE = 700
 # Include images in gallery category subfolders even if they have not yet
 # been assigned to a Pages CMS artwork entry. Preserve non-gallery assets,
 # especially the full-width About collages and site branding.
