@@ -44,7 +44,22 @@ except ImportError as exc:
     raise SystemExit('Pillow is required: add Pillow>=10,<13 to requirements.txt') from exc
 
 MAX_ARTWORK_SIDE = 1000
-for relative in sorted({item['image'] for item in items}):
+# Include images in gallery category subfolders even if they have not yet
+# been assigned to a Pages CMS artwork entry. Preserve non-gallery assets,
+# especially the full-width About collages and site branding.
+GALLERY_FOLDERS = {'queer', 'queer art', 'portraits', 'star wars', 'star-wars',
+                   'nintendo', 'miscellaneous', 'misc', 'other'}
+uploads = ROOT / 'assets' / 'uploads'
+category_images = set()
+if uploads.exists():
+    for source_file in uploads.rglob('*'):
+        if not source_file.is_file():
+            continue
+        folder_parts = [part.lower() for part in source_file.relative_to(uploads).parts[:-1]]
+        if any(part in GALLERY_FOLDERS for part in folder_parts):
+            if source_file.suffix.lower() in ('.jpg', '.jpeg', '.png', '.webp'):
+                category_images.add(source_file.relative_to(ROOT).as_posix())
+for relative in sorted({item['image'] for item in items} | category_images):
     source = ROOT / relative
     public = DIST / relative
     if not source.is_file():
