@@ -9,3 +9,17 @@
 .bry-global-social:nth-child(2):hover,.bry-global-social:nth-child(2):focus-visible{box-shadow:7px 7px 0 var(--purple,#a435ff)}
 .bry-global-social:nth-child(3):hover,.bry-global-social:nth-child(3):focus-visible{box-shadow:7px 7px 0 var(--yellow,#f5f323)}
 @media(max-width:700px){.bry-global-socials{padding-top:36px;padding-bottom:48px}.bry-global-social-grid{display:grid;grid-template-columns:1fr;gap:16px}.bry-global-social{justify-content:space-between}}
+
+/* Inline social bar on desktop, stacked on small screens, including Contact. */
+@media(min-width:701px){
+  .bry-global-socials{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+  .bry-global-socials h2{flex:0 0 auto;margin:0;font-size:clamp(20px,2.1vw,28px);line-height:1.15}
+  .bry-global-social-grid{flex:0 1 auto;align-items:center;gap:18px}
+  .bry-contact-content .bry-socials{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+  .bry-contact-content .bry-socials h2{flex:0 0 auto;margin:0;font-size:clamp(20px,2.1vw,28px);line-height:1.15}
+  .bry-contact-content .bry-social-grid{flex:0 1 auto;align-items:center;gap:18px}
+}
+@media(max-width:700px){
+  .bry-global-socials h2,.bry-contact-content .bry-socials h2{font-size:26px;margin:0 0 18px}
+  .bry-global-social-grid,.bry-contact-content .bry-social-grid{display:grid;grid-template-columns:1fr;gap:16px}
+}
