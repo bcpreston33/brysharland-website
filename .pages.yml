@@ -296,6 +296,9 @@ content:
     format: yaml-frontmatter
     fields:
       - { name: site_name, label: Browser tab site name, type: string }
+      - { name: content_padding_desktop, label: Desktop side spacing (px), type: number }
+      - { name: content_padding_tablet, label: Tablet side spacing (px), type: number }
+      - { name: content_padding_mobile, label: Mobile side spacing (px), type: number }
       - { name: background_color, label: Main background hex, type: string }
       - { name: text_color, label: Main text hex, type: string }
       - { name: pink, label: Neon pink hex, type: string }
