@@ -1,0 +1,31 @@
+/* Responsive navigation, independent of the desktop menu styles. */
+@media (max-width: 760px) {
+  header { position: relative; z-index: 100; }
+  header > .wrap { display:flex; align-items:center; justify-content:space-between; flex-wrap:nowrap; min-height:72px; gap:16px; }
+  header > .wrap > a { flex:0 1 auto; min-width:0; }
+  header > .wrap .logo { max-width:100%; max-height:64px; width:auto; object-fit:contain; }
+  .bry-menu-toggle {
+    display:inline-flex; flex:0 0 auto; align-items:center; justify-content:center;
+    width:48px; height:44px; padding:8px; margin-left:auto;
+    color:#fff; background:#17111c; border:2px solid var(--pink,#ff29b4);
+    box-shadow:3px 3px 0 var(--cyan,#08e8f4); cursor:pointer;
+  }
+  .bry-menu-toggle svg { width:26px; height:26px; fill:none; stroke:currentColor; stroke-width:2.5; stroke-linecap:round; }
+  header > .wrap > nav[aria-label="Main navigation"] {
+    display:none !important; position:absolute; left:0; right:0; top:100%;
+    margin:0; padding:18px 20px 24px; background:#100d14;
+    border-bottom:2px solid var(--purple,#a435ff);
+    box-shadow:0 16px 24px rgba(0,0,0,.45);
+    flex-direction:column; align-items:stretch; gap:6px; width:100%;
+  }
+  header > .wrap > nav[aria-label="Main navigation"].bry-menu-open { display:flex !important; }
+  header > .wrap > nav[aria-label="Main navigation"] a {
+    display:flex; justify-content:flex-start; min-height:44px; width:100%;
+    padding:10px 12px; margin:0; white-space:normal;
+  }
+  header > .wrap > nav[aria-label="Main navigation"] a:last-child {
+    width:max-content; max-width:100%; margin:8px 0 4px;
+  }
+  header > .wrap > nav[aria-label="Main navigation"] a[aria-current="page"]::after { display:none; }
+}
+@media (min-width: 761px) { .bry-menu-toggle { display:none !important; } }
