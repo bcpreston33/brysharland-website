@@ -29,3 +29,35 @@
   header > .wrap > nav[aria-label="Main navigation"] a[aria-current="page"]::after { display:none; }
 }
 @media (min-width: 761px) { .bry-menu-toggle { display:none !important; } }
+
+/* Mobile header alignment and complete tap target */
+@media (max-width:760px) {
+  body header > .wrap, body header .wrap {
+    display:flex !important; flex-direction:row !important; flex-wrap:nowrap !important;
+    align-items:center !important; justify-content:space-between !important;
+    gap:12px !important; min-height:76px;
+  }
+  body header .wrap > a:has(.logo) {display:flex !important; align-items:center; flex:0 1 auto; width:auto !important; min-width:0; margin:0 !important;}
+  body header .wrap .logo {display:block; max-width:min(55vw,220px) !important; max-height:64px !important; width:auto !important; height:auto !important;}
+  body header .wrap > .bry-menu-toggle {
+    display:flex !important; position:relative; z-index:1002; flex:0 0 48px !important;
+    width:48px !important; height:48px !important; padding:0 !important;
+    align-items:center !important; justify-content:center !important;
+    margin:0 0 0 auto !important; cursor:pointer; touch-action:manipulation;
+    pointer-events:auto !important;
+  }
+  body header .wrap > .bry-menu-toggle svg {pointer-events:none;}
+  body header .wrap > nav[aria-label="Main navigation"] {z-index:1001;}
+  body header .wrap > nav[aria-label="Main navigation"] a {
+    font-size:18px !important; line-height:1.35 !important; font-weight:700;
+    padding:13px 14px !important; min-height:50px !important;
+    background:transparent !important; box-shadow:none !important;
+    border:0 !important; border-radius:0 !important;
+    color:#fff !important; width:100% !important; max-width:none !important;
+    margin:0 !important; text-decoration:none !important;
+  }
+  body header .wrap > nav[aria-label="Main navigation"] a:hover,
+  body header .wrap > nav[aria-label="Main navigation"] a:focus-visible {color:var(--pink,#ff29b4) !important; background:rgba(255,255,255,.07) !important;}
+  body header .wrap > nav[aria-label="Main navigation"] a::before,
+  body header .wrap > nav[aria-label="Main navigation"] a::after {display:none !important;}
+}
