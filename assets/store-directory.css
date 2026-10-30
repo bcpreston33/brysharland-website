@@ -34,3 +34,31 @@
 .bry-store-card p{color:#f1ebf1;margin:0 0 4px}
 .bry-store-button,.bry-store-coming{margin-top:auto}
 @media(max-width:650px){.bry-store-card-content{padding:18px 20px 20px}}
+
+
+/* Connected image + caption hover treatment, with visibly tinted translucent panel. */
+.bry-store-card{
+  --store-accent:#ff27ac;
+  background:#211326;
+  border-bottom-color:var(--store-accent);
+  transition:box-shadow .25s ease,background-color .25s ease;
+}
+.bry-store-card:nth-child(3n+2){--store-accent:#a435ff;border-bottom-color:var(--store-accent)}
+.bry-store-card:nth-child(3n){--store-accent:#05dff2;border-bottom-color:var(--store-accent)}
+.bry-store-card-content{
+  background:rgba(71,32,82,.66);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+  transition:background-color .3s ease,box-shadow .3s ease;
+}
+.bry-store-card:nth-child(3n+2) .bry-store-card-content{background:rgba(61,34,88,.68)}
+.bry-store-card:nth-child(3n) .bry-store-card-content{background:rgba(20,66,76,.68)}
+.bry-store-card:hover .bry-store-card-content,
+.bry-store-card:focus-within .bry-store-card-content{
+  background:color-mix(in srgb,var(--store-accent) 30%,#141018 70%);
+  box-shadow:inset 0 3px 0 var(--store-accent);
+}
+.bry-store-card:hover,
+.bry-store-card:focus-within{box-shadow:0 8px 25px rgba(0,0,0,.28)}
+@media(prefers-reduced-motion:reduce){
+  .bry-store-card,.bry-store-card-content,.bry-store-image img{transition:none}
+}
