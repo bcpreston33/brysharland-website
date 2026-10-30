@@ -282,14 +282,56 @@ for slug in ('about','contact','store'):
         page=re.sub(r'<section class="copy wrap">.*?</section>',lambda m:section,page,count=1,flags=re.S)
         page=page.replace('</head>','<link rel="stylesheet" href="assets/contact.css"></head>',1)
         page=page.replace('</body>','<script src="assets/contact.js" defer></script></body>',1)
-    if slug=='store':
-        store=safe_url(obj.get('store_url'))
-        if store:extras+='<p><a class="btn" href="'+escape(store,quote=True)+'" rel="noopener" target="_blank">'+escape(val(obj,'button_text','Visit the store'))+'</a></p>'
     if extras:
         page=page.replace('</section></main>',extras+'</section></main>',1)
     page=page.replace('</head>','<link rel="stylesheet" href="assets/cms-pages.css"></head>',1)
     target.write_text(page,encoding='utf-8')
 
+
+# Storefront directory. Each entry is a separate Pages CMS collection item.
+# An empty URL renders a Coming Soon card, never a broken checkout link.
+store_entries=[]
+for file in sorted((ROOT/'content/stores').glob('*.md')):
+    raw=file.read_text(encoding='utf-8-sig')
+    m=re.match(r'^---\s*\n(.*?)\n---(?:\s*\n|$)',raw,re.S)
+    if not m:continue
+    item=yaml.safe_load(m.group(1)) or {}
+    if not isinstance(item,dict) or item.get('visible') is False:continue
+    try:order=int(item.get('order') or 100)
+    except (ValueError,TypeError):order=100
+    store_entries.append((order,file.name,item))
+store_entries.sort(key=lambda row:(row[0],row[1]))
+store_page=DIST/'store.html'
+if store_page.exists():
+    page=store_page.read_text(encoding='utf-8')
+    store_cfg=read_page('store')
+    intro=str(store_cfg.get('body') or '').strip()
+    # Existing Store description can still be edited in CMS.
+    if intro:
+        if markdown: intro_html=markdown.markdown(intro)
+        else:intro_html=''.join('<p>'+escape(x)+'</p>' for x in re.split(r'\n\s*\n',intro) if x.strip())
+        import bleach
+        intro_html=bleach.clean(intro_html,tags=['p','strong','em','br','a'],attributes={'a':['href']},protocols=['https','http'],strip=True)
+    else:
+        intro_html='<p>Explore prints, original artwork, and collections from Bry Sharland.</p>'
+    cards=[]
+    for _,filename,item in store_entries:
+        name=str(item.get('title') or '').strip()[:110]
+        if not name:continue
+        description=str(item.get('description') or '').strip()[:600]
+        image=safe_image(item.get('image'))
+        url=safe_url(item.get('url'))
+        button=str(item.get('button_text') or 'VISIT STORE').strip()[:60]
+        picture='<div class="bry-store-image"><img src="'+escape(image,quote=True)+'" alt="'+escape(name,quote=True)+' artwork" loading="lazy"></div>' if image else '<div class="bry-store-image bry-store-image-empty" aria-hidden="true"><span>ART BY BRY</span></div>'
+        action='<a class="bry-store-button" href="'+escape(url,quote=True)+'" target="_blank" rel="noopener noreferrer">'+escape(button)+' <span aria-hidden="true">↗</span></a>' if url else '<span class="bry-store-coming">COMING SOON</span>'
+        cards.append('<article class="bry-store-card">'+picture+'<div class="bry-store-card-content"><h2>'+escape(name)+'</h2>'+(('<p>'+escape(description)+'</p>') if description else '')+action+'</div></article>')
+    if not cards:
+        cards=['<p class="bry-store-empty">Storefronts will appear here once added in Pages CMS.</p>']
+    section='<section class="bry-store-directory wrap" aria-label="Online stores"><div class="bry-store-intro">'+intro_html+'</div><div class="bry-store-grid">'+''.join(cards)+'</div></section>'
+    page,count=re.subn(r'<section\s+class="copy wrap"[^>]*>.*?</section>',lambda m:section,page,count=1,flags=re.S)
+    if count!=1:raise SystemExit('Store page template copy section missing; not overwriting the site.')
+    page=page.replace('</head>','<link rel="stylesheet" href="assets/store-directory.css"></head>',1)
+    store_page.write_text(page,encoding='utf-8')
 
 # Global appearance and navigation, applied to every generated HTML page.
 legacy=read_page('appearance')
@@ -451,7 +493,7 @@ for target in DIST.glob('*.html'):
     page=page.replace('</head>','<link rel="stylesheet" href="assets/heading-restoration.css"><link rel="stylesheet" href="assets/page-heading-controls.css"></head>',1)
     layout_values = [pixel('content_padding_desktop',60,0,180), pixel('content_padding_tablet',32,0,120), pixel('content_padding_mobile',20,0,80)]
     layout_vars = ';'.join('--layout-side-'+key+':'+str(val)+'px' for key,val in zip(('desktop','tablet','mobile'),layout_values))
-    page=page.replace('</head>','<style>:root{'+layout_vars+'}</style><link rel="stylesheet" href="assets/layout-spacing.css"><link rel="stylesheet" href="assets/homepage-refinements.css"></head>',1)
+    page=page.replace('</head>','<style>:root{'+layout_vars+'}</style><link rel="stylesheet" href="assets/layout-spacing.css"><link rel="stylesheet" href="assets/homepage-refinements.css"><link rel="stylesheet" href="assets/store-home-fixes.css"></head>',1)
     if slug=='contact':
         page=page.replace('</head>','<link rel="stylesheet" href="assets/global-socials.css"></head>',1)
     # Shared social links: use Contact Page CMS values across the website.
