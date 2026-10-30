@@ -237,7 +237,7 @@ for slug in ('about','contact','store'):
             url=safe_url(obj.get(field))
             if url:socials.append('<a class="bry-social" href="'+escape(url,quote=True)+'" target="_blank" rel="noopener noreferrer"><span>'+label+'</span><span aria-hidden="true">↗</span></a>')
         social_html='<div class="bry-socials"><h2>'+social_heading+'</h2><div class="bry-social-grid">'+''.join(socials)+'</div></div>' if socials else ''
-        section='<section class="copy wrap bry-contact-content"><p class="bry-contact-intro">'+intro+'</p><div class="bry-contact-panel"><h2>'+heading+'</h2>'+form+'</div>'+social_html+'</section>'
+        section='<section class="copy wrap bry-contact-content"><p class="bry-contact-intro">'+intro+'</p>'+social_html+'<div class="bry-contact-panel"><h2>'+heading+'</h2>'+form+'</div></section>'
         page=re.sub(r'<section class="copy wrap">.*?</section>',lambda m:section,page,count=1,flags=re.S)
         page=page.replace('</head>','<link rel="stylesheet" href="assets/contact.css"></head>',1)
         page=page.replace('</body>','<script src="assets/contact.js" defer></script></body>',1)
@@ -348,6 +348,15 @@ for target in DIST.glob('*.html'):
         page=re.sub(r'<title>(.*?)</title>',lambda m:'<title>'+escape(m.group(1).split(' | ')[0]+' | '+site_name[:80])+'</title>',page,count=1)
     if appearance.get('footer_text'):
         page=re.sub(r'(<footer\b[^>]*>.*?<div class="wrap">).*?(</div>)',lambda m:m.group(1)+escape(str(appearance['footer_text'])[:250])+m.group(2),page,count=1,flags=re.S)
+    # Restore layered headings for all gallery and ordinary pages, including CMS-edited titles.
+    def heading_text(match):
+        attrs, content = match.group(1), match.group(2)
+        if 'data-shadow-text=' not in attrs:
+            label=html.unescape(re.sub(r'<[^>]+>', '', content)).strip()
+            attrs += ' data-shadow-text="'+escape(label,quote=True)+'"'
+        return '<h1'+attrs+'>'+content+'</h1>'
+    page=re.sub(r'<h1([^>]*)>(.*?)</h1>', heading_text, page, count=1, flags=re.S) if 'class="pagehead wrap"' in page else page
+    page=page.replace('</head>','<link rel="stylesheet" href="assets/heading-restoration.css"></head>',1)
     target.write_text(page,encoding='utf-8')
 
 print(f'Built {len(items)} artwork entries into dist/')
