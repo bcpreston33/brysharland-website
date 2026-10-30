@@ -97,7 +97,14 @@ def read_page(slug):
     m=re.match(r'^---\s*\n(.*?)\n---(?:\s*\n|$)',raw,re.S)
     if not m:return {}
     obj=yaml.safe_load(m.group(1)) or {}
-    return obj if isinstance(obj,dict) else {}
+    if not isinstance(obj,dict):return {}
+    # Pages CMS stores the rich-text `body` field as Markdown after the
+    # closing frontmatter delimiter, not as a YAML frontmatter property.
+    # Preserve an explicit YAML body if one exists for older content.
+    body_after_frontmatter=raw[m.end():].strip()
+    if body_after_frontmatter and not obj.get('body'):
+        obj['body']=body_after_frontmatter
+    return obj
 
 def val(obj,key,default=''):
     v=obj.get(key)
