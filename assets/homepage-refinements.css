@@ -1,7 +1,39 @@
 /* Homepage refinements: retain full-bleed hero image, enlarge featured heading. */
 body:has(.hero) .hero{width:100%;max-width:none}
 body:has(.hero) .hero>img{right:0;left:auto;max-width:none}
-body:has(.hero) section.feature h2{font-family:'Barlow Condensed',Impact,sans-serif;font-weight:900;font-size:clamp(65px,8vw,115px) !important;line-height:.8;text-transform:uppercase}
+body:has(.hero) .feature h2{font-family:'Barlow Condensed',Impact,sans-serif;font-weight:900;font-size:max(65px,var(--home-feature-size,clamp(65px,8vw,115px)));line-height:.8;text-transform:uppercase}
 body:has(.hero) .hero h1.hero-name-combined{display:block;max-width:100%;margin:35px 0 25px;line-height:1}
 body:has(.hero) .hero h1.hero-name-combined img{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;object-position:left center}
-@media(max-width:700px){body:has(.hero) .hero h1.hero-name-combined{margin:24px 0}body:has(.hero) section.feature h2{font-size:clamp(55px,12vw,85px) !important}}
+@media(max-width:700px){body:has(.hero) .hero h1.hero-name-combined{margin:24px 0}body:has(.hero) .feature h2{font-size:max(55px,var(--home-feature-size,clamp(55px,12vw,85px)))}}
+
+/* Full-bleed hero photograph with an uninterrupted left-to-right black fade.
+   Important overrides the legacy image-width setting injected by the builder. */
+body:has(.hero) .hero > img {
+  position:absolute;
+  inset:0;
+  width:100% !important;
+  height:100% !important;
+  max-width:none;
+  object-fit:cover;
+  object-position:var(--hero-image-focus,center center);
+  opacity:1;
+}
+body:has(.hero) .hero::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(90deg,
+    rgba(9,8,12,.98) 0%,
+    rgba(9,8,12,.93) 23%,
+    rgba(9,8,12,.70) 43%,
+    rgba(9,8,12,.26) 69%,
+    rgba(9,8,12,0) 100%);
+}
+@media(max-width:700px){
+  body:has(.hero) .hero > img {width:100% !important;opacity:1 !important;}
+  body:has(.hero) .hero::after {
+    background:linear-gradient(90deg,rgba(9,8,12,.91),rgba(9,8,12,.40)),
+      linear-gradient(0deg,rgba(9,8,12,.70),transparent 75%);
+  }
+}
