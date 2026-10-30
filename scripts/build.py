@@ -452,6 +452,26 @@ for target in DIST.glob('*.html'):
     layout_values = [pixel('content_padding_desktop',60,0,180), pixel('content_padding_tablet',32,0,120), pixel('content_padding_mobile',20,0,80)]
     layout_vars = ';'.join('--layout-side-'+key+':'+str(val)+'px' for key,val in zip(('desktop','tablet','mobile'),layout_values))
     page=page.replace('</head>','<style>:root{'+layout_vars+'}</style><link rel="stylesheet" href="assets/layout-spacing.css"><link rel="stylesheet" href="assets/homepage-refinements.css"></head>',1)
+    # Shared social links: use Contact Page CMS values across the website.
+    # Contact already displays these links above its form, so avoid duplication.
+    if slug != 'contact' and '<footer' in page:
+        social_settings=read_page('contact')
+        social_defaults={
+            'deviantart':'https://www.deviantart.com/brysharland',
+            'instagram':'https://www.instagram.com/brysharlandart/',
+            'bluesky':'https://bsky.app/profile/brysharlandart.bsky.social',
+        }
+        social_buttons=[]
+        for label,field in [('DeviantArt','deviantart'),('Instagram','instagram'),('Bluesky','bluesky')]:
+            # An explicitly blank field hides the corresponding button.
+            raw_url=social_settings.get(field,social_defaults[field])
+            url=safe_url(raw_url)
+            if url:
+                social_buttons.append('<a class="bry-global-social" href="'+escape(url,quote=True)+'" target="_blank" rel="noopener noreferrer"><span>'+label+'</span><span aria-hidden="true">↗</span></a>')
+        if social_buttons:
+            socials_markup='<section class="bry-global-socials wrap" aria-label="Bry Sharland social media"><h2>FIND BRY ONLINE</h2><div class="bry-global-social-grid">'+''.join(social_buttons)+'</div></section>'
+            page=page.replace('<footer',socials_markup+'<footer',1)
+            page=page.replace('</head>','<link rel="stylesheet" href="assets/global-socials.css"></head>',1)
     target.write_text(page,encoding='utf-8')
 
 print(f'Built {len(items)} artwork entries into dist/')
