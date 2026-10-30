@@ -10,3 +10,22 @@
 /* Remove the previous top offset because the divider supplies the spacing. */
 .bry-interior-divider + .bry-store-directory,.bry-interior-divider + .bry-contact-content{padding-top:0}
 @media(max-width:700px){.bry-interior-divider.wrap{margin-top:38px;margin-bottom:38px}}
+
+/* Revised rhythm: restore breathing room under the large neon title.
+   Measure the divider spacing from the end of the intro copy, not
+   from the page heading section's built-in bottom padding. */
+.pagehead.wrap:has(+ .bry-interior-divider){padding-bottom:0}
+.pagehead.wrap:has(+ .bry-interior-divider) > p,
+.pagehead.wrap:has(+ .bry-interior-divider) > .bry-contact-intro,
+.pagehead.wrap:has(+ .bry-interior-divider) > .bry-store-intro{
+  position:static;
+  margin-top:25px;
+  margin-bottom:0;
+}
+.bry-interior-divider.wrap{margin-top:75px;margin-bottom:60px}
+@media(max-width:700px){
+  .bry-interior-divider.wrap{margin-top:50px;margin-bottom:45px}
+  .pagehead.wrap:has(+ .bry-interior-divider) > p,
+  .pagehead.wrap:has(+ .bry-interior-divider) > .bry-contact-intro,
+  .pagehead.wrap:has(+ .bry-interior-divider) > .bry-store-intro{margin-top:20px}
+}
