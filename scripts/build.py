@@ -35,6 +35,41 @@ for p in sorted((ROOT/'content/artwork').glob('*.md')):
     item['featured']=obj.get('featured') is True
     item['order']=obj.get('order','')
     items.append(item)
+# Publish only web-sized artwork files. Originals remain in the source repository
+# but the public dist/assets/uploads copies are overwritten at build time.
+# Keeping the same URLs also protects artwork reused in other site sections.
+try:
+    from PIL import Image, ImageOps
+except ImportError as exc:
+    raise SystemExit('Pillow is required: add Pillow>=10,<13 to requirements.txt') from exc
+
+MAX_ARTWORK_SIDE = 1000
+for relative in sorted({item['image'] for item in items}):
+    source = ROOT / relative
+    public = DIST / relative
+    if not source.is_file():
+        raise SystemExit(f'Artwork image not found: {relative}')
+    if not public.is_file():
+        raise SystemExit(f'Artwork image missing from output: {relative}')
+    try:
+        with Image.open(source) as original:
+            if original.format not in ('JPEG', 'PNG', 'WEBP'):
+                raise ValueError('Supported gallery formats: JPEG, PNG, WebP')
+            image = ImageOps.exif_transpose(original)
+            image.thumbnail((MAX_ARTWORK_SIDE, MAX_ARTWORK_SIDE), Image.Resampling.LANCZOS)
+            fmt = original.format
+            if fmt == 'JPEG':
+                if image.mode not in ('RGB', 'L'):
+                    image = image.convert('RGB')
+                image.save(public, format='JPEG', quality=80, optimize=True, progressive=True, exif=b'')
+            elif fmt == 'WEBP':
+                image.save(public, format='WEBP', quality=80, method=6, exif=b'', icc_profile=b'')
+            else:
+                # Keep PNG transparency; never convert to a lossy JPEG.
+                image.save(public, format='PNG', optimize=True)
+    except Exception as exc:
+        raise SystemExit(f'Unable to prepare gallery image {relative}: {exc}') from exc
+
 (DIST/'assets/artwork.json').write_text(json.dumps(items,ensure_ascii=False,indent=2),encoding='utf-8')
 
 # Optional per-gallery heading settings from Pages CMS.
