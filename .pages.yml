@@ -233,7 +233,9 @@ content:
       - { name: section_size, label: Section heading size (px), type: number }
       - { name: section_title, label: Content heading, type: string }
       - { name: body, label: Artist biography, type: rich-text }
-      - { name: image, label: Artist photograph, type: image }
+      - { name: collage_desktop, label: Desktop and tablet collage, type: image }
+      - { name: collage_mobile, label: Mobile collage (700px and below), type: image }
+      - { name: image, label: Artist photograph (legacy field), type: image }
 
   - name: contact-page
     label: Contact Page
