@@ -1,0 +1,7 @@
+/* Homepage refinements: retain full-bleed hero image, enlarge featured heading. */
+body:has(.hero) .hero{width:100%;max-width:none}
+body:has(.hero) .hero>img{right:0;left:auto;max-width:none}
+body:has(.hero) section.feature h2{font-family:'Barlow Condensed',Impact,sans-serif;font-weight:900;font-size:clamp(65px,8vw,115px) !important;line-height:.8;text-transform:uppercase}
+body:has(.hero) .hero h1.hero-name-combined{display:block;max-width:100%;margin:35px 0 25px;line-height:1}
+body:has(.hero) .hero h1.hero-name-combined img{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;object-position:left center}
+@media(max-width:700px){body:has(.hero) .hero h1.hero-name-combined{margin:24px 0}body:has(.hero) section.feature h2{font-size:clamp(55px,12vw,85px) !important}}
