@@ -1,8 +1,12 @@
 ---
 eyebrow: Let's connect
 title: Get in Touch
+eyebrow_color: orange
+title_color: pink
+shadow_color: purple
 form_heading: Send a Message
-form_intro: Interested in a custom portrait, original artwork, an exhibition, or a collaboration? Send Bry a message or connect with him on social media.
+form_intro: Interested in a custom portrait, original artwork, an exhibition, or
+  a collaboration? Send Bry a message or connect with him on social media.
 social_heading: Find Bry Online
 deviantart: https://www.deviantart.com/brysharland
 instagram: https://www.instagram.com/brysharlandart/
