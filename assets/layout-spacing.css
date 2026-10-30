@@ -1,0 +1,8 @@
+/* Consistent page gutters, preserving full-bleed rules and artwork bands. */
+:root{--layout-side-desktop:60px;--layout-side-tablet:32px;--layout-side-mobile:20px}
+.wrap{width:calc(100% - 2 * var(--layout-side-desktop));max-width:1320px;margin-left:auto;margin-right:auto}
+/* The collage breaks out of its wrapping content column without cropping. */
+.bry-about-collage.wrap{width:100vw;max-width:none;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);background:transparent}
+.bry-about-collage picture,.bry-about-collage img{width:100%;max-width:none;height:auto;background:transparent}
+@media(max-width:900px){.wrap{width:calc(100% - 2 * var(--layout-side-tablet))}}
+@media(max-width:600px){.wrap{width:calc(100% - 2 * var(--layout-side-mobile))}}
