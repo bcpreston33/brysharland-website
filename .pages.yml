@@ -221,10 +221,13 @@ content:
     fields:
       - { name: eyebrow, label: Small heading, type: string }
       - { name: title, label: Page title, type: string }
-      - { name: section_title, label: Content heading, type: string }
-      - { name: body, label: Contact description, type: rich-text }
-      - { name: email, label: Public contact email, type: string }
-      - { name: instagram, label: Instagram profile URL, type: string }
+      - { name: form_heading, label: Contact form heading, type: string }
+      - { name: form_intro, label: Contact page introduction, type: text }
+      - { name: social_heading, label: Social links heading, type: string }
+      - { name: deviantart, label: DeviantArt URL, type: string }
+      - { name: instagram, label: Instagram URL, type: string }
+      - { name: bluesky, label: Bluesky URL, type: string }
+      - { name: web3forms_access_key, label: Web3Forms public access key, type: string }
 
   - name: store-page
     label: Store Page
