@@ -1,0 +1,9 @@
+/* Page-local typography options; all values originate in Pages CMS. */
+.pagehead .eyebrow{color:var(--eyebrow-custom-color,var(--cyan,#05dff2));font-family:var(--eyebrow-custom-font,inherit);font-size:var(--eyebrow-custom-size,inherit)}
+.pagehead h1{font-family:var(--heading-font,'Barlow Condensed',sans-serif)}
+/* The heading settings are attached to pagehead, and inherited by the content section through body selectors. */
+.copy h2,.bry-contact-panel h2,.bry-socials h2{position:relative;isolation:isolate;display:table;max-width:100%;font-family:var(--section-custom-font,'Barlow Condensed',sans-serif);font-size:var(--section-custom-size,clamp(30px,5vw,52px));color:var(--section-custom-color,inherit)}
+.copy h2::before,.bry-contact-panel h2::before,.bry-socials h2::before{content:attr(data-shadow-text);position:absolute;inset:0;transform:translate(3px,4px);z-index:-1;color:var(--section-custom-shadow,transparent);font:inherit;line-height:inherit;pointer-events:none}
+body:has(.hero) .hero .eyebrow{color:var(--eyebrow-custom-color,inherit);font-size:var(--eyebrow-custom-size,inherit)}
+body:has(.hero) .section-title{position:relative;isolation:isolate;color:var(--home-work-color,inherit);font-size:var(--home-work-size,inherit)}
+body:has(.hero) .feature h2{position:relative;isolation:isolate;color:var(--home-feature-color,inherit);font-size:var(--home-feature-size,inherit)}
