@@ -1,5 +1,6 @@
 ---
 hero_image: /assets/uploads/IMG_7198-LR.jpg
+name_heading_image: /assets/uploads/Bry-Logo-Angle-Opacity.png
 hero_alt: Colorful original artwork by Bry Sharland
 eyebrow: Art / Pop culture / Queer identity
 slogan_one: Bold art
