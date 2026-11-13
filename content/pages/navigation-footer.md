@@ -1,5 +1,5 @@
 ---
-logo_image: /assets/uploads/Bry-Logo.png
+logo_image: /assets/uploads/Bry-Logo-Straight.png
 navigation_font: DM Sans
 nav_home: HOME
 nav_artwork: ARTWORK
