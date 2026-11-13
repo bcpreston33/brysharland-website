@@ -24,7 +24,8 @@ for p in sorted((ROOT/'content/artwork').glob('*.md')):
     if not isinstance(obj,dict):continue
     category_raw=str(obj.get('category','')).strip()
     category=re.sub(r'[^a-z0-9]+','-',category_raw.lower()).strip('-')
-    if category not in ('queer','portraits','star-wars','nintendo','miscellaneous'):continue
+    if category in ('nintendo','miscellaneous'):category='various'
+    if category not in ('queer','portraits','star-wars','various'):continue
     image=obj.get('image','')
     if not isinstance(image,str) or not image.startswith('/assets/uploads/') and not image.startswith('assets/uploads/'):
         continue
@@ -48,7 +49,7 @@ MAX_ARTWORK_SIDE = 700
 # been assigned to a Pages CMS artwork entry. Preserve non-gallery assets,
 # especially the full-width About collages and site branding.
 GALLERY_FOLDERS = {'queer', 'queer art', 'portraits', 'star wars', 'star-wars',
-                   'nintendo', 'miscellaneous', 'misc', 'other'}
+                   'nintendo', 'miscellaneous', 'misc', 'other', 'various'}
 uploads = ROOT / 'assets' / 'uploads'
 category_images = set()
 if uploads.exists():
@@ -100,7 +101,7 @@ allowed_fonts={'Barlow Condensed':"'Barlow Condensed',sans-serif",
                'Barlow Condensed Italic':"'Barlow Condensed',sans-serif",
                'Oswald Italic':"'Oswald',sans-serif",
                'Roboto Condensed Italic':"'Roboto Condensed',sans-serif"}
-for slug in ('queer','portraits','star-wars','nintendo','miscellaneous'):
+for slug in ('queer','portraits','star-wars','various'):
     target=DIST/(slug+'.html')
     if not target.exists():continue
     page=target.read_text(encoding='utf-8')
@@ -113,7 +114,7 @@ for slug in ('queer','portraits','star-wars','nintendo','miscellaneous'):
             import yaml
             obj=yaml.safe_load(match.group(1)) or {}
             if not isinstance(obj,dict):obj={}
-    defaults={'queer':'Queer','portraits':'Portraits','star-wars':'Star Wars','nintendo':'Nintendo','miscellaneous':'Miscellaneous'}
+    defaults={'queer':'Queer','portraits':'Portraits','star-wars':'Star Wars','various':'Various'}
     title=str(obj.get('title') or defaults[slug])[:100]
     eyebrow=str(obj.get('eyebrow') or 'Artwork / '+defaults[slug])[:120]
     description=str(obj.get('description') or '')[:1200]
@@ -229,9 +230,9 @@ if home:
     if 'category_note' in home:
         note=val(home,'category_note')
         page=sub(r'<p class="note">.*?</p>',('<p class="note">'+escape(note)+'</p>') if note else '',page)
-    category_images={'queer_image':'queer','portraits_image':'portraits','star_wars_image':'star-wars','nintendo_image':'nintendo','miscellaneous_image':'miscellaneous'}
+    category_images={'queer_image':'queer','portraits_image':'portraits','star_wars_image':'star-wars','various_image':'various'}
     for field,slug in category_images.items():
-        img=safe_image(home.get(field))
+        img=safe_image(home.get(field) or (home.get('miscellaneous_image') if field=='various_image' else None))
         if img:
             pattern=r'(<a class="tile" href="'+slug+r'\.html"><div class="photo"><img src=")[^"]*(")'
             page=re.sub(pattern,lambda m:m.group(1)+escape(img,quote=True)+m.group(2),page,count=1)
@@ -484,7 +485,7 @@ for target in DIST.glob('*.html'):
     # Page-level typography controls, independent of the global theme.
     slug=target.stem
     cfg=read_page(slug) if slug in ('about','contact','store') else (read_page('home') if slug=='index' else {})
-    if slug in ('queer','portraits','star-wars','nintendo','miscellaneous'):
+    if slug in ('queer','portraits','star-wars','various'):
         cfg=read_page('unused')
         gp=ROOT/'content/gallery-pages'/(slug+'.md')
         if gp.exists():
@@ -540,8 +541,7 @@ for target in DIST.glob('*.html'):
       'queer':'EXPLORE QUEER ART',
       'portraits':'EXPLORE PORTRAITS',
       'star-wars':'EXPLORE STAR WARS',
-      'nintendo':'EXPLORE NINTENDO',
-      'miscellaneous':'EXPLORE MORE ART',
+      'various':'EXPLORE VARIOUS ART',
     }
     if slug in intro_defaults:
         intro=intro_defaults[slug]
@@ -596,7 +596,7 @@ print(f'Built {len(items)} artwork entries into dist/')
 # Interior-page hero/content separation (homepage and About deliberately excluded).
 # Move the contact/store introductory copy into the heading area, then place a
 # container-width divider between the page introduction and the main content.
-for slug in ('contact','store','queer','portraits','star-wars','nintendo','miscellaneous'):
+for slug in ('contact','store','queer','portraits','star-wars','various'):
     target=DIST/(slug+'.html')
     if not target.exists():continue
     page=target.read_text(encoding='utf-8')
