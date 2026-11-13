@@ -2,9 +2,9 @@
 body:has(.hero) .hero{width:100%;max-width:none}
 body:has(.hero) .hero>img{right:0;left:auto;max-width:none}
 body:has(.hero) .feature h2{font-family:'Barlow Condensed',Impact,sans-serif;font-weight:900;font-size:max(65px,var(--home-feature-size,clamp(65px,8vw,115px)));line-height:.8;text-transform:uppercase}
-body:has(.hero) .hero h1.hero-name-combined{display:block;max-width:100%;margin:35px 0 25px;line-height:1}
+body:has(.hero) .hero h1.hero-name-combined{display:block;width:min(520px,48vw);max-width:100%;margin:35px 0 25px;line-height:1}
 body:has(.hero) .hero h1.hero-name-combined img{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;object-position:left center}
-@media(max-width:700px){body:has(.hero) .hero h1.hero-name-combined{margin:24px 0}body:has(.hero) .feature h2{font-size:max(55px,var(--home-feature-size,clamp(55px,12vw,85px)))}}
+@media(max-width:700px){body:has(.hero) .hero h1.hero-name-combined{width:min(400px,78vw);margin:24px 0}body:has(.hero) .feature h2{font-size:max(55px,var(--home-feature-size,clamp(55px,12vw,85px)))}}
 
 /* Full-bleed hero photograph with an uninterrupted left-to-right black fade.
    Important overrides the legacy image-width setting injected by the builder. */
