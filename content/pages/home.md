@@ -12,6 +12,7 @@ work_heading_accent: the work
 star_wars_image: /assets/uploads/Star Wars/Ahsoka-Lothal-LR.jpg
 feature_eyebrow: Featured ongoing project
 feature_title: Pink Triangle Portraits
+feature_heading_color: pink
 feature_description: |-
   Giving color and dignity to those who had it stripped away. 
   Visit the separate portrait and biography project.
