@@ -30,7 +30,7 @@ content:
         type: select
         required: true
         options:
-          values: [Queer, Portraits, Star Wars, Nintendo, Miscellaneous]
+          values: [Queer, Portraits, Star Wars, Various]
       - name: year
         label: Year
         type: string
@@ -66,7 +66,7 @@ content:
         type: select
         required: true
         options:
-          values: [queer, portraits, star-wars, nintendo, miscellaneous]
+          values: [queer, portraits, star-wars, various]
       - name: eyebrow
         label: Small heading
         type: string
@@ -163,11 +163,8 @@ content:
       - name: star_wars_image
         label: Star Wars category image
         type: image
-      - name: nintendo_image
-        label: Nintendo category image
-        type: image
-      - name: miscellaneous_image
-        label: Miscellaneous category image
+      - name: various_image
+        label: Various category image
         type: image
       - name: feature_eyebrow
         label: Featured project small heading
