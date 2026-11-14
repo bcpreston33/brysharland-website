@@ -10,7 +10,7 @@ slogan_three: Queer culture
 button_text: Explore the work ↗
 work_heading: "Explore "
 work_heading_accent: the work
-queer_image: /assets/uploads/unnamed(7).jpg
+queer_image: /assets/uploads/the_hockey_boys_by_brysharland_dlmxvgg-fullview.jpg
 portraits_image: /assets/uploads/unnamed(27).jpg
 star_wars_image: /assets/uploads/Star Wars/Ahsoka-Lothal-LR.jpg
 feature_eyebrow: Featured ongoing project
