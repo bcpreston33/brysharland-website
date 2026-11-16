@@ -31,6 +31,22 @@ function setupArtworkLightbox(){
  const large=lb.querySelector('#large'),caption=lb.querySelector('#caption');
  const prev=lb.querySelector('.prev'),next=lb.querySelector('.next'),closeBtn=lb.querySelector('.close');
  let i=0,previousFocus=null,touchStart=null;
+ function positionMobileArrows(){
+  if(!lb.classList.contains('open'))return;
+  const rect=large.getBoundingClientRect();
+  if(rect.height>0)lb.style.setProperty('--artwork-image-mid',Math.round(rect.top+rect.height/2)+'px');
+ }
+ large.addEventListener('load',()=>requestAnimationFrame(positionMobileArrows));
+ window.addEventListener('resize',positionMobileArrows);
+
+ function positionMobileArrows(){
+  if(!lb.classList.contains('open'))return;
+  const rect=large.getBoundingClientRect();
+  if(rect.height>0)lb.style.setProperty('--artwork-image-mid',Math.round(rect.top+rect.height/2)+'px');
+ }
+ large.addEventListener('load',()=>requestAnimationFrame(positionMobileArrows));
+ window.addEventListener('resize',positionMobileArrows);
+
  const category=(document.body.dataset.category||'artwork').replaceAll('-',' ');
  lb.setAttribute('aria-modal','true');lb.setAttribute('tabindex','-1');
  function show(){
@@ -46,9 +62,9 @@ function setupArtworkLightbox(){
   }
   const count=document.createElement('span');count.className='caption-count';count.textContent=(i+1)+' / '+items.length;caption.append(count);
  }
- function open(n){previousFocus=document.activeElement;i=n;show();lb.classList.add('open');document.body.classList.add('artwork-viewer-open');closeBtn.focus()}
+ function open(n){previousFocus=document.activeElement;i=n;show();lb.classList.add('open');document.body.classList.add('artwork-viewer-open');requestAnimationFrame(positionMobileArrows);closeBtn.focus()}
  function close(){lb.classList.remove('open');document.body.classList.remove('artwork-viewer-open');large.removeAttribute('src');if(previousFocus&&previousFocus.focus)previousFocus.focus()}
- function move(n){i=(i+n+items.length)%items.length;show()}
+ function move(n){i=(i+n+items.length)%items.length;show();requestAnimationFrame(positionMobileArrows)}
  // Deep-link to an individual artwork from the homepage featured card.
  // The gallery remains available when the viewer is closed.
  function openFromHash(){

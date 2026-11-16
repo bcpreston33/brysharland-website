@@ -1,5 +1,4 @@
 ---
-feature_heading_color: pink
 hero_image: /assets/uploads/IMG_7198-LR.jpg
 name_heading_image: /assets/uploads/Bry-Logo-Angle-Opacity.png
 hero_alt: Colorful original artwork by Bry Sharland
@@ -8,7 +7,7 @@ slogan_one: Bold art
 slogan_two: Bright colors
 slogan_three: Queer culture
 button_text: Explore the work ↗
-work_heading: "Explore "
+work_heading: 'Explore '
 work_heading_accent: the work
 queer_image: /assets/uploads/the_hockey_boys_by_brysharland_dlmxvgg-fullview.jpg
 portraits_image: /assets/uploads/unnamed(27).jpg
@@ -16,9 +15,8 @@ star_wars_image: /assets/uploads/Star Wars/Ahsoka-Lothal-LR.jpg
 various_image: /assets/uploads/unnamed(3).jpg
 feature_eyebrow: Featured ongoing project
 feature_title: Pink Triangle Portraits
-feature_description: |-
-  Giving color and dignity to those who had it stripped away. 
-  Visit the separate portrait and biography project.
+feature_description: "Giving color and dignity to those who had it stripped away. \nVisit the separate portrait and biography\
+  \ project."
 feature_button_text: Visit the project ↗
 feature_url: https://www.pinktriangleportraits.com/
 feature_image: /assets/uploads/PTP-Image.jpg

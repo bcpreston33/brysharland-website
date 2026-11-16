@@ -431,6 +431,8 @@ if body_font:styles.append('--site-body-font:'+body_font+';')
 if heading_font:styles.append('--site-heading-font:'+heading_font+';')
 if nav_font:styles.append('--site-nav-font:'+nav_font+';')
 if appearance.get('logo_width'):styles.append('--site-logo-width:'+str(pixel('logo_width',100,60,240))+'px;')
+for key,default in [('content_padding_desktop',60),('content_padding_tablet',32),('content_padding_mobile',20)]:
+    styles.append('--'+key.replace('content_padding','layout-side')+':'+str(pixel(key,default,8,120))+'px;')
 
 # Page-specific controls: scoped to the homepage or galleries.
 def optional_px(obj,key,lo,hi):
@@ -498,7 +500,7 @@ for target in DIST.glob('*.html'):
         page=re.sub(r'(<footer\b[^>]*>.*?<div class="wrap">).*?(</div>)',lambda m:m.group(1)+escape(str(appearance['footer_text'])[:250])+m.group(2),page,count=1,flags=re.S)
     # Page-level typography controls, independent of the global theme.
     slug=target.stem
-    cfg=read_page(slug) if slug in ('about','contact','store') else (read_page('home') if slug=='index' else {})
+    cfg=read_page(slug) if slug in ('about','contact','store') else ({**read_page('home'), **read_page('home-appearance')} if slug=='index' else {})
     if slug in ('queer','portraits','star-wars','various'):
         cfg=read_page('unused')
         gp=ROOT/'content/gallery-pages'/(slug+'.md')

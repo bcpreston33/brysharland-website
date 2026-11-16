@@ -143,3 +143,31 @@ html body:has(.hero) section.feature .wrap {position:relative;z-index:1;}
      linear-gradient(180deg,#160d1c 0%,#160d1c 34%,#291020 65%,#681d40 100%) !important;
  }
 }
+
+/* 2026-11 audit: keep long news headlines inside their own column. */
+.bry-featured-card[data-kind="news"] .bry-featured-content{min-width:0;max-width:100%;overflow-wrap:anywhere}
+.bry-featured-card[data-kind="news"] .bry-featured-content h2{max-width:100%;font-size:clamp(27px,3.2vw,49px)!important;overflow-wrap:anywhere;word-break:normal;hyphens:auto}
+@media(max-width:700px){.bry-featured-card[data-kind="news"] .bry-featured-content h2{font-size:clamp(22px,5vw,33px)!important}}
+/* About archive: close the gap after the biography and distinguish it subtly. */
+body:has(#bry-news-archive) .copy{min-height:0;padding-bottom:18px}
+.bry-news-archive{box-sizing:border-box;background:#1b1024;border-top:2px solid #e927a7;padding:24px clamp(18px,3vw,36px) 30px;margin-bottom:36px}
+.bry-news-archive h2{margin-bottom:14px}
+/* Mobile artwork arrows track the actual artwork image, not the full dialog. */
+@media(max-width:800px){
+ .lightbox .prev,.lightbox .next{position:fixed;top:var(--artwork-image-mid,40%);transform:translateY(-50%);width:36px;height:44px;display:grid;place-items:center;background:rgba(8,6,14,.58);border-radius:22px;font-size:30px;line-height:1}
+ .lightbox .prev{left:4px}.lightbox .next{right:4px}
+}
+
+/* 2026-11 audit: keep long news headlines inside their own column. */
+.bry-featured-card[data-kind="news"] .bry-featured-content{min-width:0;max-width:100%;overflow-wrap:anywhere}
+.bry-featured-card[data-kind="news"] .bry-featured-content h2{max-width:100%;font-size:clamp(27px,3.2vw,49px)!important;overflow-wrap:anywhere;word-break:normal;hyphens:auto}
+@media(max-width:700px){.bry-featured-card[data-kind="news"] .bry-featured-content h2{font-size:clamp(22px,5vw,33px)!important}}
+/* About archive: close the gap after the biography and distinguish it subtly. */
+body:has(#bry-news-archive) .copy{min-height:0;padding-bottom:18px}
+.bry-news-archive{box-sizing:border-box;background:#1b1024;border-top:2px solid #e927a7;padding:24px clamp(18px,3vw,36px) 30px;margin-bottom:36px}
+.bry-news-archive h2{margin-bottom:14px}
+/* Mobile artwork arrows track the actual artwork image, not the full dialog. */
+@media(max-width:800px){
+ .lightbox .prev,.lightbox .next{position:fixed;top:var(--artwork-image-mid,40%);transform:translateY(-50%);width:36px;height:44px;display:grid;place-items:center;background:rgba(8,6,14,.58);border-radius:22px;font-size:30px;line-height:1}
+ .lightbox .prev{left:4px}.lightbox .next{right:4px}
+}
