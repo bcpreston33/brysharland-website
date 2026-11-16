@@ -36,6 +36,23 @@ footer .bry-global-social:nth-child(3) .bry-social-icon{filter:brightness(0) inv
 .bry-featured-card{grid-template-columns:1fr}.bry-featured-art{padding:18px}.bry-featured-content{padding:20px 22px 25px}
 }
 
-/* Consistent non-emoji external-link arrows (original artist-supplied SVG). */
-.bry-vector-arrow{display:inline-block!important;position:static!important;flex:0 0 auto;width:.72em!important;height:.72em!important;min-width:0!important;margin-left:.22em!important;vertical-align:.03em!important;background-color:currentColor!important;-webkit-mask:url('/assets/arrow.svg') center / contain no-repeat;mask:url('/assets/arrow.svg') center / contain no-repeat;font-size:inherit!important;line-height:1!important;border:0!important;transform:none!important;}
-@media(max-width:600px){footer .bry-social-arrow.bry-vector-arrow{display:none!important}}
+/* Compact mobile FOLLOW ME buttons: roughly half-width, 25px between. */
+@media (max-width:700px){
+  footer .bry-global-social-grid{
+    display:flex!important;
+    justify-content:center!important;
+    align-items:center!important;
+    flex-wrap:nowrap!important;
+    gap:25px!important;
+    width:100%;
+  }
+  footer .bry-global-social{
+    box-sizing:border-box;
+    flex:0 0 clamp(60px,18vw,75px);
+    width:clamp(60px,18vw,75px);
+    min-width:0!important;
+    min-height:54px;
+    padding:12px 8px;
+    justify-content:center;
+  }
+}
