@@ -86,3 +86,30 @@ html body header {border-bottom:0!important;box-shadow:0 2px 0 #a435ff!important
 /* Optional image-free news cards and compact About archive */
 .bry-featured-no-image .bry-featured-art{font-size:clamp(64px,10vw,130px);font-weight:900;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(130deg,#d51a91,#8b2ef1,#13d6e5)}
 .bry-news-archive{padding:44px 0 58px}.bry-news-archive h2{font:900 clamp(28px,4vw,44px) 'Barlow Condensed',sans-serif;margin:0 0 18px;color:#fff}.bry-news-archive-row{display:flex;align-items:center;justify-content:space-between;gap:25px;border-top:1px solid rgba(255,255,255,.22);padding:14px 0}.bry-news-archive-row small{color:#14e1e9;font-size:11px;letter-spacing:.03em}.bry-news-archive-row h3{font:700 17px/1.3 'DM Sans',sans-serif;color:#fff;margin:5px 0 0}.bry-news-archive-row a{flex-shrink:0;color:#fff;font-size:12px;font-weight:800;text-decoration:underline;text-underline-offset:3px}@media(max-width:600px){.bry-news-archive-row{align-items:flex-start;gap:12px}.bry-news-archive-row a{font-size:10px}.bry-featured-no-image .bry-featured-art{min-height:125px}}
+
+/* Featured artwork visual correction: no outer border, no image shadow,
+   editorial copy on left and artwork on right at all viewport widths. */
+.bry-featured-card{border:0!important;box-shadow:none!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;background-image:linear-gradient(115deg,#071f2b 0%,#251344 49%,#9321a3 78%,#ed159d 100%)!important;position:relative}
+.bry-featured-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(155deg,transparent 0 29px,rgba(255,255,255,.045) 30px,transparent 31px)}
+.bry-featured-content{grid-column:1;grid-row:1;position:relative;z-index:1;padding:clamp(24px,3vw,46px)!important;justify-content:center}
+.bry-featured-art{grid-column:2;grid-row:1;position:relative;z-index:1;padding:clamp(20px,3vw,38px)!important;background:transparent!important}
+.bry-featured-art img{box-shadow:none!important;filter:none!important;max-height:340px;width:100%;height:100%;object-fit:contain}
+.bry-featured-kicker{display:inline-block;background:#00d9e8;color:#07121c!important;padding:9px 13px;font:900 13px 'Barlow Condensed',sans-serif!important;letter-spacing:.035em!important}
+.bry-featured-content h2{font-size:clamp(34px,4.6vw,65px)!important;line-height:.94!important}
+.bry-featured-content a{background:#00d9e8!important;color:#081018!important;box-shadow:5px 5px 0 #b12aff!important;text-decoration:none}
+@media(max-width:700px){
+ .bry-featured-card{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;min-height:260px}
+ .bry-featured-content{padding:20px!important}
+ .bry-featured-art{padding:14px!important}
+ .bry-featured-art img{max-height:260px}
+ .bry-featured-content h2{font-size:clamp(26px,7vw,44px)!important}
+ .bry-featured-content p{font-size:12px}
+ .bry-featured-kicker{font-size:11px!important;padding:7px 9px}
+}
+@media(max-width:420px){
+ .bry-featured-card{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;min-height:245px}
+ .bry-featured-content{padding:15px!important}
+ .bry-featured-content h2{font-size:clamp(24px,7.4vw,34px)!important}
+ .bry-featured-content a{padding:10px;font-size:10px}
+ .bry-featured-art{padding:10px!important}
+}
