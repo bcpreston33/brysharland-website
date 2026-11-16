@@ -39,7 +39,7 @@
    const kicker=document.createElement('div');kicker.className='bry-featured-kicker';text(kicker,kind==='art'?'JUST ADDED':'NEWS & EVENTS');
    const h=document.createElement('h2');text(h,x.title);
    const p=document.createElement('p');text(p,x.description|| (kind==='art'?'New artwork by Bry Sharland.':'Latest news from Bry Sharland.'));
-   const a=document.createElement('a');a.href=link;text(a,kind==='art'?'VIEW ARTWORK ↗':'READ MORE ↗');
+   const a=document.createElement('a');a.href=link;text(a,kind==='art'?'VIEW ARTWORK':'READ MORE');const arrow=document.createElement('span');arrow.className='bry-vector-arrow';arrow.setAttribute('aria-hidden','true');a.append(' ',arrow);
    content.append(kicker,h,p,a);card.append(media,content);host.querySelector('.bry-featured-grid').append(card);
   }
   host.hidden=!host.querySelector('.bry-featured-card');

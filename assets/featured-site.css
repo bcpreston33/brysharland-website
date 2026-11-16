@@ -35,3 +35,7 @@ footer .bry-global-social:nth-child(3) .bry-social-icon{filter:brightness(0) inv
 .bry-featured-strip{padding:28px 0 12px}.bry-featured-grid{grid-template-columns:1fr;gap:18px}
 .bry-featured-card{grid-template-columns:1fr}.bry-featured-art{padding:18px}.bry-featured-content{padding:20px 22px 25px}
 }
+
+/* Consistent non-emoji external-link arrows (original artist-supplied SVG). */
+.bry-vector-arrow{display:inline-block!important;position:static!important;flex:0 0 auto;width:.72em!important;height:.72em!important;min-width:0!important;margin-left:.22em!important;vertical-align:.03em!important;background-color:currentColor!important;-webkit-mask:url('/assets/arrow.svg') center / contain no-repeat;mask:url('/assets/arrow.svg') center / contain no-repeat;font-size:inherit!important;line-height:1!important;border:0!important;transform:none!important;}
+@media(max-width:600px){footer .bry-social-arrow.bry-vector-arrow{display:none!important}}
