@@ -61,3 +61,8 @@
   body header .wrap > nav[aria-label="Main navigation"] a::before,
   body header .wrap > nav[aria-label="Main navigation"] a::after {display:none !important;}
 }
+
+/* Keep the compact mobile navigation accessible during scrolling. */
+@media (max-width:760px) {
+  html body header { position:sticky !important; top:0; z-index:1000; }
+}

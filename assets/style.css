@@ -153,3 +153,6 @@ nav a:last-child:hover{background:var(--pink);color:#101010;transform:translate(
   letter-spacing:inherit;
   line-height:inherit;
 }
+
+/* Header divider: matches the restrained line used above the footer. */
+body > header { border-bottom:2px solid #593660 !important; }

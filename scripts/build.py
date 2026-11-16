@@ -231,9 +231,8 @@ if home:
             content=escape(val(home,field))
             if field=='feature_title':content=content.replace('\n','<br>')
             page=re.sub(pattern,lambda m:m.group(1)+content+m.group(2),page,count=1,flags=re.S)
-    if 'category_note' in home:
-        note=val(home,'category_note')
-        page=sub(r'<p class="note">.*?</p>',('<p class="note">'+escape(note)+'</p>') if note else '',page)
+    # Remove the old layout-testing caption; no longer part of the public site.
+    page=sub(r'<p class="note">.*?</p>', '', page)
     category_images={'queer_image':'queer','portraits_image':'portraits','star_wars_image':'star-wars','various_image':'various'}
     for field,slug in category_images.items():
         img=safe_image(home.get(field) or (home.get('miscellaneous_image') if field=='various_image' else None))
@@ -331,7 +330,7 @@ for slug in ('about','contact','store'):
         socials=[]
         for label,field in [('DeviantArt','deviantart'),('Instagram','instagram'),('Bluesky','bluesky')]:
             url=safe_url(obj.get(field))
-            if url:socials.append('<a class="bry-social" href="'+escape(url,quote=True)+'" target="_blank" rel="noopener noreferrer"><span>'+label+'</span><span class="bry-vector-arrow" aria-hidden="true"></span></a>')
+            if url:socials.append('<a class="bry-social" href="'+escape(url,quote=True)+'" target="_blank" rel="noopener noreferrer"><span>'+label+'</span><span aria-hidden="true">↗</span></a>')
         social_html='<div class="bry-socials"><h2>'+social_heading+'</h2><div class="bry-social-grid">'+''.join(socials)+'</div></div>' if socials else ''
         section='<section class="copy wrap bry-contact-content"><p class="bry-contact-intro">'+intro+'</p>'+social_html+'<div class="bry-contact-panel"><h2>'+heading+'</h2>'+form+'</div></section>'
         page=re.sub(r'<section class="copy wrap">.*?</section>',lambda m:section,page,count=1,flags=re.S)
@@ -378,7 +377,7 @@ if store_page.exists():
         url=safe_url(item.get('url'))
         button=str(item.get('button_text') or 'VISIT STORE').strip()[:60]
         picture='<div class="bry-store-image"><img src="'+escape(image,quote=True)+'" alt="'+escape(name,quote=True)+' artwork" loading="lazy"></div>' if image else '<div class="bry-store-image bry-store-image-empty" aria-hidden="true"><span>ART BY BRY</span></div>'
-        action='<a class="bry-store-button" href="'+escape(url,quote=True)+'" target="_blank" rel="noopener noreferrer">'+escape(button)+' <span class="bry-vector-arrow" aria-hidden="true"></span></a>' if url else '<span class="bry-store-coming">COMING SOON</span>'
+        action='<a class="bry-store-button" href="'+escape(url,quote=True)+'" target="_blank" rel="noopener noreferrer">'+escape(button)+' <span aria-hidden="true">↗</span></a>' if url else '<span class="bry-store-coming">COMING SOON</span>'
         cards.append('<article class="bry-store-card">'+picture+'<div class="bry-store-card-content"><h2>'+escape(name)+'</h2>'+(('<p>'+escape(description)+'</p>') if description else '')+action+'</div></article>')
     if not cards:
         cards=['<p class="bry-store-empty">Storefronts will appear here once added in Pages CMS.</p>']
@@ -587,7 +586,7 @@ for target in DIST.glob('*.html'):
             raw_url=social_settings.get(field,social_defaults[field])
             url=safe_url(raw_url)
             if url:
-                social_buttons.append('<a class="bry-global-social" href="'+escape(url,quote=True)+'" target="_blank" rel="noopener noreferrer"><span>'+label+'</span><span class="bry-vector-arrow" aria-hidden="true"></span></a>')
+                social_buttons.append('<a class="bry-global-social" href="'+escape(url,quote=True)+'" target="_blank" rel="noopener noreferrer"><span>'+label+'</span><span aria-hidden="true">↗</span></a>')
         if social_buttons:
             socials_markup='<section class="bry-global-socials wrap" aria-label="Bry Sharland social media"><h2>FOLLOW ME</h2><div class="bry-global-social-grid">'+''.join(social_buttons)+'</div></section>'
             page=page.replace('<footer',socials_markup+'<footer',1)
@@ -682,7 +681,7 @@ for target in DIST.glob('*.html'):
         if not url:continue
         label=name.capitalize() if name!='deviantart' else 'DeviantArt'
         icon_url='https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/'+name+'.svg'
-        buttons.append('<a class="bry-global-social" href="'+escape(url,quote=True)+'" target="_blank" rel="noopener noreferrer" aria-label="'+label+'"><span class="bry-social-word">'+label+'</span><img class="bry-social-icon" src="'+icon_url+'" alt="" aria-hidden="true"><span class="bry-social-arrow bry-vector-arrow" aria-hidden="true"></span></a>')
+        buttons.append('<a class="bry-global-social" href="'+escape(url,quote=True)+'" target="_blank" rel="noopener noreferrer" aria-label="'+label+'"><span class="bry-social-word">'+label+'</span><img class="bry-social-icon" src="'+icon_url+'" alt="" aria-hidden="true"><span class="bry-social-arrow" aria-hidden="true">↗</span></a>')
     markup='<section class="bry-global-socials wrap" aria-label="Follow Bry Sharland"><h2>FOLLOW ME</h2><div class="bry-global-social-grid">'+''.join(buttons)+'</div></section>'
     page=re.sub(r'<footer\b[^>]*>.*?</footer>', '<footer>'+markup+'</footer>',page,count=1,flags=re.S)
     if target.stem=='index':
