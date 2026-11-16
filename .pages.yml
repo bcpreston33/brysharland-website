@@ -1,1008 +1,359 @@
 media:
   input: assets/uploads
   output: /assets/uploads
+
 content:
-- name: artwork
-  label: Artwork
-  type: collection
-  path: content/artwork
-  format: yaml-frontmatter
-  filename: '{primary}.md'
-  view:
+  - name: artwork
+    label: Artwork
+    type: collection
+    path: content/artwork
+    format: yaml-frontmatter
+    filename: '{primary}.md'
+    view:
+      fields: [title, category, year, featured, order]
+      primary: title
+      sort: [order, title]
+      default:
+        sort: order
+        order: asc
     fields:
-    - title
-    - category
-    - year
-    - featured
-    - order
-    primary: title
-    sort:
-    - order
-    - title
-    default:
-      sort: order
-      order: asc
-  fields:
-  - name: title
-    label: 01 · ARTWORK DETAILS  /  Artwork title
-    type: string
-    required: true
-    description: 'Section 1: Artwork details.'
-  - name: image
-    label: Artwork image
-    type: image
-    required: true
-    description: Artwork image displayed in the gallery.
-  - name: category
-    label: Category
-    type: select
-    required: true
-    options:
-      values:
-      - Queer
-      - Portraits
-      - Star Wars
-      - Various
-  - name: year
-    label: Year
-    type: string
-  - name: medium
-    label: Medium
-    type: string
-  - name: dimensions
-    label: Dimensions
-    type: string
-  - name: description
-    label: Description
-    type: text
-  - name: featured
-    label: 02 · HOMEPAGE & ORDERING  /  Feature on homepage
-    type: boolean
-    default: false
-    description: 'Section 2: Homepage & ordering. Controls whether this artwork is eligible for the homepage featured area.'
-  - name: order
-    label: Display order
-    type: number
-    description: Lower numbers appear first where ordering is supported.
-- name: gallery-pages
-  label: Gallery Page Settings
-  type: collection
-  path: content/gallery-pages
-  format: yaml-frontmatter
-  filename: '{primary}.md'
-  view:
+      - name: title
+        label: Artwork title
+        type: string
+        required: true
+      - name: image
+        label: Artwork image
+        type: image
+        required: true
+      - name: category
+        label: Category
+        type: select
+        required: true
+        options:
+          values: [Queer, Portraits, Star Wars, Various]
+      - name: year
+        label: Year
+        type: string
+      - name: medium
+        label: Medium
+        type: string
+      - name: dimensions
+        label: Dimensions
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: featured
+        label: Feature on homepage
+        type: boolean
+        default: false
+      - name: order
+        label: Display order
+        type: number
+
+  - name: gallery-pages
+    label: Gallery Page Settings
+    type: collection
+    path: content/gallery-pages
+    format: yaml-frontmatter
+    filename: '{primary}.md'
+    view:
+      fields: [slug, title, title_color]
+      primary: slug
     fields:
-    - slug
-    - title
-    - title_color
-    primary: slug
-  fields:
-  - name: slug
-    label: 01 · PAGE INTRODUCTION  /  Page ID
-    type: select
-    required: true
-    options:
-      values:
-      - queer
-      - portraits
-      - star-wars
-      - various
-    description: 'Section 1: Page introduction.'
-  - name: eyebrow
-    label: Small heading
-    type: string
-    description: Optional small heading above the main page title.
-  - name: title
-    label: Main title
-    type: string
-    required: true
-  - name: description
-    label: Description
-    type: text
-  - name: intro_brush
-    label: Intro phrase (brush font; leave blank to hide)
-    type: string
-    description: Optional decorative introduction phrase; leave empty to hide.
-  - name: intro_brush_color
-    label: 02 · HEADING APPEARANCE  /  Intro phrase color
-    type: select
-    options:
-      values:
-      - pink
-      - orange
-      - purple
-      - cyan
-      - yellow
-      - white
-    description: 'Section 2: Heading appearance.'
-  - name: eyebrow_color
-    label: Small heading color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: eyebrow_font
-    label: Small heading font
-    type: select
-    options:
-      values:
-      - Barlow Condensed
-      - Barlow Condensed Italic
-      - Anton
-      - Oswald
-      - Oswald Italic
-      - Bebas Neue
-      - Roboto Condensed
-      - Roboto Condensed Italic
-      - Archivo Black
-  - name: eyebrow_size
-    label: Small heading size (px)
-    type: number
-  - name: title_color
-    label: Main title color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: shadow_color
-    label: Offset layer color
-    type: select
-    options:
-      values:
-      - cyan
-      - pink
-      - purple
-      - orange
-      - yellow
-      - white
-  - name: title_font
-    label: Main title font
-    type: select
-    options:
-      values:
-      - Barlow Condensed
-      - Barlow Condensed Italic
-      - Anton
-      - Oswald
-      - Oswald Italic
-      - Bebas Neue
-      - Roboto Condensed
-      - Roboto Condensed Italic
-      - Archivo Black
-  - name: title_size
-    label: Main title size in pixels (48-180)
-    type: number
-- name: homepage
-  label: Homepage
-  type: file
-  path: content/pages/home.md
-  format: yaml-frontmatter
-  fields:
-  - name: hero_image
-    label: 01 · HERO IMAGES & TEXT  /  Hero image
-    type: image
-    description: 'Section 1: Hero images & text. Large homepage hero artwork image.'
-  - name: name_heading_image
-    label: BRY SHARLAND combined heading image (transparent PNG or WebP)
-    type: image
-    description: Transparent BRY SHARLAND logo layered over the homepage hero.
-  - name: hero_alt
-    label: Hero image description
-    type: string
-    description: Description of the hero artwork for accessibility.
-  - name: eyebrow
-    label: Small intro heading
-    type: string
-    description: Optional small heading above the main page title.
-  - name: slogan_one
-    label: Slogan line 1
-    type: string
-  - name: slogan_two
-    label: Slogan line 2
-    type: string
-  - name: slogan_three
-    label: Slogan line 3
-    type: string
-  - name: hero_title
-    label: Large hero title
-    type: string
-  - name: hero_subtitle
-    label: Second title line
-    type: string
-  - name: button_text
-    label: Explore button text
-    type: string
-    description: Text of the homepage Explore the Work button.
-  - name: work_heading
-    label: 02 · ARTWORK CATEGORIES  /  Artwork section heading
-    type: string
-    description: 'Section 2: Artwork categories.'
-  - name: work_heading_accent
-    label: Artwork section accent text
-    type: string
-  - name: queer_image
-    label: Queer category image
-    type: image
-  - name: portraits_image
-    label: Portraits category image
-    type: image
-  - name: star_wars_image
-    label: Star Wars category image
-    type: image
-  - name: various_image
-    label: Various category image
-    type: image
-  - name: category_note
-    label: Text below artwork categories (leave blank to hide)
-    type: text
-  - name: feature_eyebrow
-    label: 03 · FEATURED PROJECT  /  Featured project small heading
-    type: string
-    description: 'Section 3: Featured project.'
-  - name: feature_title
-    label: Featured project title
-    type: string
-  - name: feature_description
-    label: Featured project description
-    type: text
-  - name: feature_button_text
-    label: Featured project button
-    type: string
-  - name: feature_url
-    label: Featured project URL
-    type: string
-    description: Destination when visitors click the featured project button.
-  - name: feature_image
-    label: Featured project image (optional)
-    type: image
-  - name: eyebrow_color
-    label: 04 · HERO APPEARANCE  /  Hero small heading color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-    description: 'Section 4: Hero appearance.'
-  - name: eyebrow_size
-    label: Hero small heading size (px)
-    type: number
-  - name: work_heading_color
-    label: 05 · ARTWORK HEADING APPEARANCE  /  Artwork section heading color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-    description: 'Section 5: Artwork heading appearance.'
-  - name: work_heading_shadow
-    label: Artwork section offset color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: work_heading_size
-    label: Artwork section heading size (px)
-    type: number
-  - name: feature_heading_color
-    label: 06 · FEATURED PROJECT APPEARANCE  /  Featured project heading color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-    description: 'Section 6: Featured project appearance. Color of the Pink Triangle Portraits featured heading.'
-  - name: feature_heading_shadow
-    label: Featured project offset color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: feature_heading_size
-    label: Featured project heading size (px)
-    type: number
-- name: about-page
-  label: About Page
-  type: file
-  path: content/pages/about.md
-  format: yaml-frontmatter
-  fields:
-  - name: eyebrow
-    label: 01 · PAGE INTRODUCTION  /  Small heading
-    type: string
-    description: 'Section 1: Page introduction. Optional small heading above the main page title.'
-  - name: title
-    label: Page title
-    type: string
-  - name: intro_brush
-    label: Intro phrase (brush font; leave blank to hide)
-    type: string
-    description: Optional decorative introduction phrase; leave empty to hide.
-  - name: section_title
-    label: 02 · BIOGRAPHY & IMAGES  /  Content heading
-    type: string
-    description: 'Section 2: Biography & images.'
-  - name: body
-    label: Artist biography
-    type: rich-text
-  - name: collage_desktop
-    label: Desktop and tablet collage
-    type: image
-    description: Shown on desktop and tablet.
-  - name: collage_mobile
-    label: Mobile collage (700px and below)
-    type: image
-    description: Shown at widths of 700px and below.
-  - name: image
-    label: Artist photograph (legacy field)
-    type: image
-    description: Artwork image displayed in the gallery.
-  - name: intro_brush_color
-    label: 03 · PAGE HEADING APPEARANCE  /  Intro phrase color
-    type: select
-    options:
-      values:
-      - pink
-      - orange
-      - purple
-      - cyan
-      - yellow
-      - white
-    description: 'Section 3: Page heading appearance.'
-  - name: eyebrow_color
-    label: Small heading color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: eyebrow_font
-    label: Small heading font
-    type: select
-    options:
-      values:
-      - Barlow Condensed
-      - Barlow Condensed Italic
-      - Anton
-      - Oswald
-      - Oswald Italic
-      - Bebas Neue
-      - Roboto Condensed
-      - Roboto Condensed Italic
-      - Archivo Black
-  - name: eyebrow_size
-    label: Small heading size (px)
-    type: number
-  - name: title_color
-    label: Page title front color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: shadow_color
-    label: Page title offset color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: title_font
-    label: Page title font
-    type: select
-    options:
-      values:
-      - Barlow Condensed
-      - Barlow Condensed Italic
-      - Anton
-      - Oswald
-      - Oswald Italic
-      - Bebas Neue
-      - Roboto Condensed
-      - Roboto Condensed Italic
-      - Archivo Black
-  - name: title_size
-    label: Page title size (px)
-    type: number
-  - name: section_color
-    label: 04 · CONTENT HEADING APPEARANCE  /  Section heading front color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-    description: 'Section 4: Content heading appearance.'
-  - name: section_shadow_color
-    label: Section heading offset color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: section_font
-    label: Section heading font
-    type: select
-    options:
-      values:
-      - Barlow Condensed
-      - Barlow Condensed Italic
-      - Anton
-      - Oswald
-      - Oswald Italic
-      - Bebas Neue
-      - Roboto Condensed
-      - Roboto Condensed Italic
-      - Archivo Black
-  - name: section_size
-    label: Section heading size (px)
-    type: number
-- name: contact-page
-  label: Contact Page
-  type: file
-  path: content/pages/contact.md
-  format: yaml-frontmatter
-  fields:
-  - name: eyebrow
-    label: 01 · PAGE INTRODUCTION  /  Small heading
-    type: string
-    description: 'Section 1: Page introduction. Optional small heading above the main page title.'
-  - name: title
-    label: Page title
-    type: string
-  - name: intro_brush
-    label: Intro phrase (brush font; leave blank to hide)
-    type: string
-    description: Optional decorative introduction phrase; leave empty to hide.
-  - name: form_heading
-    label: 02 · CONTACT FORM  /  Contact form heading
-    type: string
-    description: 'Section 2: Contact form.'
-  - name: form_intro
-    label: Contact page introduction
-    type: text
-  - name: web3forms_access_key
-    label: Web3Forms public access key
-    type: string
-    description: Public form integration key. Do not change unless the contact form service is reconfigured.
-  - name: social_heading
-    label: 03 · SOCIAL LINKS  /  Social links heading
-    type: string
-    description: 'Section 3: Social links.'
-  - name: deviantart
-    label: DeviantArt URL
-    type: string
-  - name: instagram
-    label: Instagram URL
-    type: string
-  - name: bluesky
-    label: Bluesky URL
-    type: string
-  - name: intro_brush_color
-    label: 04 · PAGE HEADING APPEARANCE  /  Intro phrase color
-    type: select
-    options:
-      values:
-      - pink
-      - orange
-      - purple
-      - cyan
-      - yellow
-      - white
-    description: 'Section 4: Page heading appearance.'
-  - name: eyebrow_color
-    label: Small heading color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: eyebrow_font
-    label: Small heading font
-    type: select
-    options:
-      values:
-      - Barlow Condensed
-      - Barlow Condensed Italic
-      - Anton
-      - Oswald
-      - Oswald Italic
-      - Bebas Neue
-      - Roboto Condensed
-      - Roboto Condensed Italic
-      - Archivo Black
-  - name: eyebrow_size
-    label: Small heading size (px)
-    type: number
-  - name: title_color
-    label: Page title front color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: shadow_color
-    label: Page title offset color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: title_font
-    label: Page title font
-    type: select
-    options:
-      values:
-      - Barlow Condensed
-      - Barlow Condensed Italic
-      - Anton
-      - Oswald
-      - Oswald Italic
-      - Bebas Neue
-      - Roboto Condensed
-      - Roboto Condensed Italic
-      - Archivo Black
-  - name: title_size
-    label: Page title size (px)
-    type: number
-  - name: section_color
-    label: 05 · SECTION HEADING APPEARANCE  /  Section heading front color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-    description: 'Section 5: Section heading appearance.'
-  - name: section_shadow_color
-    label: Section heading offset color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: section_font
-    label: Section heading font
-    type: select
-    options:
-      values:
-      - Barlow Condensed
-      - Barlow Condensed Italic
-      - Anton
-      - Oswald
-      - Oswald Italic
-      - Bebas Neue
-      - Roboto Condensed
-      - Roboto Condensed Italic
-      - Archivo Black
-  - name: section_size
-    label: Section heading size (px)
-    type: number
-- name: storefronts
-  label: Storefronts
-  type: collection
-  path: content/stores
-  format: yaml-frontmatter
-  filename: '{primary}.md'
-  view:
+      - name: slug
+        label: Page ID
+        type: select
+        required: true
+        options:
+          values: [queer, portraits, star-wars, various]
+      - name: eyebrow
+        label: Small heading
+        type: string
+      - name: title
+        label: Main title
+        type: string
+        required: true
+      - name: description
+        label: Description
+        type: text
+      - { name: intro_brush, label: Intro phrase (brush font; leave blank to hide), type: string }
+      - { name: intro_brush_color, label: Intro phrase color, type: select, options: { values: [pink, orange, purple, cyan, yellow, white] } }
+      - { name: eyebrow_color, label: Small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: eyebrow_font, label: Small heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: eyebrow_size, label: Small heading size (px), type: number }
+      - name: title_color
+        label: Main title color
+        type: select
+        options:
+          values: [orange, pink, purple, cyan, yellow, white]
+      - name: shadow_color
+        label: Offset layer color
+        type: select
+        options:
+          values: [cyan, pink, purple, orange, yellow, white]
+      - name: title_font
+        label: Main title font
+        type: select
+        options:
+          values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black]
+      - name: title_size
+        label: Main title size in pixels (48-180)
+        type: number
+
+  - name: homepage
+    label: Homepage
+    type: file
+    path: content/pages/home.md
+    format: yaml-frontmatter
     fields:
-    - title
-    - order
-    - visible
-    primary: title
-    sort:
-    - order
-    - title
-    default:
-      sort: order
-      order: asc
-  fields:
-  - name: title
-    label: 01 · STORE CARD CONTENT  /  Store name
-    type: string
-    required: true
-    description: 'Section 1: Store card content.'
-  - name: image
-    label: Store card image
-    type: image
-    description: Artwork image displayed in the gallery.
-  - name: description
-    label: Short description
-    type: text
-  - name: url
-    label: Square storefront URL
-    type: string
-  - name: button_text
-    label: Button text
-    type: string
-    description: Text of the homepage Explore the Work button.
-  - name: visible
-    label: 02 · VISIBILITY & ORDERING  /  Show this storefront
-    type: boolean
-    default: true
-    description: 'Section 2: Visibility & ordering. Turn off to hide this storefront without deleting it.'
-  - name: order
-    label: Display order (lower first)
-    type: number
-    description: Lower numbers appear first where ordering is supported.
-- name: store-page
-  label: Store Page
-  type: file
-  path: content/pages/store.md
-  format: yaml-frontmatter
-  fields:
-  - name: eyebrow
-    label: 01 · PAGE INTRODUCTION  /  Small heading
-    type: string
-    description: 'Section 1: Page introduction. Optional small heading above the main page title.'
-  - name: title
-    label: Page title
-    type: string
-  - name: intro_brush
-    label: Intro phrase (brush font; leave blank to hide)
-    type: string
-    description: Optional decorative introduction phrase; leave empty to hide.
-  - name: section_title
-    label: 02 · STORE CONTENT & LINKS  /  Content heading
-    type: string
-    description: 'Section 2: Store content & links.'
-  - name: body
-    label: Store description
-    type: rich-text
-  - name: button_text
-    label: Store button label
-    type: string
-    description: Text of the homepage Explore the Work button.
-  - name: store_url
-    label: External store URL
-    type: string
-    description: External store destination.
-  - name: intro_brush_color
-    label: 03 · PAGE HEADING APPEARANCE  /  Intro phrase color
-    type: select
-    options:
-      values:
-      - pink
-      - orange
-      - purple
-      - cyan
-      - yellow
-      - white
-    description: 'Section 3: Page heading appearance.'
-  - name: eyebrow_color
-    label: Small heading color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: eyebrow_font
-    label: Small heading font
-    type: select
-    options:
-      values:
-      - Barlow Condensed
-      - Barlow Condensed Italic
-      - Anton
-      - Oswald
-      - Oswald Italic
-      - Bebas Neue
-      - Roboto Condensed
-      - Roboto Condensed Italic
-      - Archivo Black
-  - name: eyebrow_size
-    label: Small heading size (px)
-    type: number
-  - name: title_color
-    label: Page title front color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: shadow_color
-    label: Page title offset color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: title_font
-    label: Page title font
-    type: select
-    options:
-      values:
-      - Barlow Condensed
-      - Barlow Condensed Italic
-      - Anton
-      - Oswald
-      - Oswald Italic
-      - Bebas Neue
-      - Roboto Condensed
-      - Roboto Condensed Italic
-      - Archivo Black
-  - name: title_size
-    label: Page title size (px)
-    type: number
-  - name: section_color
-    label: 04 · SECTION HEADING APPEARANCE  /  Section heading front color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-    description: 'Section 4: Section heading appearance.'
-  - name: section_shadow_color
-    label: Section heading offset color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: section_font
-    label: Section heading font
-    type: select
-    options:
-      values:
-      - Barlow Condensed
-      - Barlow Condensed Italic
-      - Anton
-      - Oswald
-      - Oswald Italic
-      - Bebas Neue
-      - Roboto Condensed
-      - Roboto Condensed Italic
-      - Archivo Black
-  - name: section_size
-    label: Section heading size (px)
-    type: number
-- name: global-appearance
-  label: Global Appearance
-  type: file
-  path: content/pages/global-appearance.md
-  format: yaml-frontmatter
-  fields:
-  - name: site_name
-    label: 01 · SITE IDENTITY  /  Browser tab site name
-    type: string
-    description: 'Section 1: Site identity.'
-  - name: content_padding_desktop
-    label: 02 · RESPONSIVE SPACING  /  Desktop side spacing (px)
-    type: number
-    description: 'Section 2: Responsive spacing.'
-  - name: content_padding_tablet
-    label: Tablet side spacing (px)
-    type: number
-  - name: content_padding_mobile
-    label: Mobile side spacing (px)
-    type: number
-    description: Horizontal page padding on mobile in pixels. Leave empty to use the coded default.
-  - name: background_color
-    label: 03 · GLOBAL COLORS  /  Main background hex
-    type: string
-    description: 'Section 3: Global colors. Hex color value, such as #ffffff. Leave empty to retain the site default.'
-  - name: text_color
-    label: Main text hex
-    type: string
-    description: Global body text color in hexadecimal notation.
-  - name: pink
-    label: Neon pink hex
-    type: string
-  - name: cyan
-    label: Neon cyan hex
-    type: string
-  - name: orange
-    label: Neon orange hex
-    type: string
-  - name: yellow
-    label: Neon yellow hex
-    type: string
-  - name: purple
-    label: Neon purple hex
-    type: string
-  - name: body_font
-    label: 04 · TYPOGRAPHY  /  General body font
-    type: select
-    options:
-      values:
-      - DM Sans
-      - Barlow Condensed
-      - Oswald
-      - Roboto Condensed
-    description: 'Section 4: Typography.'
-  - name: heading_font
-    label: General heading font
-    type: select
-    options:
-      values:
-      - Barlow Condensed
-      - Anton
-      - Oswald
-      - Bebas Neue
-      - Roboto Condensed
-      - Archivo Black
-- name: homepage-appearance
-  label: Homepage Appearance
-  type: file
-  path: content/pages/home-appearance.md
-  format: yaml-frontmatter
-  fields:
-  - name: hero_min_height
-    label: 01 · HERO DIMENSIONS  /  Hero minimum height desktop (px)
-    type: number
-    description: 'Section 1: Hero dimensions.'
-  - name: hero_min_height_mobile
-    label: Hero minimum height mobile (px)
-    type: number
-  - name: hero_image_width
-    label: Hero background image width percent desktop
-    type: number
-  - name: hero_image_position
-    label: Hero background image horizontal position percent
-    type: number
-  - name: section_spacing
-    label: 02 · SECTION SPACING  /  Homepage section vertical padding (px)
-    type: number
-    description: 'Section 2: Section spacing.'
-  - name: slogan_font_size
-    label: 03 · SLOGAN TYPOGRAPHY  /  Slogan font size desktop (px)
-    type: number
-    description: 'Section 3: Slogan typography.'
-  - name: slogan_font_size_mobile
-    label: Slogan font size mobile (px)
-    type: number
-- name: gallery-appearance
-  label: Gallery Appearance
-  type: file
-  path: content/pages/gallery-appearance.md
-  format: yaml-frontmatter
-  fields:
-  - name: gallery_gap
-    label: 01 · GALLERY GRID  /  Artwork horizontal gap (px)
-    type: number
-    description: 'Section 1: Gallery grid.'
-  - name: gallery_row_gap
-    label: Artwork vertical gap (px)
-    type: number
-  - name: caption_font_size
-    label: 02 · CAPTIONS  /  Caption text size (px)
-    type: number
-    description: 'Section 2: Captions.'
-  - name: caption_background
-    label: Caption background hex
-    type: string
-  - name: gallery_border_width
-    label: 03 · SEPARATORS  /  Neon separator thickness (px)
-    type: number
-    description: 'Section 3: Separators.'
-- name: navigation-footer
-  label: Navigation & Footer
-  type: file
-  path: content/pages/navigation-footer.md
-  format: yaml-frontmatter
-  fields:
-  - name: logo_image
-    label: 01 · HEADER & LOGO  /  Header logo image
-    type: image
-    description: 'Section 1: Header & logo. Image used as the header logo.'
-  - name: logo_width
-    label: Header logo width (px)
-    type: number
-  - name: navigation_font
-    label: Navigation font
-    type: select
-    options:
-      values:
-      - DM Sans
-      - Barlow Condensed
-      - Oswald
-      - Roboto Condensed
-  - name: nav_home
-    label: 02 · NAVIGATION LABELS  /  Home menu label
-    type: string
-    description: 'Section 2: Navigation labels.'
-  - name: nav_artwork
-    label: Artwork menu label
-    type: string
-  - name: nav_about
-    label: About menu label
-    type: string
-  - name: nav_contact
-    label: Contact menu label
-    type: string
-  - name: nav_store
-    label: Store menu label
-    type: string
-  - name: footer_text
-    label: 03 · FOOTER  /  Footer copyright text
-    type: string
-    description: 'Section 3: Footer. Copyright text in the site footer.'
+      - { name: eyebrow_color, label: Hero small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: eyebrow_size, label: Hero small heading size (px), type: number }
+      - { name: work_heading_color, label: Artwork section heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: work_heading_shadow, label: Artwork section offset color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: work_heading_size, label: Artwork section heading size (px), type: number }
+      - { name: feature_heading_color, label: Featured project heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: feature_heading_shadow, label: Featured project offset color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: feature_heading_size, label: Featured project heading size (px), type: number }
+      - name: hero_image
+        label: Hero image
+        type: image
+      - name: name_heading_image
+        label: BRY SHARLAND combined heading image (transparent PNG or WebP)
+        type: image
+      - name: hero_alt
+        label: Hero image description
+        type: string
+      - name: eyebrow
+        label: Small intro heading
+        type: string
+      - name: hero_title
+        label: Large hero title
+        type: string
+      - name: hero_subtitle
+        label: Second title line
+        type: string
+      - name: slogan_one
+        label: Slogan line 1
+        type: string
+      - name: slogan_two
+        label: Slogan line 2
+        type: string
+      - name: slogan_three
+        label: Slogan line 3
+        type: string
+      - name: button_text
+        label: Explore button text
+        type: string
+      - name: work_heading
+        label: Artwork section heading
+        type: string
+      - name: work_heading_accent
+        label: Artwork section accent text
+        type: string
+      - name: queer_image
+        label: Queer category image
+        type: image
+      - name: portraits_image
+        label: Portraits category image
+        type: image
+      - name: star_wars_image
+        label: Star Wars category image
+        type: image
+      - name: various_image
+        label: Various category image
+        type: image
+      - name: feature_eyebrow
+        label: Featured project small heading
+        type: string
+      - name: feature_title
+        label: Featured project title
+        type: string
+      - name: feature_description
+        label: Featured project description
+        type: text
+      - name: feature_button_text
+        label: Featured project button
+        type: string
+      - name: feature_url
+        label: Featured project URL
+        type: string
+      - name: feature_image
+        label: Featured project image (optional)
+        type: image
+
+  - name: about-page
+    label: About Page
+    type: file
+    path: content/pages/about.md
+    format: yaml-frontmatter
+    fields:
+      - { name: eyebrow, label: Small heading, type: string }
+      - { name: title, label: Page title, type: string }
+      - { name: intro_brush, label: Intro phrase (brush font; leave blank to hide), type: string }
+      - { name: intro_brush_color, label: Intro phrase color, type: select, options: { values: [pink, orange, purple, cyan, yellow, white] } }
+      - { name: eyebrow_color, label: Small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: eyebrow_font, label: Small heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: eyebrow_size, label: Small heading size (px), type: number }
+      - { name: title_color, label: Page title front color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: shadow_color, label: Page title offset color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: title_font, label: Page title font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: title_size, label: Page title size (px), type: number }
+      - { name: section_color, label: Section heading front color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: section_shadow_color, label: Section heading offset color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: section_font, label: Section heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: section_size, label: Section heading size (px), type: number }
+      - { name: section_title, label: Content heading, type: string }
+      - { name: body, label: Artist biography, type: rich-text }
+      - { name: collage_desktop, label: Desktop and tablet collage, type: image }
+      - { name: collage_mobile, label: Mobile collage (700px and below), type: image }
+      - { name: image, label: Artist photograph (legacy field), type: image }
+
+  - name: contact-page
+    label: Contact Page
+    type: file
+    path: content/pages/contact.md
+    format: yaml-frontmatter
+    fields:
+      - { name: eyebrow, label: Small heading, type: string }
+      - { name: title, label: Page title, type: string }
+      - { name: intro_brush, label: Intro phrase (brush font; leave blank to hide), type: string }
+      - { name: intro_brush_color, label: Intro phrase color, type: select, options: { values: [pink, orange, purple, cyan, yellow, white] } }
+      - { name: eyebrow_color, label: Small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: eyebrow_font, label: Small heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: eyebrow_size, label: Small heading size (px), type: number }
+      - { name: title_color, label: Page title front color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: shadow_color, label: Page title offset color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: title_font, label: Page title font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: title_size, label: Page title size (px), type: number }
+      - { name: section_color, label: Section heading front color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: section_shadow_color, label: Section heading offset color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: section_font, label: Section heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: section_size, label: Section heading size (px), type: number }
+      - { name: form_heading, label: Contact form heading, type: string }
+      - { name: form_intro, label: Contact page introduction, type: text }
+      - { name: social_heading, label: Social links heading, type: string }
+      - { name: deviantart, label: DeviantArt URL, type: string }
+      - { name: instagram, label: Instagram URL, type: string }
+      - { name: bluesky, label: Bluesky URL, type: string }
+      - { name: web3forms_access_key, label: Web3Forms public access key, type: string }
+
+  - name: storefronts
+    label: Storefronts
+    type: collection
+    path: content/stores
+    format: yaml-frontmatter
+    filename: '{primary}.md'
+    view:
+      fields: [title, order, visible]
+      primary: title
+      sort: [order, title]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - { name: title, label: Store name, type: string, required: true }
+      - { name: image, label: Store card image, type: image }
+      - { name: description, label: Short description, type: text }
+      - { name: url, label: Square storefront URL, type: string }
+      - { name: button_text, label: Button text, type: string }
+      - { name: order, label: Display order (lower first), type: number }
+      - { name: visible, label: Show this storefront, type: boolean, default: true }
+
+  - name: store-page
+    label: Store Page
+    type: file
+    path: content/pages/store.md
+    format: yaml-frontmatter
+    fields:
+      - { name: eyebrow, label: Small heading, type: string }
+      - { name: title, label: Page title, type: string }
+      - { name: intro_brush, label: Intro phrase (brush font; leave blank to hide), type: string }
+      - { name: intro_brush_color, label: Intro phrase color, type: select, options: { values: [pink, orange, purple, cyan, yellow, white] } }
+      - { name: eyebrow_color, label: Small heading color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: eyebrow_font, label: Small heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: eyebrow_size, label: Small heading size (px), type: number }
+      - { name: title_color, label: Page title front color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: shadow_color, label: Page title offset color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: title_font, label: Page title font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: title_size, label: Page title size (px), type: number }
+      - { name: section_color, label: Section heading front color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: section_shadow_color, label: Section heading offset color, type: select, options: { values: [orange, pink, purple, cyan, yellow, white] } }
+      - { name: section_font, label: Section heading font, type: select, options: { values: [Barlow Condensed, Barlow Condensed Italic, Anton, Oswald, Oswald Italic, Bebas Neue, Roboto Condensed, Roboto Condensed Italic, Archivo Black] } }
+      - { name: section_size, label: Section heading size (px), type: number }
+      - { name: section_title, label: Content heading, type: string }
+      - { name: body, label: Store description, type: rich-text }
+      - { name: button_text, label: Store button label, type: string }
+      - { name: store_url, label: External store URL, type: string }
+
+
+  - name: global-appearance
+    label: Global Appearance
+    type: file
+    path: content/pages/global-appearance.md
+    format: yaml-frontmatter
+    fields:
+      - { name: site_name, label: Browser tab site name, type: string }
+      - { name: content_padding_desktop, label: Desktop side spacing (px), type: number }
+      - { name: content_padding_tablet, label: Tablet side spacing (px), type: number }
+      - { name: content_padding_mobile, label: Mobile side spacing (px), type: number }
+      - { name: background_color, label: Main background hex, type: string }
+      - { name: text_color, label: Main text hex, type: string }
+      - { name: pink, label: Neon pink hex, type: string }
+      - { name: cyan, label: Neon cyan hex, type: string }
+      - { name: orange, label: Neon orange hex, type: string }
+      - { name: yellow, label: Neon yellow hex, type: string }
+      - { name: purple, label: Neon purple hex, type: string }
+      - name: body_font
+        label: General body font
+        type: select
+        options:
+          values: [DM Sans, Barlow Condensed, Oswald, Roboto Condensed]
+      - name: heading_font
+        label: General heading font
+        type: select
+        options:
+          values: [Barlow Condensed, Anton, Oswald, Bebas Neue, Roboto Condensed, Archivo Black]
+  - name: homepage-appearance
+    label: Homepage Appearance
+    type: file
+    path: content/pages/home-appearance.md
+    format: yaml-frontmatter
+    fields:
+      - { name: hero_min_height, label: Hero minimum height desktop (px), type: number }
+      - { name: hero_min_height_mobile, label: Hero minimum height mobile (px), type: number }
+      - { name: hero_image_width, label: Hero background image width percent desktop, type: number }
+      - { name: hero_image_position, label: Hero background image horizontal position percent, type: number }
+      - { name: section_spacing, label: Homepage section vertical padding (px), type: number }
+      - { name: slogan_font_size, label: Slogan font size desktop (px), type: number }
+      - { name: slogan_font_size_mobile, label: Slogan font size mobile (px), type: number }
+  - name: gallery-appearance
+    label: Gallery Appearance
+    type: file
+    path: content/pages/gallery-appearance.md
+    format: yaml-frontmatter
+    fields:
+      - { name: gallery_gap, label: Artwork horizontal gap (px), type: number }
+      - { name: gallery_row_gap, label: Artwork vertical gap (px), type: number }
+      - { name: caption_font_size, label: Caption text size (px), type: number }
+      - { name: caption_background, label: Caption background hex, type: string }
+      - { name: gallery_border_width, label: Neon separator thickness (px), type: number }
+  - name: navigation-footer
+    label: Navigation & Footer
+    type: file
+    path: content/pages/navigation-footer.md
+    format: yaml-frontmatter
+    fields:
+      - { name: logo_image, label: Header logo image, type: image }
+      - { name: logo_width, label: Header logo width (px), type: number }
+      - name: navigation_font
+        label: Navigation font
+        type: select
+        options:
+          values: [DM Sans, Barlow Condensed, Oswald, Roboto Condensed]
+      - { name: nav_home, label: Home menu label, type: string }
+      - { name: nav_artwork, label: Artwork menu label, type: string }
+      - { name: nav_about, label: About menu label, type: string }
+      - { name: nav_contact, label: Contact menu label, type: string }
+      - { name: nav_store, label: Store menu label, type: string }
+      - { name: footer_text, label: Footer copyright text, type: string }
