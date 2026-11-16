@@ -13,7 +13,6 @@ content:
     - title
     - category
     - year
-    - featured
     - order
     primary: title
     sort:
@@ -27,7 +26,8 @@ content:
     label: 01 · ARTWORK DETAILS  /  Artwork title
     type: string
     required: true
-    description: 'Section 1: Artwork details.'
+    description: Add a title and image, then save. New artwork automatically replaces the homepage artwork card for 30 days.
+      Editing an existing entry does not restart the timer.
   - name: image
     label: Artwork image
     type: image
@@ -55,41 +55,12 @@ content:
   - name: description
     label: Description
     type: text
-  - name: featured
-    label: 02 · HOMEPAGE & ORDERING  /  Feature on homepage
-    type: boolean
-    default: false
-    description: 'Section 2: Homepage & ordering. Controls whether this artwork is eligible for the homepage featured
-      area.'
-  - name: published_on
-    label: Date added to website (YYYY-MM-DD)
-    type: date
-    description: Required for automatic homepage display. Enter the date this artwork was added to the website.
-  - name: feature_days
-    label: Featured days override (0 uses default)
-    type: number
-    default: 0
-    description: Optional. Leave at 0 for the default duration (30 days).
-  - name: feature_override
-    label: Homepage feature behavior
-    type: select
-    default: automatic
-    options:
-      values:
-      - automatic
-      - pin
-      - hide
-    description: Automatic = show while recent; Pin = keep featured; Hide = never show.
-  - name: feature_until
-    label: Feature end date override (YYYY-MM-DD)
-    type: date
-    description: Optional expiration date for a pinned or automatically featured artwork.
   - name: order
     label: Display order
     type: number
     description: Lower numbers appear first where ordering is supported.
 - name: news
-  label: News & Events
+  label: News & Updates
   type: collection
   path: content/news
   format: yaml-frontmatter
@@ -97,50 +68,53 @@ content:
   view:
     fields:
     - title
-    - published_on
-    - feature_override
+    - category
     primary: title
   fields:
   - name: title
     label: Headline
     type: string
     required: true
-    description: Create a new entry here to trigger the News & Events homepage card.
+    description: Save a new entry to automatically feature it for 30 days. The newest update replaces the previous card. All
+      updates remain listed on the About page.
+  - name: category
+    label: Type of update
+    type: select
+    default: Personal Update
+    options:
+      values:
+      - Exhibition / Show
+      - Press / Media
+      - Event / Appearance
+      - Personal Update
+      - General Announcement
+    description: Optional category shown on the homepage and in the About page archive.
   - name: description
     label: Short description
     type: text
-  - name: image
-    label: Card image
-    type: image
-    required: true
-  - name: link
-    label: Article or event URL
-    type: string
-    required: true
-  - name: published_on
-    label: Publication date
-    type: date
-    required: true
-    description: Use YYYY-MM-DD; future-dated entries do not appear yet.
-  - name: feature_days
-    label: Featured days override (0 uses default)
-    type: number
-    default: 0
-  - name: feature_override
-    label: Feature behavior
+  - name: icon
+    label: Optional icon
     type: select
-    default: automatic
     options:
       values:
-      - automatic
-      - pin
-      - hide
-    description: Automatic = show while recent; Pin = keep featured; Hide = never show.
-  - name: feature_until
-    label: Feature end date override
-    type: date
+      - None
+      - Star
+      - Calendar
+      - Newspaper
+      - Heart
+      - Sparkles
+    default: None
+    description: Used when no image is supplied.
+  - name: image
+    label: Optional image
+    type: image
+    description: Optional. Without an image, the featured card displays a text-only layout.
+  - name: link
+    label: Optional external link
+    type: string
+    description: Leave blank for personal updates without an external page.
 - name: featured-home
-  label: Homepage Featured Cards
+  label: Homepage Featured Cards (Advanced)
   type: file
   path: content/pages/featured-home.md
   format: yaml-frontmatter
@@ -149,7 +123,7 @@ content:
     label: Default feature duration (days)
     type: number
     default: 30
-    description: Number of days a new artwork or news item appears automatically (default 30).
+    description: 30 days by default. New artwork and news automatically replace older entries; no dates to enter.
   - name: art_mode
     label: Artwork card mode
     type: select
@@ -157,12 +131,8 @@ content:
     options:
       values:
       - automatic
-      - pin
       - hide
-  - name: art_pin_title
-    label: Artwork title to pin (exact match)
-    type: string
-    description: Used only when the corresponding card mode is Pin. Enter the exact title of an eligible item.
+    description: Leave on automatic for normal behavior; Hide temporarily disables this homepage card.
   - name: news_mode
     label: News card mode
     type: select
@@ -170,12 +140,8 @@ content:
     options:
       values:
       - automatic
-      - pin
       - hide
-  - name: news_pin_title
-    label: News title to pin (exact match)
-    type: string
-    description: Used only when the corresponding card mode is Pin. Enter the exact title of an eligible item.
+    description: Leave on automatic for normal behavior; Hide temporarily disables this homepage card.
 - name: gallery-pages
   label: Gallery Page Settings
   type: collection
