@@ -31,16 +31,15 @@
   for(const [kind,x] of picks){
    const link=kind==='art'?safeLink(x.link)||({queer:'queer.html',portraits:'portraits.html','star-wars':'star-wars.html',various:'various.html'}[x.category]||'index.html#work'):safeLink(x.link);
    const img=safeImage(x.image);
-   if(!link||!img)continue;
+   if(kind==='art'&&!img)continue;
    const card=document.createElement('article');card.className='bry-featured-card';card.dataset.kind=kind;
    const media=document.createElement('div');media.className='bry-featured-art';
-   const pic=document.createElement('img');pic.src=img;pic.alt=x.title||'Artwork';pic.loading='lazy';media.append(pic);
+   if(img){const pic=document.createElement('img');pic.src=img;pic.alt=x.title||'Artwork';pic.loading='lazy';media.append(pic);}else{card.classList.add('bry-featured-no-image');media.textContent=({Star:'★',Calendar:'▣',Newspaper:'▤',Heart:'♥',Sparkles:'✦'})[x.icon]||'✦';}
    const content=document.createElement('div');content.className='bry-featured-content';
-   const kicker=document.createElement('div');kicker.className='bry-featured-kicker';text(kicker,kind==='art'?'JUST ADDED':'NEWS & EVENTS');
+   const kicker=document.createElement('div');kicker.className='bry-featured-kicker';text(kicker,kind==='art'?'JUST ADDED':(x.category||'NEWS & UPDATES'));
    const h=document.createElement('h2');text(h,x.title);
    const p=document.createElement('p');text(p,x.description|| (kind==='art'?'New artwork by Bry Sharland.':'Latest news from Bry Sharland.'));
-   const a=document.createElement('a');a.href=link;text(a,kind==='art'?'VIEW ARTWORK':'READ MORE');const arrow=document.createElement('span');arrow.className='bry-vector-arrow';arrow.setAttribute('aria-hidden','true');a.append(' ',arrow);
-   content.append(kicker,h,p,a);card.append(media,content);host.querySelector('.bry-featured-grid').append(card);
+   content.append(kicker,h,p);if(link){const a=document.createElement('a');a.href=link;text(a,kind==='art'?'VIEW ARTWORK':'READ MORE');content.append(a);}card.append(media,content);host.querySelector('.bry-featured-grid').append(card);
   }
   host.hidden=!host.querySelector('.bry-featured-card');
  }catch(e){console.warn('Featured updates unavailable',e);host.hidden=true}

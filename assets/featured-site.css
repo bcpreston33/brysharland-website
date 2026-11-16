@@ -82,3 +82,7 @@ html body header {border-bottom:0!important;box-shadow:0 2px 0 #a435ff!important
 @media (max-width:760px){
  html body header .wrap .logo {width:100px!important;max-width:100px!important;height:auto!important;max-height:54px!important;object-fit:contain!important;}
 }
+
+/* Optional image-free news cards and compact About archive */
+.bry-featured-no-image .bry-featured-art{font-size:clamp(64px,10vw,130px);font-weight:900;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(130deg,#d51a91,#8b2ef1,#13d6e5)}
+.bry-news-archive{padding:44px 0 58px}.bry-news-archive h2{font:900 clamp(28px,4vw,44px) 'Barlow Condensed',sans-serif;margin:0 0 18px;color:#fff}.bry-news-archive-row{display:flex;align-items:center;justify-content:space-between;gap:25px;border-top:1px solid rgba(255,255,255,.22);padding:14px 0}.bry-news-archive-row small{color:#14e1e9;font-size:11px;letter-spacing:.03em}.bry-news-archive-row h3{font:700 17px/1.3 'DM Sans',sans-serif;color:#fff;margin:5px 0 0}.bry-news-archive-row a{flex-shrink:0;color:#fff;font-size:12px;font-weight:800;text-decoration:underline;text-underline-offset:3px}@media(max-width:600px){.bry-news-archive-row{align-items:flex-start;gap:12px}.bry-news-archive-row a{font-size:10px}.bry-featured-no-image .bry-featured-art{min-height:125px}}

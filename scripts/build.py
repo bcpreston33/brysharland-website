@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Compile Pages CMS artwork entries into a safe static JSON manifest, then copy site to dist."""
-import json,re,shutil
+import json,re,shutil,subprocess,datetime
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent
 DIST=ROOT/'dist'
@@ -8,6 +8,15 @@ if DIST.exists():shutil.rmtree(DIST)
 DIST.mkdir()
 for p in ROOT.glob('*.html'):shutil.copy2(p,DIST/p.name)
 shutil.copytree(ROOT/'assets',DIST/'assets',ignore=shutil.ignore_patterns('artwork.json'))
+def first_added_date(path):
+    """Git tracks the original creation commit, not later edits."""
+    rel=str(path.relative_to(ROOT))
+    try:
+        output=subprocess.check_output(['git','-C',str(ROOT),'log','--follow','--diff-filter=A','--format=%aI','--',rel],stderr=subprocess.DEVNULL,text=True,timeout=8).strip()
+        if output:return output.splitlines()[-1][:10]
+    except (OSError,subprocess.SubprocessError):pass
+    return ''
+
 items=[]
 for p in sorted((ROOT/'content/artwork').glob('*.md')):
     raw=p.read_text(encoding='utf-8-sig')
@@ -35,7 +44,7 @@ for p in sorted((ROOT/'content/artwork').glob('*.md')):
     item['image']=image
     item['featured']=obj.get('featured') is True
     item['order']=obj.get('order','')
-    item['published_on']=str(obj.get('published_on') or '')
+    item['published_on']=str(obj.get('published_on') or first_added_date(p))
     item['feature_days']=obj.get('feature_days',0)
     item['feature_until']=str(obj.get('feature_until') or '')
     item['feature_override']=str(obj.get('feature_override') or 'automatic')
@@ -231,8 +240,9 @@ if home:
             content=escape(val(home,field))
             if field=='feature_title':content=content.replace('\n','<br>')
             page=re.sub(pattern,lambda m:m.group(1)+content+m.group(2),page,count=1,flags=re.S)
-    # Remove the old layout-testing caption; no longer part of the public site.
-    page=sub(r'<p class="note">.*?</p>', '', page)
+    if 'category_note' in home:
+        note=val(home,'category_note')
+        page=sub(r'<p class="note">.*?</p>',('<p class="note">'+escape(note)+'</p>') if note else '',page)
     category_images={'queer_image':'queer','portraits_image':'portraits','star_wars_image':'star-wars','various_image':'various'}
     for field,slug in category_images.items():
         img=safe_image(home.get(field) or (home.get('miscellaneous_image') if field=='various_image' else None))
@@ -651,7 +661,9 @@ for p in sorted((ROOT/'content/news').glob('*.md')):
       'description':str(obj.get('description') or '')[:500],
       'image':safe_image(obj.get('image','')),
       'link':link,
-      'published_on':str(obj.get('published_on') or ''),
+      'published_on':str(obj.get('published_on') or first_added_date(p)),
+      'category':str(obj.get('category') or 'Personal Update'),
+      'icon':str(obj.get('icon') or 'None'),
       'feature_days':obj.get('feature_days',0),
       'feature_until':str(obj.get('feature_until') or ''),
       'feature_override':str(obj.get('feature_override') or 'automatic'),
@@ -691,3 +703,13 @@ for target in DIST.glob('*.html'):
         page=page.replace('</body>','<script src="assets/featured-home.js" defer></script></body>',1)
     page=page.replace('</head>','<link rel="stylesheet" href="assets/featured-site.css"></head>',1)
     target.write_text(page,encoding='utf-8')
+
+# News archive: always available on About, including entries past their homepage feature period.
+about=DIST/'about.html'
+if about.exists():
+    page=about.read_text(encoding='utf-8')
+    archive='<section id="bry-news-archive" class="bry-news-archive wrap" aria-label="News and Updates"><h2>NEWS &amp; UPDATES</h2><div class="bry-news-archive-items"></div></section>'
+    if 'id="bry-news-archive"' not in page:
+        page=page.replace('</main>',archive+'</main>',1) if '</main>' in page else page.replace('<footer>',archive+'<footer>',1)
+        page=page.replace('</body>','<script src="assets/news-archive.js" defer></script></body>',1)
+        about.write_text(page,encoding='utf-8')
