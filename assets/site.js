@@ -15,7 +15,7 @@
         const seed=String(x.title||'')+'|'+String(x.image||'');
         let hash=2166136261;
         for(let j=0;j<seed.length;j++){hash=Math.imul(hash^seed.charCodeAt(j),16777619)}
-        b.style.setProperty('--art-color',palette[((hash>>>0)+index)%palette.length]);b.className='art';b.type='button';b.dataset.full=x.image;b.dataset.title=x.title;b.dataset.year=x.year||'';b.dataset.medium=x.medium||'';b.dataset.dimensions=x.dimensions||'';b.dataset.description=x.description||'';b.dataset.printUrl=x.print_url||'';
+        b.style.setProperty('--art-color',palette[((hash>>>0)+index)%palette.length]);b.className='art';b.type='button';b.dataset.full=x.image;b.dataset.title=x.title;b.dataset.year=x.year||'';b.dataset.medium=x.medium||'';b.dataset.dimensions=x.dimensions||'';b.dataset.description=/^description goes here\.?$/i.test(String(x.description||'').trim())?'':(x.description||'');b.dataset.printUrl=x.print_url||'';
         const im=document.createElement('img');im.src=x.image;im.alt=x.title;im.loading='lazy';
         const info=document.createElement('div');info.className='info';const title=document.createElement('strong');title.textContent=x.title;
         const details=document.createElement('small');details.textContent=[x.medium,x.dimensions,x.year].filter(Boolean).join(' · ');
@@ -49,7 +49,19 @@ function setupArtworkLightbox(){
  function open(n){previousFocus=document.activeElement;i=n;show();lb.classList.add('open');document.body.classList.add('artwork-viewer-open');closeBtn.focus()}
  function close(){lb.classList.remove('open');document.body.classList.remove('artwork-viewer-open');large.removeAttribute('src');if(previousFocus&&previousFocus.focus)previousFocus.focus()}
  function move(n){i=(i+n+items.length)%items.length;show()}
+ // Deep-link to an individual artwork from the homepage featured card.
+ // The gallery remains available when the viewer is closed.
+ function openFromHash(){
+  const prefix='#artwork=';
+  if(!location.hash.startsWith(prefix))return;
+  let requested='';
+  try{requested=decodeURIComponent(location.hash.slice(prefix.length))}catch(e){return}
+  const index=items.findIndex(el=>el.dataset.full.replace(/^\/+/, '')===requested.replace(/^\/+/, ''));
+  if(index>=0&&!lb.classList.contains('open'))open(index);
+ }
  items.forEach((el,n)=>el.addEventListener('click',()=>open(n)));
+ window.addEventListener('hashchange',openFromHash);
+ openFromHash();
  closeBtn.addEventListener('click',close);prev.addEventListener('click',()=>move(-1));next.addEventListener('click',()=>move(1));
  lb.addEventListener('click',e=>{if(e.target===lb)close()});
  document.addEventListener('keydown',e=>{

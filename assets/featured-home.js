@@ -29,7 +29,8 @@
   };
   const picks=[['art',choose(art,cfg.art_mode,cfg.art_pin_title)],['news',choose(news,cfg.news_mode,cfg.news_pin_title)]].filter(x=>x[1]);
   for(const [kind,x] of picks){
-   const link=kind==='art'?safeLink(x.link)||({queer:'queer.html',portraits:'portraits.html','star-wars':'star-wars.html',various:'various.html'}[x.category]||'index.html#work'):safeLink(x.link);
+   const gallery=({queer:'queer.html',portraits:'portraits.html','star-wars':'star-wars.html',various:'various.html'}[x.category]||'index.html#work');
+   const link=kind==='art'?(x.image?gallery+'#artwork='+encodeURIComponent(x.image):gallery):safeLink(x.link);
    const img=safeImage(x.image);
    if(kind==='art'&&!img)continue;
    const card=document.createElement('article');card.className='bry-featured-card';card.dataset.kind=kind;
@@ -38,7 +39,9 @@
    const content=document.createElement('div');content.className='bry-featured-content';
    const kicker=document.createElement('div');kicker.className='bry-featured-kicker';text(kicker,kind==='art'?'JUST ADDED':(x.category||'NEWS & UPDATES'));
    const h=document.createElement('h2');text(h,x.title);
-   const p=document.createElement('p');text(p,x.description|| (kind==='art'?'New artwork by Bry Sharland.':'Latest news from Bry Sharland.'));
+   const p=document.createElement('p');
+   const description=String(x.description||'').trim();
+   if(description&&!/^description goes here\.?$/i.test(description)){text(p,description);content.append(p)}
    content.append(kicker,h,p);if(link){const a=document.createElement('a');a.href=link;text(a,kind==='art'?'VIEW ARTWORK':'READ MORE');content.append(a);}card.append(media,content);host.querySelector('.bry-featured-grid').append(card);
   }
   host.hidden=!host.querySelector('.bry-featured-card');
