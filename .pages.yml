@@ -55,6 +55,10 @@ content:
   - name: description
     label: Description
     type: text
+  - name: print_url
+    label: Print purchase link (optional)
+    type: string
+    description: Paste the direct store product URL when a print is available. Leave blank to hide the outlined Buy a Print button in the artwork viewer.
   - name: order
     label: Display order
     type: number
