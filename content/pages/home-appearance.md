@@ -5,4 +5,6 @@ hero_min_height_mobile: 600
 hero_image_width: 68
 hero_image_position: 65
 section_spacing: 70
+eyebrow_color: cyan
+work_heading_color: white
 ---

@@ -471,11 +471,6 @@ v=optional_px(gallery_appearance,'gallery_row_gap',0,140)
 if v is not None:add_rule('.gallery',['row-gap:'+str(v)+'px!important;'])
 v=optional_px(gallery_appearance,'caption_font_size',10,30)
 if v is not None:add_rule('.gallery .art .info',['font-size:'+str(v)+'px;'])
-color=str(gallery_appearance.get('caption_background') or '').strip()
-if re.fullmatch(r'#[0-9a-fA-F]{6}',color):
-    add_rule('.gallery .art .info',['background:'+color+'!important;'])
-v=optional_px(gallery_appearance,'gallery_border_width',0,12)
-if v is not None:add_rule('.gallery .art .info',['border-bottom-width:'+str(v)+'px!important;'])
 
 if styles:
     (DIST/'assets/appearance.css').write_text(':root{'+''.join(styles)+'}\n'+'\n'.join(page_rules),encoding='utf-8')
