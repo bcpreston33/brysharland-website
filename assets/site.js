@@ -23,10 +23,8 @@
       if(typeof window.setupArtworkLightbox==='function')window.setupArtworkLightbox();
     }
   }
-  const tiles=document.querySelectorAll('.tiles .tile');
-  tiles.forEach(tile=>{const cat=tile.getAttribute('href').replace('.html','');const candidate=data.find(x=>x.category===cat && x.featured && x.image)||data.find(x=>x.category===cat && x.image);
-    if(candidate){const im=tile.querySelector('.photo img');if(im){im.src=candidate.image;im.alt=candidate.title}}
-  });
+  // Homepage category thumbnails are explicitly chosen in Pages CMS (Homepage).
+  // Do not overwrite them with a featured or first artwork entry.
 })();
 
 function setupArtworkLightbox(){
