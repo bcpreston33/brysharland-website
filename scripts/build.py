@@ -719,3 +719,55 @@ if about.exists():
         page=page.replace('</main>',archive+'</main>',1) if '</main>' in page else page.replace('<footer>',archive+'<footer>',1)
         page=page.replace('</body>','<script src="assets/news-archive.js" defer></script></body>',1)
         about.write_text(page,encoding='utf-8')
+
+# Search and social metadata are generated only for the published HTML output.
+# Keep the canonical host independent of the Cloudflare preview URL.
+from xml.etree.ElementTree import Element, SubElement, ElementTree
+SEO_BASE = 'https://www.brysharland.com'
+SEO_PAGES = {
+    'index': ('Bry Sharland | Artist & Art Teacher', 'Explore colorful original artwork by Bry Sharland, including queer art, portraits, Star Wars-inspired pieces, and other creative work.'),
+    'about': ('About Bry Sharland | Artist & Art Teacher', 'Meet Bry Sharland, a Massachusetts artist and art teacher creating vibrant portraits, pop culture artwork, and the Pink Triangle Portraits project.'),
+    'queer': ('Queer Artwork | Bry Sharland', 'Explore queer-themed artwork by Bry Sharland, featuring expressive portraits, saturated color, and original creative work.'),
+    'portraits': ('Portrait Artwork | Bry Sharland', 'Explore portraits by artist Bry Sharland, known for expressive subjects, bold colors, and work in colored pencil and paint.'),
+    'star-wars': ('Star Wars Artwork | Bry Sharland', 'Browse Star Wars-inspired artwork by Bry Sharland, featuring colorful portraits of characters from a galaxy far, far away.'),
+    'various': ('Various Artwork | Bry Sharland', 'Explore a variety of original artwork and creative projects by artist Bry Sharland.'),
+    'contact': ('Contact Bry Sharland | Artist', 'Get in touch with artist Bry Sharland about artwork, exhibitions, collaborations, and inquiries.'),
+    'store': ('Prints & Store | Bry Sharland', 'Find information about prints and artwork by Bry Sharland. Individual print links will be added as they become available.'),
+}
+# A shared branded image is used until an intentional social-preview graphic is supplied.
+SOCIAL_IMAGE = SEO_BASE + '/assets/featured-art.jpg'
+for slug, (page_title, description) in SEO_PAGES.items():
+    target = DIST / (('index' if slug == 'index' else slug) + '.html')
+    if not target.exists():
+        continue
+    page = target.read_text(encoding='utf-8')
+    canonical = SEO_BASE + ('/' if slug == 'index' else '/' + slug + '.html')
+    page = re.sub(r'<title>.*?</title>', '<title>' + escape(page_title) + '</title>', page, count=1, flags=re.S)
+    metadata = '\n'.join([
+        '<meta name="description" content="' + escape(description, quote=True) + '">',
+        '<link rel="canonical" href="' + canonical + '">',
+        '<meta property="og:type" content="website">',
+        '<meta property="og:site_name" content="Bry Sharland">',
+        '<meta property="og:title" content="' + escape(page_title, quote=True) + '">',
+        '<meta property="og:description" content="' + escape(description, quote=True) + '">',
+        '<meta property="og:url" content="' + canonical + '">',
+        '<meta property="og:image" content="' + SOCIAL_IMAGE + '">',
+        '<meta property="og:image:alt" content="Colorful artwork by Bry Sharland">',
+        '<meta name="twitter:card" content="summary_large_image">',
+        '<meta name="twitter:title" content="' + escape(page_title, quote=True) + '">',
+        '<meta name="twitter:description" content="' + escape(description, quote=True) + '">',
+        '<meta name="twitter:image" content="' + SOCIAL_IMAGE + '">',
+    ])
+    page = page.replace('</head>', metadata + '\n</head>', 1)
+    target.write_text(page, encoding='utf-8')
+
+# These are the real pages in the new navigation, not old template leftovers.
+site_map = Element('urlset', xmlns='http://www.sitemaps.org/schemas/sitemap/0.9')
+for slug in SEO_PAGES:
+    url = SubElement(site_map, 'url')
+    SubElement(url, 'loc').text = SEO_BASE + ('/' if slug == 'index' else '/' + slug + '.html')
+ElementTree(site_map).write(DIST / 'sitemap.xml', encoding='utf-8', xml_declaration=True)
+(DIST / 'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: ' + SEO_BASE + '/sitemap.xml\n', encoding='utf-8')
+# Preserve the legacy Google Sites home address after the domain is switched.
+# Old Pink Triangle Portraits biography URLs need individual mapping later.
+(DIST / '_redirects').write_text('/home / 301\n/home/ / 301\n/pink-triangle-portraits https://www.pinktriangleportraits.com/ 301\n/pink-triangle-portraits/ https://www.pinktriangleportraits.com/ 301\n', encoding='utf-8')
