@@ -662,6 +662,8 @@ for p in sorted((ROOT/'content/news').glob('*.md')):
     news.append({
       'title':str(obj.get('title') or '')[:160],
       'description':str(obj.get('description') or '')[:500],
+      'full_text':str(obj.get('full_text') or '')[:8000],
+      'click_behavior':str(obj.get('click_behavior') or 'popup'),
       'image':safe_image(obj.get('image','')),
       'link':link,
       'published_on':str(obj.get('published_on') or first_added_date(p)),
@@ -704,7 +706,13 @@ for target in DIST.glob('*.html'):
         cards='<section id="bry-featured" class="bry-featured-strip wrap" hidden aria-label="New artwork and announcements"><div class="bry-featured-grid"></div></section>'
         page=page.replace('<section class="section wrap" id="work">',cards+'<section class="section wrap" id="work">',1)
         page=page.replace('</body>','<script src="assets/featured-home.js" defer></script></body>',1)
+    # Consistent active navigation across generated pages, including galleries.
+    active_href = ('index.html#work' if target.stem in ('queer','portraits','star-wars','various') else
+                   'index.html' if target.stem=='index' else target.stem+'.html')
+    page=re.sub(r'(<nav\b[^>]*>.*?</nav>)',lambda m:re.sub(r'<a\s+href="'+re.escape(active_href)+r'"',
+        lambda a:a.group(0)+' aria-current="page"',m.group(1),count=1),page,count=1,flags=re.S)
     page=page.replace('</head>','<link rel="stylesheet" href="assets/featured-site.css"></head>',1)
+    page=page.replace('</body>','<script src="assets/news-viewer.js" defer></script></body>',1)
     target.write_text(page,encoding='utf-8')
 
 # News archive: always available on About, including entries past their homepage feature period.

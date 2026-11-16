@@ -171,3 +171,29 @@ body:has(#bry-news-archive) .copy{min-height:0;padding-bottom:18px}
  .lightbox .prev,.lightbox .next{position:fixed;top:var(--artwork-image-mid,40%);transform:translateY(-50%);width:36px;height:44px;display:grid;place-items:center;background:rgba(8,6,14,.58);border-radius:22px;font-size:30px;line-height:1}
  .lightbox .prev{left:4px}.lightbox .next{right:4px}
 }
+
+/* News headline: natural word wrapping, a little intentional overlap permitted. */
+.bry-featured-card[data-kind="news"] .bry-featured-content{overflow:visible!important;overflow-wrap:normal!important}
+.bry-featured-card[data-kind="news"] .bry-featured-content h2{max-width:125%!important;overflow-wrap:normal!important;word-break:normal!important;hyphens:manual!important;position:relative;z-index:3}
+/* About archive: stronger but restrained purple treatment. */
+.bry-news-archive{background:rgba(103,45,130,.25)!important}
+.bry-news-archive-entry{display:flex;align-items:center;gap:16px;width:100%;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer;padding:0;font:inherit}
+.bry-news-archive-entry img{width:76px;height:64px;object-fit:cover;flex:none}
+.bry-news-archive-info{display:flex;flex-direction:column;gap:5px;flex:1;min-width:0}
+.bry-news-archive-info small{color:#14e1e9;font-size:11px}
+.bry-news-archive-info strong{font:700 16px/1.3 'DM Sans',sans-serif}
+.bry-news-archive-hint{color:#14e1e9;font-size:11px;font-weight:800;white-space:nowrap}
+.bry-news-archive-entry:hover strong,.bry-news-archive-entry:focus-visible strong{text-decoration:underline;text-underline-offset:4px}
+.bry-news-modal[hidden]{display:none!important}.bry-news-modal{position:fixed;inset:0;z-index:2500;background:rgba(5,3,9,.9);display:flex;align-items:center;justify-content:center;padding:25px;overflow-y:auto}
+.bry-news-modal-open{overflow:hidden}.bry-news-modal-panel{position:relative;width:min(650px,100%);max-height:calc(100vh - 50px);overflow:auto;background:#1a1022;border-top:3px solid #f026ab;padding:clamp(24px,4vw,38px);box-shadow:0 16px 70px #0009}
+.bry-news-modal-close{position:absolute;right:12px;top:6px;color:white;background:transparent;border:0;font-size:34px;cursor:pointer}
+.bry-news-modal-meta{color:#14e1e9;font:700 11px 'DM Sans',sans-serif;text-transform:uppercase;letter-spacing:.07em;margin-right:30px;margin-bottom:18px}
+.bry-news-modal-image{max-height:350px;max-width:100%;width:auto;object-fit:contain;margin:0 auto 24px}
+.bry-news-modal-body h2{font:900 clamp(35px,6vw,58px)/.95 'Barlow Condensed',sans-serif;text-transform:uppercase;margin:0 0 18px}
+.bry-news-modal-copy{white-space:pre-line;line-height:1.65;color:#e5dce8;margin-bottom:20px}
+.bry-news-modal-link{display:inline-block;border:1px solid #14e1e9;color:#14e1e9;padding:11px 16px;font-size:12px;font-weight:800}
+/* Consistent dividers on all page templates. */
+html body > header{border-bottom:2px solid #a435ff!important}
+html body > footer{border-top:2px solid #a435ff!important}
+html body header nav a[aria-current="page"]:not(:last-child){color:var(--yellow,#f5f323)!important}
+@media(max-width:600px){.bry-news-archive-entry img{width:58px;height:58px}.bry-news-archive-hint{font-size:10px}.bry-featured-card[data-kind="news"] .bry-featured-content h2{max-width:115%!important}}

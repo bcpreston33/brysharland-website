@@ -42,7 +42,9 @@
    const p=document.createElement('p');
    const description=String(x.description||'').trim();
    if(description&&!/^description goes here\.?$/i.test(description)){text(p,description);content.append(p)}
-   content.append(kicker,h,p);if(link){const a=document.createElement('a');a.href=link;text(a,kind==='art'?'VIEW ARTWORK':'READ MORE');content.append(a);}card.append(media,content);host.querySelector('.bry-featured-grid').append(card);
+   content.append(kicker,h,p);if(kind==='news'){
+    const a=document.createElement('a');a.href='#news';a.dataset.bryNewsIndex=String(news.indexOf(x));text(a,'READ MORE');content.append(a);
+   }else if(link){const a=document.createElement('a');a.href=link;text(a,'VIEW ARTWORK');content.append(a);}card.append(media,content);host.querySelector('.bry-featured-grid').append(card);
   }
   host.hidden=!host.querySelector('.bry-featured-card');
  }catch(e){console.warn('Featured updates unavailable',e);host.hidden=true}
