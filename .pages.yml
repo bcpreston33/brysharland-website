@@ -995,11 +995,11 @@ content:
       - cyan
       - yellow
       - white
-    description: Color of the small introductory heading above the hero.
+    description: Cyan is the current color of the small introductory heading.
   - name: eyebrow_size
     label: Hero small heading size (px)
     type: number
-    description: Size in pixels of the hero intro label.
+    description: Optional override. Leave blank to keep the current 12px CSS size.
   - name: work_heading_color
     label: Artwork section heading color
     type: select
@@ -1011,7 +1011,7 @@ content:
       - cyan
       - yellow
       - white
-    description: Color of the main Explore heading.
+    description: White is the current color of the main Explore heading.
   - name: work_heading_shadow
     label: Artwork section offset color
     type: select
@@ -1023,11 +1023,11 @@ content:
       - cyan
       - yellow
       - white
-    description: Offset color used behind the Explore heading.
+    description: Optional offset color. Leave blank to retain the current heading treatment; this variable is not currently rendered as a separate shadow.
   - name: work_heading_size
     label: Artwork section heading size (px)
     type: number
-    description: Size in pixels of the Explore heading.
+    description: Optional override. Leave blank to keep the responsive heading size.
   - name: feature_heading_color
     label: Featured project heading color
     type: select
@@ -1051,11 +1051,11 @@ content:
       - cyan
       - yellow
       - white
-    description: Offset color behind the featured project heading.
+    description: Optional offset color. Leave blank to retain the current heading treatment; this variable is not currently rendered as a separate shadow.
   - name: feature_heading_size
     label: Featured project heading size (px)
     type: number
-    description: Size in pixels of the featured project heading.
+    description: Optional override. Leave blank to keep the responsive heading size.
 - name: gallery-appearance
   label: Gallery Appearance
   type: file
@@ -1065,23 +1065,15 @@ content:
   - name: gallery_gap
     label: 01 · GALLERY GRID  /  Artwork horizontal gap (px)
     type: number
-    description: Horizontal space between artworks; current default 20px.
+    description: Horizontal space between artwork columns; currently 20px.
   - name: gallery_row_gap
     label: Artwork vertical gap (px)
     type: number
-    description: Vertical space between artworks; current gallery styles use 38–52px depending on screen size.
+    description: Optional override. Leave blank to keep 52px on desktop and 38px on mobile.
   - name: caption_font_size
     label: 02 · CAPTIONS  /  Caption text size (px)
     type: number
-    description: Gallery titles appear on hover on desktop and below artwork on mobile; CSS uses different responsive sizes.
-  - name: caption_background
-    label: Caption background hex
-    type: string
-    description: Legacy caption color control. The redesigned gallery uses transparent captions and a dark hover overlay; leave blank.
-  - name: gallery_border_width
-    label: 03 · SEPARATORS  /  Neon separator thickness (px)
-    type: number
-    description: Legacy separator control. New galleries hide the old colored panel borders; leave blank.
+    description: Optional fixed-size override. Leave blank to retain different desktop and mobile title sizes.
 - name: navigation-footer
   label: Navigation & Footer
   type: file
