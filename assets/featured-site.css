@@ -56,3 +56,29 @@ footer .bry-global-social:nth-child(3) .bry-social-icon{filter:brightness(0) inv
     justify-content:center;
   }
 }
+
+/* Pink Triangle Portraits: full-section ambient color, no inset card. */
+body:has(.hero) section.feature {
+  position:relative;
+  isolation:isolate;
+  background:
+    radial-gradient(ellipse 49% 85% at 96% 49%, rgba(255,134,25,.70) 0%, rgba(255,60,107,.42) 43%, transparent 100%),
+    radial-gradient(ellipse 51% 100% at 77% 55%, rgba(245,33,146,.48) 0%, rgba(126,24,116,.26) 57%, transparent 100%),
+    linear-gradient(90deg,#160d1c 0%,#160d1c 31%,#241022 59%,#501c35 100%);
+}
+body:has(.hero) section.feature .wrap {position:relative;z-index:1;}
+/* The image itself is untouched; its existing art treatment is preserved. */
+@media (max-width:900px){
+ body:has(.hero) section.feature {
+  background:
+    radial-gradient(ellipse 92% 43% at 85% 83%,rgba(255,136,24,.62),rgba(249,42,135,.35) 49%,transparent 100%),
+    radial-gradient(ellipse 90% 50% at 75% 76%,rgba(207,34,143,.38),transparent 95%),
+    linear-gradient(180deg,#160d1c 0%,#160d1c 37%,#281224 73%,#491a30 100%);
+ }
+}
+/* Draw the header divider outside any translucent header layer. */
+html body header {border-bottom:0!important;box-shadow:0 2px 0 #a435ff!important;}
+/* Consistent, compact logo on mobile without changing desktop size. */
+@media (max-width:760px){
+ html body header .wrap .logo {width:100px!important;max-width:100px!important;height:auto!important;max-height:54px!important;object-fit:contain!important;}
+}
