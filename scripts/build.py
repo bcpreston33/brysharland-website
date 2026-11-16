@@ -40,6 +40,7 @@ for p in sorted((ROOT/'content/artwork').glob('*.md')):
         continue
     image=image.lstrip('/')
     item={k:str(obj.get(k) or '') for k in ('title','category','year','medium','dimensions','description')}
+    item['print_url']=str(obj.get('print_url') or '').strip()
     item['category']=category
     item['image']=image
     item['featured']=obj.get('featured') is True
