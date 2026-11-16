@@ -97,6 +97,21 @@ content:
   - name: description
     label: Short description
     type: text
+  - name: full_text
+    label: Full announcement (optional)
+    type: text
+    description: Longer text shown in the announcement popup. Leave blank to use the short description.
+  - name: click_behavior
+    label: What happens when clicked
+    type: select
+    default: popup
+    options:
+      values:
+      - value: popup
+        label: Open announcement popup
+      - value: external
+        label: Go directly to external link
+    description: Direct links require an external URL. Without one, the announcement opens in a popup.
   - name: icon
     label: Optional icon
     type: select
