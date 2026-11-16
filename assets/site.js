@@ -37,8 +37,8 @@ function setupArtworkLightbox(){
   const item=items[i];large.src=item.dataset.full;large.alt=item.dataset.title||'Artwork';caption.replaceChildren();
   const label=document.createElement('span');label.className='artwork-category';label.textContent=category+' / Artwork';caption.append(label);
   const title=document.createElement('strong');title.textContent=item.dataset.title||'Untitled';caption.append(title);
-  const meta=[item.dataset.medium,item.dataset.dimensions,item.dataset.year].filter(Boolean).join(' · ');
-  if(meta){const m=document.createElement('span');m.className='caption-meta';m.textContent=meta;caption.append(m)}
+  const meta=[item.dataset.medium,item.dataset.dimensions,item.dataset.year].filter(Boolean);
+  if(meta.length){const m=document.createElement('span');m.className='caption-meta';meta.forEach(value=>{const line=document.createElement('span');line.style.display='block';line.textContent=value;m.append(line)});caption.append(m)}
   if(item.dataset.description){const d=document.createElement('span');d.className='caption-description';d.textContent=item.dataset.description;caption.append(d)}
   const url=item.dataset.printUrl||'';
   if(/^https?:\/\//i.test(url)){
