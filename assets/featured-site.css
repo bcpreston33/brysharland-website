@@ -113,3 +113,33 @@ html body header {border-bottom:0!important;box-shadow:0 2px 0 #a435ff!important
  .bry-featured-content a{padding:10px;font-size:10px}
  .bry-featured-art{padding:10px!important}
 }
+
+
+/* Pink Triangle Portraits full-width feature: dark readable copy on the left,
+   magenta/pink/orange glow concentrated behind the collage on the right. */
+html body:has(.hero) section.feature {
+  position:relative;
+  isolation:isolate;
+  background:
+    radial-gradient(ellipse 54% 105% at 101% 50%, rgba(255,137,28,.84) 0%, rgba(255,91,43,.67) 36%, rgba(242,34,129,.39) 67%, transparent 100%),
+    radial-gradient(ellipse 60% 120% at 76% 53%, rgba(232,24,143,.56) 0%, rgba(116,17,104,.30) 55%, transparent 100%),
+    linear-gradient(90deg,#160d1c 0%,#160d1c 30%,#271020 55%,#6c193e 100%) !important;
+  border-radius:0!important;
+}
+html body:has(.hero) section.feature::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:repeating-linear-gradient(155deg,transparent 0 31px,rgba(255,255,255,.025) 32px,transparent 33px);
+}
+html body:has(.hero) section.feature .wrap {position:relative;z-index:1;}
+@media (max-width:900px){
+ html body:has(.hero) section.feature {
+   background:
+     radial-gradient(ellipse 105% 55% at 88% 85%,rgba(255,134,25,.78) 0%,rgba(246,44,112,.47) 46%,transparent 100%),
+     radial-gradient(ellipse 90% 60% at 77% 80%,rgba(220,27,139,.46),transparent 100%),
+     linear-gradient(180deg,#160d1c 0%,#160d1c 34%,#291020 65%,#681d40 100%) !important;
+ }
+}
