@@ -1,0 +1,37 @@
+
+/* Bry Sharland approved V3 styling */
+header,footer{background:#290d40!important;border-color:transparent!important}
+footer{padding:0!important;color:#fff!important}
+footer .bry-global-socials{width:min(1320px,calc(100% - 64px));margin:0 auto!important;display:flex!important;align-items:center;justify-content:center;flex-wrap:wrap;gap:26px;padding:42px 0 47px!important;border:0!important}
+footer .bry-global-socials h2{margin:0!important;font:800 clamp(30px,4vw,52px)/1 'Barlow Condensed',sans-serif;color:var(--cyan,#05dff2);text-align:center}
+footer .bry-global-social-grid{display:flex!important;justify-content:center;align-items:center;flex-wrap:wrap;gap:18px;padding:0!important}
+footer .bry-global-social{min-width:160px;min-height:54px;display:inline-flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 24px;background:var(--pink,#ff27ac);color:#101010;font:800 13px 'DM Sans',sans-serif;box-shadow:5px 5px 0 var(--cyan,#05dff2);text-decoration:none}
+footer .bry-global-social:nth-child(2){background:var(--cyan,#05dff2);box-shadow:5px 5px 0 var(--purple,#a435ff)}
+footer .bry-global-social:nth-child(3){background:var(--purple,#a435ff);box-shadow:5px 5px 0 var(--yellow,#fff023);color:#fff}
+footer .bry-social-icon{display:none}
+.bry-featured-strip{padding:48px 0 24px}
+.bry-featured-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.bry-featured-grid:has(.bry-featured-card:only-child){grid-template-columns:1fr}
+.bry-featured-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-width:0;min-height:330px;overflow:hidden;background:#271126;border:1px solid #ffffff20}
+.bry-featured-card[data-kind=art]{background:linear-gradient(125deg,#7022a9,#e61f9e 70%,#ff8026)}
+.bry-featured-card[data-kind=news]{background:linear-gradient(125deg,#0c697b,#651da9 70%,#ed269e)}
+.bry-featured-art{min-width:0;display:grid;place-items:center;padding:20px}
+.bry-featured-art img{display:block;width:100%;max-height:295px;object-fit:contain;box-shadow:8px 8px 0 #ffffffb0}
+.bry-featured-content{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:28px 25px;min-width:0}
+.bry-featured-kicker{color:#fff;font:800 14px 'DM Sans',sans-serif;letter-spacing:.09em;text-transform:uppercase}
+.bry-featured-content h2{color:#fff;font:900 clamp(36px,4vw,58px)/.9 'Barlow Condensed',sans-serif;text-transform:uppercase;margin:12px 0}
+.bry-featured-content p{font-size:14px;line-height:1.5;color:#fff;margin:0 0 22px}
+.bry-featured-content a{background:#fff;color:#101014;box-shadow:5px 5px 0 #05dff2;font:800 13px 'DM Sans',sans-serif;text-transform:uppercase;padding:12px 15px}
+.bry-featured-card[data-kind=news] .bry-featured-content a{box-shadow:5px 5px 0 #ff27ac}
+@media(max-width:900px){.bry-featured-card{grid-template-columns:1fr}.bry-featured-art img{max-height:270px}.bry-featured-content{padding:20px}}
+@media(max-width:700px){
+footer .bry-global-socials{width:calc(100% - 40px);flex-direction:column;gap:20px;padding:33px 0 43px!important}
+footer .bry-global-socials h2{font-size:30px}
+footer .bry-global-social-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;width:100%}
+footer .bry-global-social{min-width:0;min-height:58px;padding:12px;justify-content:center}
+footer .bry-social-word,footer .bry-social-arrow{display:none}
+footer .bry-social-icon{display:block;width:24px;height:24px;filter:brightness(0)}
+footer .bry-global-social:nth-child(3) .bry-social-icon{filter:brightness(0) invert(1)}
+.bry-featured-strip{padding:28px 0 12px}.bry-featured-grid{grid-template-columns:1fr;gap:18px}
+.bry-featured-card{grid-template-columns:1fr}.bry-featured-art{padding:18px}.bry-featured-content{padding:20px 22px 25px}
+}

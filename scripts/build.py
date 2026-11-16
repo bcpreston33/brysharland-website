@@ -35,6 +35,10 @@ for p in sorted((ROOT/'content/artwork').glob('*.md')):
     item['image']=image
     item['featured']=obj.get('featured') is True
     item['order']=obj.get('order','')
+    item['published_on']=str(obj.get('published_on') or '')
+    item['feature_days']=obj.get('feature_days',0)
+    item['feature_until']=str(obj.get('feature_until') or '')
+    item['feature_override']=str(obj.get('feature_override') or 'automatic')
     items.append(item)
 # Publish only web-sized artwork files. Originals remain in the source repository
 # but the public dist/assets/uploads copies are overwritten at build time.
@@ -630,3 +634,61 @@ for target in DIST.glob('*.html'):
     if 'assets/mobile-navigation.js' not in page:
         page = page.replace('</body>', '<script src="assets/mobile-navigation.js" defer></script></body>', 1)
     target.write_text(page, encoding='utf-8')
+
+
+# Homepage live features, and shared footer. Dates are evaluated in the browser
+# so a static deployment still expires features on the correct calendar day.
+import datetime
+news=[]
+for p in sorted((ROOT/'content/news').glob('*.md')):
+    raw=p.read_text(encoding='utf-8-sig')
+    m=re.match(r'^---\s*\n(.*?)\n---(?:\s*\n|$)',raw,re.S)
+    if not m:continue
+    obj=yaml.safe_load(m.group(1)) or {}
+    if not isinstance(obj,dict):continue
+    link=safe_url(obj.get('link',''))
+    news.append({
+      'title':str(obj.get('title') or '')[:160],
+      'description':str(obj.get('description') or '')[:500],
+      'image':safe_image(obj.get('image','')),
+      'link':link,
+      'published_on':str(obj.get('published_on') or ''),
+      'feature_days':obj.get('feature_days',0),
+      'feature_until':str(obj.get('feature_until') or ''),
+      'feature_override':str(obj.get('feature_override') or 'automatic'),
+    })
+(DIST/'assets/news.json').write_text(json.dumps(news,ensure_ascii=False),encoding='utf-8')
+feature_config=read_page('featured-home')
+(DIST/'assets/featured-home.json').write_text(json.dumps({
+ 'default_days':feature_config.get('default_days',30),
+ 'art_mode':feature_config.get('art_mode','automatic'),
+ 'art_pin_title':feature_config.get('art_pin_title',''),
+ 'news_mode':feature_config.get('news_mode','automatic'),
+ 'news_pin_title':feature_config.get('news_pin_title',''),
+}),encoding='utf-8')
+for target in DIST.glob('*.html'):
+    page=target.read_text(encoding='utf-8')
+    # Use a single shared social footer on all pages, including Contact.
+    social=re.search(r'<section class="bry-global-socials wrap".*?</section>',page,re.S)
+    if social:
+        page=page[:social.start()]+page[social.end():]
+    if target.stem=='contact':
+        page=re.sub(r'<div class="bry-socials">.*?</div></div>', '',page,count=1,flags=re.S)
+    social_settings=read_page('contact')
+    defaults={'deviantart':'https://www.deviantart.com/brysharland','instagram':'https://www.instagram.com/brysharlandart/','bluesky':'https://bsky.app/profile/brysharlandart.bsky.social'}
+    buttons=[]
+    for name in ('deviantart','instagram','bluesky'):
+        url=safe_url(social_settings.get(name,defaults[name]))
+        if not url:continue
+        label=name.capitalize() if name!='deviantart' else 'DeviantArt'
+        icon_url='https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/'+name+'.svg'
+        buttons.append('<a class="bry-global-social" href="'+escape(url,quote=True)+'" target="_blank" rel="noopener noreferrer" aria-label="'+label+'"><span class="bry-social-word">'+label+'</span><img class="bry-social-icon" src="'+icon_url+'" alt="" aria-hidden="true"><span class="bry-social-arrow" aria-hidden="true">↗</span></a>')
+    markup='<section class="bry-global-socials wrap" aria-label="Follow Bry Sharland"><h2>FOLLOW ME</h2><div class="bry-global-social-grid">'+''.join(buttons)+'</div></section>'
+    page=re.sub(r'<footer\b[^>]*>.*?</footer>', '<footer>'+markup+'</footer>',page,count=1,flags=re.S)
+    if target.stem=='index':
+        page=re.sub(r'(<section class="hero">.*?<div class="eyebrow">).*?(</div>)',r'\1\2',page,count=1,flags=re.S)
+        cards='<section id="bry-featured" class="bry-featured-strip wrap" hidden aria-label="New artwork and announcements"><div class="bry-featured-grid"></div></section>'
+        page=page.replace('<section class="section wrap" id="work">',cards+'<section class="section wrap" id="work">',1)
+        page=page.replace('</body>','<script src="assets/featured-home.js" defer></script></body>',1)
+    page=page.replace('</head>','<link rel="stylesheet" href="assets/featured-site.css"></head>',1)
+    target.write_text(page,encoding='utf-8')
