@@ -771,3 +771,14 @@ ElementTree(site_map).write(DIST / 'sitemap.xml', encoding='utf-8', xml_declarat
 # Preserve the legacy Google Sites home address after the domain is switched.
 # Old Pink Triangle Portraits biography URLs need individual mapping later.
 (DIST / '_redirects').write_text('/home / 301\n/home/ / 301\n/pink-triangle-portraits https://www.pinktriangleportraits.com/ 301\n/pink-triangle-portraits/ https://www.pinktriangleportraits.com/ 301\n', encoding='utf-8')
+
+# Shared accessibility enhancements on every generated page.
+for target in DIST.glob('*.html'):
+    page=target.read_text(encoding='utf-8')
+    if 'class="bry-skip-link"' not in page and '<body' in page:
+        page=re.sub(r'(<body\b[^>]*>)',r'\1<a class="bry-skip-link" href="#main-content">Skip to main content</a>',page,count=1)
+    if 'id="main-content"' not in page:
+        page=page.replace('<main>', '<main id="main-content">',1)
+    if 'assets/accessibility.css' not in page:
+        page=page.replace('</head>','<link rel="stylesheet" href="assets/accessibility.css"></head>',1)
+    target.write_text(page,encoding='utf-8')

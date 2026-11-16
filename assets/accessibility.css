@@ -1,0 +1,5 @@
+/* Keyboard navigation and reduced-motion accommodations. */
+.bry-skip-link{position:fixed;left:12px;top:10px;z-index:20000;transform:translateY(-160%);padding:12px 18px;background:#08e8f4;color:#09070d;font-weight:800;text-decoration:none}
+.bry-skip-link:focus{transform:none}
+:where(a,button,input,select,textarea):focus-visible{outline:3px solid #08e8f4;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}

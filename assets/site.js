@@ -31,6 +31,8 @@ function setupArtworkLightbox(){
  const large=lb.querySelector('#large'),caption=lb.querySelector('#caption');
  const prev=lb.querySelector('.prev'),next=lb.querySelector('.next'),closeBtn=lb.querySelector('.close');
  let i=0,previousFocus=null,touchStart=null;
+ const siblings=[...lb.parentElement.children].filter(el=>el!==lb);
+ const setBackgroundInert=active=>{siblings.forEach(el=>el.toggleAttribute('inert',active));document.querySelector('header')?.toggleAttribute('inert',active);document.querySelector('footer')?.toggleAttribute('inert',active)};
  function positionMobileArrows(){
   if(!lb.classList.contains('open'))return;
   const rect=large.getBoundingClientRect();
@@ -39,20 +41,13 @@ function setupArtworkLightbox(){
  large.addEventListener('load',()=>requestAnimationFrame(positionMobileArrows));
  window.addEventListener('resize',positionMobileArrows);
 
- function positionMobileArrows(){
-  if(!lb.classList.contains('open'))return;
-  const rect=large.getBoundingClientRect();
-  if(rect.height>0)lb.style.setProperty('--artwork-image-mid',Math.round(rect.top+rect.height/2)+'px');
- }
- large.addEventListener('load',()=>requestAnimationFrame(positionMobileArrows));
- window.addEventListener('resize',positionMobileArrows);
 
  const category=(document.body.dataset.category||'artwork').replaceAll('-',' ');
- lb.setAttribute('aria-modal','true');lb.setAttribute('tabindex','-1');
+ lb.setAttribute('aria-modal','true');lb.setAttribute('tabindex','-1');lb.setAttribute('aria-labelledby','artwork-dialog-title');
  function show(){
   const item=items[i];large.src=item.dataset.full;large.alt=item.dataset.title||'Artwork';caption.replaceChildren();
   const label=document.createElement('span');label.className='artwork-category';label.textContent=category+' / Artwork';caption.append(label);
-  const title=document.createElement('strong');title.textContent=item.dataset.title||'Untitled';caption.append(title);
+  const title=document.createElement('strong');title.textContent=item.dataset.title||'Untitled';title.id='artwork-dialog-title';caption.append(title);
   const meta=[item.dataset.medium,item.dataset.dimensions,item.dataset.year].filter(Boolean);
   if(meta.length){const m=document.createElement('span');m.className='caption-meta';meta.forEach(value=>{const line=document.createElement('span');line.style.display='block';line.textContent=value;m.append(line)});caption.append(m)}
   if(item.dataset.description){const d=document.createElement('span');d.className='caption-description';d.textContent=item.dataset.description;caption.append(d)}
@@ -62,8 +57,8 @@ function setupArtworkLightbox(){
   }
   const count=document.createElement('span');count.className='caption-count';count.textContent=(i+1)+' / '+items.length;caption.append(count);
  }
- function open(n){previousFocus=document.activeElement;i=n;show();lb.classList.add('open');document.body.classList.add('artwork-viewer-open');requestAnimationFrame(positionMobileArrows);closeBtn.focus()}
- function close(){lb.classList.remove('open');document.body.classList.remove('artwork-viewer-open');large.removeAttribute('src');if(previousFocus&&previousFocus.focus)previousFocus.focus()}
+ function open(n){previousFocus=document.activeElement;i=n;show();lb.classList.add('open');document.body.classList.add('artwork-viewer-open');setBackgroundInert(true);requestAnimationFrame(positionMobileArrows);closeBtn.focus()}
+ function close(){lb.classList.remove('open');document.body.classList.remove('artwork-viewer-open');setBackgroundInert(false);large.removeAttribute('src');if(previousFocus&&previousFocus.focus)previousFocus.focus()}
  function move(n){i=(i+n+items.length)%items.length;show();requestAnimationFrame(positionMobileArrows)}
  // Deep-link to an individual artwork from the homepage featured card.
  // The gallery remains available when the viewer is closed.
