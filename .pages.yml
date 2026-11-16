@@ -26,8 +26,8 @@ content:
     label: 01 · ARTWORK DETAILS  /  Artwork title
     type: string
     required: true
-    description: Add a title and image, then save. New artwork automatically replaces the homepage artwork card for 30 days.
-      Editing an existing entry does not restart the timer.
+    description: Add a title and image, then save. New artwork automatically replaces the homepage artwork card for 30 days. Editing
+      an existing entry does not restart the timer.
   - name: image
     label: Artwork image
     type: image
@@ -44,25 +44,26 @@ content:
       - Star Wars
       - Various
   - name: year
-    label: Year
+    label: Year (optional)
     type: string
   - name: medium
-    label: Medium
+    label: Medium (optional)
     type: string
   - name: dimensions
-    label: Dimensions
+    label: Dimensions (optional)
     type: string
   - name: description
-    label: Description
+    label: Description (optional)
     type: text
   - name: print_url
     label: Print purchase link (optional)
     type: string
-    description: Paste the direct store product URL when a print is available. Leave blank to hide the outlined Buy a Print button in the artwork viewer.
+    description: Paste the direct store product URL when a print is available. Leave blank to hide the outlined Buy a Print button in
+      the artwork viewer.
   - name: order
-    label: Display order
+    label: 02 · GALLERY DISPLAY / Display order
     type: number
-    description: Lower numbers appear first where ordering is supported.
+    description: Lower numbers appear first. Entries with the same number are sorted using the site’s secondary ordering.
 - name: news
   label: News & Updates
   type: collection
@@ -298,9 +299,11 @@ content:
   - name: hero_title
     label: Large hero title
     type: string
+    description: Optional text-only fallback. Currently unused because the combined BRY SHARLAND image is supplied.
   - name: hero_subtitle
     label: Second title line
     type: string
+    description: Optional text-only fallback. Currently unused because the combined BRY SHARLAND image is supplied.
   - name: button_text
     label: Explore button text
     type: string
@@ -347,73 +350,6 @@ content:
   - name: feature_image
     label: Featured project image (optional)
     type: image
-  - name: eyebrow_color
-    label: 04 · HERO APPEARANCE  /  Hero small heading color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-    description: 'Section 4: Hero appearance.'
-  - name: eyebrow_size
-    label: Hero small heading size (px)
-    type: number
-  - name: work_heading_color
-    label: 05 · ARTWORK HEADING APPEARANCE  /  Artwork section heading color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-    description: 'Section 5: Artwork heading appearance.'
-  - name: work_heading_shadow
-    label: Artwork section offset color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: work_heading_size
-    label: Artwork section heading size (px)
-    type: number
-  - name: feature_heading_color
-    label: 06 · FEATURED PROJECT APPEARANCE  /  Featured project heading color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-    description: 'Section 6: Featured project appearance. Color of the Pink Triangle Portraits featured heading.'
-  - name: feature_heading_shadow
-    label: Featured project offset color
-    type: select
-    options:
-      values:
-      - orange
-      - pink
-      - purple
-      - cyan
-      - yellow
-      - white
-  - name: feature_heading_size
-    label: Featured project heading size (px)
-    type: number
 - name: about-page
   label: About Page
   type: file
@@ -936,41 +872,47 @@ content:
   - name: site_name
     label: 01 · SITE IDENTITY  /  Browser tab site name
     type: string
-    description: 'Section 1: Site identity.'
+    description: Text shown in the browser tab; currently Bry Sharland.
   - name: content_padding_desktop
     label: 02 · RESPONSIVE SPACING  /  Desktop side spacing (px)
     type: number
-    description: 'Section 2: Responsive spacing.'
+    description: Desktop side spacing, currently 60px.
   - name: content_padding_tablet
     label: Tablet side spacing (px)
     type: number
+    description: Tablet side spacing, currently 32px.
   - name: content_padding_mobile
     label: Mobile side spacing (px)
     type: number
-    description: Horizontal page padding on mobile in pixels. Leave empty to use the coded default.
+    description: Mobile side spacing, currently 20px.
   - name: background_color
     label: 03 · GLOBAL COLORS  /  Main background hex
     type: string
-    description: 'Section 3: Global colors. Hex color value, such as #ffffff. Leave empty to retain the site default.'
+    description: 'Site background, currently #09080c.'
   - name: text_color
     label: Main text hex
     type: string
-    description: Global body text color in hexadecimal notation.
+    description: 'Main body text, currently #faf6fa.'
   - name: pink
     label: Neon pink hex
     type: string
+    description: 'Pink accent, #ff29b4.'
   - name: cyan
     label: Neon cyan hex
     type: string
+    description: 'Cyan accent, #08e8f4.'
   - name: orange
     label: Neon orange hex
     type: string
+    description: 'Orange accent, #ff851a.'
   - name: yellow
     label: Neon yellow hex
     type: string
+    description: 'Yellow accent, #f5f323.'
   - name: purple
     label: Neon purple hex
     type: string
+    description: 'Purple accent, #a435ff.'
   - name: body_font
     label: 04 · TYPOGRAPHY  /  General body font
     type: select
@@ -980,7 +922,7 @@ content:
       - Barlow Condensed
       - Oswald
       - Roboto Condensed
-    description: 'Section 4: Typography.'
+    description: Body font currently DM Sans.
   - name: heading_font
     label: General heading font
     type: select
@@ -992,6 +934,7 @@ content:
       - Bebas Neue
       - Roboto Condensed
       - Archivo Black
+    description: Heading font currently Barlow Condensed.
 - name: homepage-appearance
   label: Homepage Appearance
   type: file
@@ -1001,27 +944,103 @@ content:
   - name: hero_min_height
     label: 01 · HERO DIMENSIONS  /  Hero minimum height desktop (px)
     type: number
-    description: 'Section 1: Hero dimensions.'
+    description: Minimum height for desktop hero; default 630px.
   - name: hero_min_height_mobile
     label: Hero minimum height mobile (px)
     type: number
+    description: Minimum height on phones; default 600px.
   - name: hero_image_width
     label: Hero background image width percent desktop
     type: number
+    description: Width of desktop hero image as a percentage; default 68%.
   - name: hero_image_position
     label: Hero background image horizontal position percent
     type: number
+    description: Horizontal crop position; default 65%.
   - name: section_spacing
     label: 02 · SECTION SPACING  /  Homepage section vertical padding (px)
     type: number
-    description: 'Section 2: Section spacing.'
+    description: Vertical padding of homepage sections; default 70px.
   - name: slogan_font_size
     label: 03 · SLOGAN TYPOGRAPHY  /  Slogan font size desktop (px)
     type: number
-    description: 'Section 3: Slogan typography.'
+    description: Override the responsive desktop slogan size; leave blank to retain fluid sizing (27–43px).
   - name: slogan_font_size_mobile
     label: Slogan font size mobile (px)
     type: number
+    description: Override the mobile slogan size; leave blank to retain responsive styling.
+  - name: eyebrow_color
+    label: Hero small heading color
+    type: select
+    options:
+      values:
+      - orange
+      - pink
+      - purple
+      - cyan
+      - yellow
+      - white
+    description: Color of the small introductory heading above the hero.
+  - name: eyebrow_size
+    label: Hero small heading size (px)
+    type: number
+    description: Size in pixels of the hero intro label.
+  - name: work_heading_color
+    label: Artwork section heading color
+    type: select
+    options:
+      values:
+      - orange
+      - pink
+      - purple
+      - cyan
+      - yellow
+      - white
+    description: Color of the main Explore heading.
+  - name: work_heading_shadow
+    label: Artwork section offset color
+    type: select
+    options:
+      values:
+      - orange
+      - pink
+      - purple
+      - cyan
+      - yellow
+      - white
+    description: Offset color used behind the Explore heading.
+  - name: work_heading_size
+    label: Artwork section heading size (px)
+    type: number
+    description: Size in pixels of the Explore heading.
+  - name: feature_heading_color
+    label: Featured project heading color
+    type: select
+    options:
+      values:
+      - orange
+      - pink
+      - purple
+      - cyan
+      - yellow
+      - white
+    description: Color of the Pink Triangle Portraits heading.
+  - name: feature_heading_shadow
+    label: Featured project offset color
+    type: select
+    options:
+      values:
+      - orange
+      - pink
+      - purple
+      - cyan
+      - yellow
+      - white
+    description: Offset color behind the featured project heading.
+  - name: feature_heading_size
+    label: Featured project heading size (px)
+    type: number
+    description: Size in pixels of the featured project heading.
 - name: gallery-appearance
   label: Gallery Appearance
   type: file
@@ -1031,21 +1050,23 @@ content:
   - name: gallery_gap
     label: 01 · GALLERY GRID  /  Artwork horizontal gap (px)
     type: number
-    description: 'Section 1: Gallery grid.'
+    description: Horizontal space between artworks; current default 20px.
   - name: gallery_row_gap
     label: Artwork vertical gap (px)
     type: number
+    description: Vertical space between artworks; current gallery styles use 38–52px depending on screen size.
   - name: caption_font_size
     label: 02 · CAPTIONS  /  Caption text size (px)
     type: number
-    description: 'Section 2: Captions.'
+    description: Gallery titles appear on hover on desktop and below artwork on mobile; CSS uses different responsive sizes.
   - name: caption_background
     label: Caption background hex
     type: string
+    description: Legacy caption color control. The redesigned gallery uses transparent captions and a dark hover overlay; leave blank.
   - name: gallery_border_width
     label: 03 · SEPARATORS  /  Neon separator thickness (px)
     type: number
-    description: 'Section 3: Separators.'
+    description: Legacy separator control. New galleries hide the old colored panel borders; leave blank.
 - name: navigation-footer
   label: Navigation & Footer
   type: file
@@ -1059,6 +1080,7 @@ content:
   - name: logo_width
     label: Header logo width (px)
     type: number
+    description: Desktop logo width; currently 100px. Mobile is separately fixed at 100px.
   - name: navigation_font
     label: Navigation font
     type: select
@@ -1087,4 +1109,4 @@ content:
   - name: footer_text
     label: 03 · FOOTER  /  Footer copyright text
     type: string
-    description: 'Section 3: Footer. Copyright text in the site footer.'
+    description: Legacy copyright line. The current footer is the FOLLOW ME social section; this field may not be visible.
