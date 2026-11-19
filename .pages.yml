@@ -2,23 +2,22 @@ media:
   input: assets/uploads
   output: /assets/uploads
 content:
-- name: artwork
-  label: Artwork
+- name: artwork-portraits
+  label: Portraits
   type: collection
-  path: content/artwork
+  path: content/artwork-portraits
   format: yaml-frontmatter
   filename: '{primary}.md'
   view:
     fields:
     - title
-    - category
     - year
     - order
     primary: title
-    sort:
+    sort: &id001
     - order
     - title
-    default:
+    default: &id002
       sort: order
       order: asc
   fields:
@@ -26,8 +25,7 @@ content:
     label: 01 · ARTWORK DETAILS  /  Artwork title
     type: string
     required: true
-    description: Add a title and image, then save. New artwork automatically replaces the homepage artwork card
-      for 30 days. Editing an existing entry does not restart the timer.
+    description: Artwork for the Portraits gallery. Add a main image; extra images are optional.
   - name: image
     label: Artwork image
     type: image
@@ -38,20 +36,10 @@ content:
     type: list
     description: Add extra views or close-ups. The main image remains the gallery thumbnail and first enlarged image.
       Extra photos appear only in the enlarged viewer. Drag to reorder.
-    field:
+    field: &id003
       name: image
       label: Additional image
       type: image
-  - name: category
-    label: Category
-    type: select
-    required: true
-    options:
-      values:
-      - Queer
-      - Portraits
-      - Star Wars
-      - Various
   - name: year
     label: Year (optional)
     type: string
@@ -74,6 +62,192 @@ content:
     type: number
     description: Lower numbers appear first. Entries with the same number are sorted using the site’s secondary
       ordering.
+- name: artwork-queer
+  label: Queer Artwork
+  type: collection
+  path: content/artwork-queer
+  format: yaml-frontmatter
+  filename: '{primary}.md'
+  view:
+    fields:
+    - title
+    - year
+    - order
+    primary: title
+    sort: *id001
+    default: *id002
+  fields:
+  - name: title
+    label: 01 · ARTWORK DETAILS  /  Artwork title
+    type: string
+    required: true
+    description: Artwork for the Queer Artwork gallery. Add a main image; extra images are optional.
+  - name: image
+    label: Artwork image
+    type: image
+    required: true
+    description: Artwork image displayed in the gallery.
+  - name: additional_images
+    label: Additional artwork images (optional)
+    type: list
+    description: Add extra views or close-ups. The main image remains the gallery thumbnail and first enlarged image.
+      Extra photos appear only in the enlarged viewer. Drag to reorder.
+    field: *id003
+  - name: year
+    label: Year (optional)
+    type: string
+  - name: medium
+    label: Medium (optional)
+    type: string
+  - name: dimensions
+    label: Dimensions (optional)
+    type: string
+  - name: description
+    label: Description (optional)
+    type: text
+  - name: print_url
+    label: Print purchase link (optional)
+    type: string
+    description: Paste the direct store product URL when a print is available. Leave blank to hide the outlined
+      Buy a Print button in the artwork viewer.
+  - name: order
+    label: 02 · GALLERY DISPLAY / Display order
+    type: number
+    description: Lower numbers appear first. Entries with the same number are sorted using the site’s secondary
+      ordering.
+- name: artwork-star-wars
+  label: Star Wars
+  type: collection
+  path: content/artwork-star-wars
+  format: yaml-frontmatter
+  filename: '{primary}.md'
+  view:
+    fields:
+    - title
+    - year
+    - order
+    primary: title
+    sort: *id001
+    default: *id002
+  fields:
+  - name: title
+    label: 01 · ARTWORK DETAILS  /  Artwork title
+    type: string
+    required: true
+    description: Artwork for the Star Wars gallery. Add a main image; extra images are optional.
+  - name: image
+    label: Artwork image
+    type: image
+    required: true
+    description: Artwork image displayed in the gallery.
+  - name: additional_images
+    label: Additional artwork images (optional)
+    type: list
+    description: Add extra views or close-ups. The main image remains the gallery thumbnail and first enlarged image.
+      Extra photos appear only in the enlarged viewer. Drag to reorder.
+    field: *id003
+  - name: year
+    label: Year (optional)
+    type: string
+  - name: medium
+    label: Medium (optional)
+    type: string
+  - name: dimensions
+    label: Dimensions (optional)
+    type: string
+  - name: description
+    label: Description (optional)
+    type: text
+  - name: print_url
+    label: Print purchase link (optional)
+    type: string
+    description: Paste the direct store product URL when a print is available. Leave blank to hide the outlined
+      Buy a Print button in the artwork viewer.
+  - name: order
+    label: 02 · GALLERY DISPLAY / Display order
+    type: number
+    description: Lower numbers appear first. Entries with the same number are sorted using the site’s secondary
+      ordering.
+- name: artwork-various
+  label: Various Artwork
+  type: collection
+  path: content/artwork-various
+  format: yaml-frontmatter
+  filename: '{primary}.md'
+  view:
+    fields:
+    - title
+    - year
+    - order
+    primary: title
+    sort: *id001
+    default: *id002
+  fields:
+  - name: title
+    label: 01 · ARTWORK DETAILS  /  Artwork title
+    type: string
+    required: true
+    description: Artwork for the Various Artwork gallery. Add a main image; extra images are optional.
+  - name: image
+    label: Artwork image
+    type: image
+    required: true
+    description: Artwork image displayed in the gallery.
+  - name: additional_images
+    label: Additional artwork images (optional)
+    type: list
+    description: Add extra views or close-ups. The main image remains the gallery thumbnail and first enlarged image.
+      Extra photos appear only in the enlarged viewer. Drag to reorder.
+    field: *id003
+  - name: year
+    label: Year (optional)
+    type: string
+  - name: medium
+    label: Medium (optional)
+    type: string
+  - name: dimensions
+    label: Dimensions (optional)
+    type: string
+  - name: description
+    label: Description (optional)
+    type: text
+  - name: print_url
+    label: Print purchase link (optional)
+    type: string
+    description: Paste the direct store product URL when a print is available. Leave blank to hide the outlined
+      Buy a Print button in the artwork viewer.
+  - name: order
+    label: 02 · GALLERY DISPLAY / Display order
+    type: number
+    description: Lower numbers appear first. Entries with the same number are sorted using the site’s secondary
+      ordering.
+- name: website-images
+  label: Website Images (library)
+  type: collection
+  path: content/website-images
+  format: yaml-frontmatter
+  filename: '{primary}.md'
+  view:
+    fields:
+    - title
+    - placement
+    primary: title
+  fields:
+  - name: title
+    label: Image name
+    type: string
+    required: true
+  - name: image
+    label: Website image
+    type: image
+    required: true
+  - name: placement
+    label: Intended use / page
+    type: string
+    description: Reference only. To display an image, select it in the appropriate page settings.
+  - name: notes
+    label: Notes
+    type: text
 - name: news
   label: News & Updates
   type: collection
