@@ -26,13 +26,22 @@ content:
     label: 01 · ARTWORK DETAILS  /  Artwork title
     type: string
     required: true
-    description: Add a title and image, then save. New artwork automatically replaces the homepage artwork card for 30 days. Editing
-      an existing entry does not restart the timer.
+    description: Add a title and image, then save. New artwork automatically replaces the homepage artwork card
+      for 30 days. Editing an existing entry does not restart the timer.
   - name: image
     label: Artwork image
     type: image
     required: true
     description: Artwork image displayed in the gallery.
+  - name: additional_images
+    label: Additional artwork images (optional)
+    type: list
+    description: Add extra views or close-ups. The main image remains the gallery thumbnail and first enlarged image.
+      Extra photos appear only in the enlarged viewer. Drag to reorder.
+    field:
+      name: image
+      label: Additional image
+      type: image
   - name: category
     label: Category
     type: select
@@ -58,12 +67,13 @@ content:
   - name: print_url
     label: Print purchase link (optional)
     type: string
-    description: Paste the direct store product URL when a print is available. Leave blank to hide the outlined Buy a Print button in
-      the artwork viewer.
+    description: Paste the direct store product URL when a print is available. Leave blank to hide the outlined
+      Buy a Print button in the artwork viewer.
   - name: order
     label: 02 · GALLERY DISPLAY / Display order
     type: number
-    description: Lower numbers appear first. Entries with the same number are sorted using the site’s secondary ordering.
+    description: Lower numbers appear first. Entries with the same number are sorted using the site’s secondary
+      ordering.
 - name: news
   label: News & Updates
   type: collection
@@ -80,8 +90,8 @@ content:
     label: Headline
     type: string
     required: true
-    description: Save a new entry to automatically feature it for 30 days. The newest update replaces the previous card. All
-      updates remain listed on the About page.
+    description: Save a new entry to automatically feature it for 30 days. The newest update replaces the previous
+      card. All updates remain listed on the About page.
   - name: category
     label: Type of update
     type: select
@@ -1023,7 +1033,8 @@ content:
       - cyan
       - yellow
       - white
-    description: Optional offset color. Leave blank to retain the current heading treatment; this variable is not currently rendered as a separate shadow.
+    description: Optional offset color. Leave blank to retain the current heading treatment; this variable is not
+      currently rendered as a separate shadow.
   - name: work_heading_size
     label: Artwork section heading size (px)
     type: number
@@ -1051,7 +1062,8 @@ content:
       - cyan
       - yellow
       - white
-    description: Optional offset color. Leave blank to retain the current heading treatment; this variable is not currently rendered as a separate shadow.
+    description: Optional offset color. Leave blank to retain the current heading treatment; this variable is not
+      currently rendered as a separate shadow.
   - name: feature_heading_size
     label: Featured project heading size (px)
     type: number
@@ -1116,4 +1128,5 @@ content:
   - name: footer_text
     label: 03 · FOOTER  /  Footer copyright text
     type: string
-    description: Legacy copyright line. The current footer is the FOLLOW ME social section; this field may not be visible.
+    description: Legacy copyright line. The current footer is the FOLLOW ME social section; this field may not be
+      visible.
