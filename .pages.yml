@@ -399,6 +399,10 @@ content:
   - name: description
     label: Description
     type: text
+  - name: artwork_sequence
+    label: 03 · GALLERY ORDER / Artwork sequence
+    type: text
+    description: One artwork title per line, from first to last. Move lines up or down to reorder the gallery. New artwork not listed here appears at the end automatically. Keep duplicate-title entries with their filename suffix.
   - name: intro_brush
     label: Intro phrase (brush font; leave blank to hide)
     type: string
