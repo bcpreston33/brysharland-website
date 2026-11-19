@@ -14,10 +14,10 @@ content:
     - year
     - order
     primary: title
-    sort: &id001
+    sort:
     - order
     - title
-    default: &id002
+    default:
       sort: order
       order: asc
   fields:
@@ -36,7 +36,7 @@ content:
     type: list
     description: Add extra views or close-ups. The main image remains the gallery thumbnail and first enlarged image.
       Extra photos appear only in the enlarged viewer. Drag to reorder.
-    field: &id003
+    field:
       name: image
       label: Additional image
       type: image
@@ -55,13 +55,12 @@ content:
   - name: print_url
     label: Print purchase link (optional)
     type: string
-    description: Paste the direct store product URL when a print is available. Leave blank to hide the outlined
-      Buy a Print button in the artwork viewer.
+    description: Paste the direct store product URL when a print is available. Leave blank to hide the outlined Buy a
+      Print button in the artwork viewer.
   - name: order
     label: 02 · GALLERY DISPLAY / Display order
     type: number
-    description: Lower numbers appear first. Entries with the same number are sorted using the site’s secondary
-      ordering.
+    description: Lower numbers appear first. Entries with the same number are sorted using the site’s secondary ordering.
 - name: artwork-queer
   label: Queer Artwork
   type: collection
@@ -74,8 +73,12 @@ content:
     - year
     - order
     primary: title
-    sort: *id001
-    default: *id002
+    sort:
+    - order
+    - title
+    default:
+      sort: order
+      order: asc
   fields:
   - name: title
     label: 01 · ARTWORK DETAILS  /  Artwork title
@@ -92,7 +95,10 @@ content:
     type: list
     description: Add extra views or close-ups. The main image remains the gallery thumbnail and first enlarged image.
       Extra photos appear only in the enlarged viewer. Drag to reorder.
-    field: *id003
+    field:
+      name: image
+      label: Additional image
+      type: image
   - name: year
     label: Year (optional)
     type: string
@@ -108,13 +114,12 @@ content:
   - name: print_url
     label: Print purchase link (optional)
     type: string
-    description: Paste the direct store product URL when a print is available. Leave blank to hide the outlined
-      Buy a Print button in the artwork viewer.
+    description: Paste the direct store product URL when a print is available. Leave blank to hide the outlined Buy a
+      Print button in the artwork viewer.
   - name: order
     label: 02 · GALLERY DISPLAY / Display order
     type: number
-    description: Lower numbers appear first. Entries with the same number are sorted using the site’s secondary
-      ordering.
+    description: Lower numbers appear first. Entries with the same number are sorted using the site’s secondary ordering.
 - name: artwork-star-wars
   label: Star Wars
   type: collection
@@ -127,8 +132,12 @@ content:
     - year
     - order
     primary: title
-    sort: *id001
-    default: *id002
+    sort:
+    - order
+    - title
+    default:
+      sort: order
+      order: asc
   fields:
   - name: title
     label: 01 · ARTWORK DETAILS  /  Artwork title
@@ -145,7 +154,10 @@ content:
     type: list
     description: Add extra views or close-ups. The main image remains the gallery thumbnail and first enlarged image.
       Extra photos appear only in the enlarged viewer. Drag to reorder.
-    field: *id003
+    field:
+      name: image
+      label: Additional image
+      type: image
   - name: year
     label: Year (optional)
     type: string
@@ -161,13 +173,12 @@ content:
   - name: print_url
     label: Print purchase link (optional)
     type: string
-    description: Paste the direct store product URL when a print is available. Leave blank to hide the outlined
-      Buy a Print button in the artwork viewer.
+    description: Paste the direct store product URL when a print is available. Leave blank to hide the outlined Buy a
+      Print button in the artwork viewer.
   - name: order
     label: 02 · GALLERY DISPLAY / Display order
     type: number
-    description: Lower numbers appear first. Entries with the same number are sorted using the site’s secondary
-      ordering.
+    description: Lower numbers appear first. Entries with the same number are sorted using the site’s secondary ordering.
 - name: artwork-various
   label: Various Artwork
   type: collection
@@ -180,8 +191,12 @@ content:
     - year
     - order
     primary: title
-    sort: *id001
-    default: *id002
+    sort:
+    - order
+    - title
+    default:
+      sort: order
+      order: asc
   fields:
   - name: title
     label: 01 · ARTWORK DETAILS  /  Artwork title
@@ -198,7 +213,10 @@ content:
     type: list
     description: Add extra views or close-ups. The main image remains the gallery thumbnail and first enlarged image.
       Extra photos appear only in the enlarged viewer. Drag to reorder.
-    field: *id003
+    field:
+      name: image
+      label: Additional image
+      type: image
   - name: year
     label: Year (optional)
     type: string
@@ -214,15 +232,14 @@ content:
   - name: print_url
     label: Print purchase link (optional)
     type: string
-    description: Paste the direct store product URL when a print is available. Leave blank to hide the outlined
-      Buy a Print button in the artwork viewer.
+    description: Paste the direct store product URL when a print is available. Leave blank to hide the outlined Buy a
+      Print button in the artwork viewer.
   - name: order
     label: 02 · GALLERY DISPLAY / Display order
     type: number
-    description: Lower numbers appear first. Entries with the same number are sorted using the site’s secondary
-      ordering.
+    description: Lower numbers appear first. Entries with the same number are sorted using the site’s secondary ordering.
 - name: website-images
-  label: Website Images (library)
+  label: Website Images (reference library)
   type: collection
   path: content/website-images
   format: yaml-frontmatter
@@ -244,7 +261,8 @@ content:
   - name: placement
     label: Intended use / page
     type: string
-    description: Reference only. To display an image, select it in the appropriate page settings.
+    description: Reference label only. Images are placed using the relevant page controls (Home, About, Navigation &
+      Footer, etc.).
   - name: notes
     label: Notes
     type: text
@@ -264,8 +282,8 @@ content:
     label: Headline
     type: string
     required: true
-    description: Save a new entry to automatically feature it for 30 days. The newest update replaces the previous
-      card. All updates remain listed on the About page.
+    description: Save a new entry to automatically feature it for 30 days. The newest update replaces the previous card.
+      All updates remain listed on the About page.
   - name: category
     label: Type of update
     type: select
@@ -1207,8 +1225,8 @@ content:
       - cyan
       - yellow
       - white
-    description: Optional offset color. Leave blank to retain the current heading treatment; this variable is not
-      currently rendered as a separate shadow.
+    description: Optional offset color. Leave blank to retain the current heading treatment; this variable is not currently
+      rendered as a separate shadow.
   - name: work_heading_size
     label: Artwork section heading size (px)
     type: number
@@ -1236,8 +1254,8 @@ content:
       - cyan
       - yellow
       - white
-    description: Optional offset color. Leave blank to retain the current heading treatment; this variable is not
-      currently rendered as a separate shadow.
+    description: Optional offset color. Leave blank to retain the current heading treatment; this variable is not currently
+      rendered as a separate shadow.
   - name: feature_heading_size
     label: Featured project heading size (px)
     type: number
@@ -1249,17 +1267,25 @@ content:
   format: yaml-frontmatter
   fields:
   - name: gallery_gap
-    label: 01 · GALLERY GRID  /  Artwork horizontal gap (px)
+    label: 01 · MASONRY GALLERY / Horizontal AND vertical gap (px)
     type: number
-    description: Horizontal space between artwork columns; currently 20px.
-  - name: gallery_row_gap
-    label: Artwork vertical gap (px)
-    type: number
-    description: Optional override. Leave blank to keep 52px on desktop and 38px on mobile.
+    description: 'One consistent spacing value for both directions on every gallery. Current value: 20px.'
   - name: caption_font_size
     label: 02 · CAPTIONS  /  Caption text size (px)
     type: number
     description: Optional fixed-size override. Leave blank to retain different desktop and mobile title sizes.
+  - name: gallery_bottom_space
+    label: Space below final artwork (px)
+    type: number
+    description: Space before the social footer, currently 120px.
+  - name: gallery_nav_space
+    label: Space after gallery links (px)
+    type: number
+    description: Distance between the lower pink navigation rule and first artwork, currently 42px.
+  - name: gallery_intro_space
+    label: Space above gallery description (px)
+    type: number
+    description: Distance from heading to description, currently 28px.
 - name: navigation-footer
   label: Navigation & Footer
   type: file
@@ -1299,8 +1325,23 @@ content:
   - name: nav_store
     label: Store menu label
     type: string
-  - name: footer_text
-    label: 03 · FOOTER  /  Footer copyright text
+  - name: footer_heading
+    label: 03 · FOOTER / Social heading
     type: string
-    description: Legacy copyright line. The current footer is the FOLLOW ME social section; this field may not be
-      visible.
+    description: Heading above the social links, currently FOLLOW ME.
+  - name: footer_heading_color
+    label: Footer heading color
+    type: select
+    options:
+      values:
+      - cyan
+      - pink
+      - orange
+      - yellow
+      - purple
+      - white
+    description: 'Current color: cyan.'
+  - name: footer_top_padding
+    label: Footer inner top spacing (px)
+    type: number
+    description: Currently 42px on desktop.
