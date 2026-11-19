@@ -1,0 +1,12 @@
+---
+title: Brian
+image: /assets/uploads/Portraits/brian-LR.jpg
+additional_images: []
+category: Portraits
+year: '2024'
+medium: Prismacolor Pencils
+dimensions: ''
+description: ''
+featured: false
+order: ''
+---
