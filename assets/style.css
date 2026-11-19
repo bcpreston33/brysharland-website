@@ -268,3 +268,33 @@ body[data-category] .gallery-category-nav a:hover,
 body[data-category] .gallery-category-nav a:focus-visible,
 body[data-category] .gallery-category-nav a[aria-current="page"]{color:var(--pink)!important}
 @media(max-width:600px){body[data-category] .gallery-category-nav{width:calc(100% - 32px)!important}}
+
+/* Gallery navigation final alignment: match the artwork's actual content edges. */
+body[data-category] .bry-interior-divider{display:none!important}
+body[data-category] .gallery-category-nav{
+  box-sizing:border-box!important;
+  max-width:none!important;
+  padding:15px 0!important;
+  border-top:2px solid var(--pink)!important;
+  border-bottom:2px solid var(--pink)!important;
+  margin-top:0!important;
+  margin-bottom:42px!important;
+}
+body[data-category] .gallery-category-nav a,
+body[data-category] .gallery-category-nav a:link,
+body[data-category] .gallery-category-nav a:visited,
+body[data-category] .gallery-category-nav a:hover,
+body[data-category] .gallery-category-nav a:focus-visible,
+body[data-category] .gallery-category-nav a[aria-current="page"]{
+  border:0!important;
+  border-bottom:0!important;
+  text-decoration:none!important;
+  text-decoration-line:none!important;
+  box-shadow:none!important;
+  background-image:none!important;
+  background-color:transparent!important;
+  outline-offset:4px;
+}
+body[data-category] .gallery-category-nav a::before,
+body[data-category] .gallery-category-nav a::after{display:none!important;content:none!important}
+body[data-category] .gallery-category-nav a[aria-current="page"]{color:var(--pink)!important}

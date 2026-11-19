@@ -159,5 +159,22 @@ function setupGalleryCategoryNavigation(){
    nav.append(a);
  }
  pagehead.insertAdjacentElement('afterend',nav);
+ // Use the actual gallery boundaries, including any theme-level padding.
+ // This keeps the two navigation rules aligned on every gallery and viewport.
+ const alignNavigation=()=>{
+   const rect=gallery.getBoundingClientRect();
+   const style=getComputedStyle(gallery);
+   const leftInset=parseFloat(style.paddingLeft)||0;
+   const rightInset=parseFloat(style.paddingRight)||0;
+   const left=rect.left+leftInset;
+   const width=Math.max(0,rect.width-leftInset-rightInset);
+   const parentLeft=nav.parentElement.getBoundingClientRect().left;
+   nav.style.setProperty('width',width+'px','important');
+   nav.style.setProperty('margin-left',(left-parentLeft)+'px','important');
+   nav.style.setProperty('margin-right','0','important');
+ };
+ alignNavigation();
+ window.addEventListener('resize',alignNavigation,{passive:true});
+ if(window.ResizeObserver)new ResizeObserver(alignNavigation).observe(gallery);
 }
 setupGalleryCategoryNavigation();
