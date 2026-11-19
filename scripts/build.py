@@ -102,6 +102,43 @@ for relative in sorted({item['image'] for item in items} | {extra for item in it
     except Exception as exc:
         raise SystemExit(f'Unable to prepare gallery image {relative}: {exc}') from exc
 
+# Apply per-gallery ordering from the existing Gallery Page Settings entry.
+# Unlisted artwork follows afterward in its existing order; missing images never block a build.
+def gallery_sequence(slug):
+    path=ROOT/'content/gallery-pages'/(slug+'.md')
+    if not path.is_file():return []
+    raw=path.read_text(encoding='utf-8-sig')
+    match=re.match(r'^---\\s*\\n(.*?)\\n---(?:\\s*\\n|$)',raw,re.S)
+    if not match:return []
+    import yaml
+    obj=yaml.safe_load(match.group(1)) or {}
+    value=obj.get('artwork_sequence','') if isinstance(obj,dict) else ''
+    return [s.strip() for s in str(value or '').splitlines() if s.strip()]
+
+for category in ('portraits','queer','star-wars','various'):
+    listed=gallery_sequence(category)
+    members=[item for item in items if item['category']==category]
+    # Preserve the existing numeric ordering for artwork not listed in the sequence.
+    def old_order(item):
+        try:return (float(item['order']),str(item['title']).casefold())
+        except (TypeError,ValueError):return (float('inf'),str(item['title']).casefold())
+    members.sort(key=old_order)
+    seen=set()
+    ordered=[]
+    for line in listed:
+        for item in members:
+            if id(item) in seen:continue
+            # Title matching is case-insensitive; optional filename suffix disambiguates duplicates.
+            title=str(item['title']).strip()
+            filename=Path(item['image']).stem
+            if line.casefold() in (title.casefold(),f'{title} | {filename}'.casefold()):
+                ordered.append(item)
+                seen.add(id(item))
+                break
+    ordered.extend(item for item in members if id(item) not in seen)
+    for index,item in enumerate(ordered,1):
+        item['order']=index
+
 items = [item for item in items if (ROOT / item['image']).is_file()]
 for item in items:
     item['additional_images'] = [img for img in item['additional_images'] if (ROOT / img).is_file()]
