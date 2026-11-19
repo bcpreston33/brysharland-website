@@ -105,28 +105,59 @@ document.querySelectorAll('nav a').forEach(link=>{
  }
 });
 
-/* Fit each artwork into masonry rows while retaining CMS display order. */
+/* Pixel-precise masonry: 20px vertical and horizontal gutters. */
 function setupArtworkMasonry(gallery){
   if(!gallery)return;
-  let frame=0;
-  const layout=()=>{
-    cancelAnimationFrame(frame);
-    frame=requestAnimationFrame(()=>{
-      const style=getComputedStyle(gallery);
-      const row=parseFloat(style.gridAutoRows)||1;
-      const gap=parseFloat(style.rowGap)||20;
-      gallery.querySelectorAll('.art').forEach(card=>{
+  let raf=0;
+  function layout(){
+    cancelAnimationFrame(raf);
+    raf=requestAnimationFrame(()=>{
+      const cards=[...gallery.querySelectorAll('.art')];
+      if(!cards.length)return;
+      const columns=window.innerWidth<=600?1:window.innerWidth<=900?2:3;
+      const gap=20;
+      const width=gallery.clientWidth;
+      const cardWidth=(width-gap*(columns-1))/columns;
+      const heights=Array(columns).fill(0);
+      gallery.style.position='relative';
+      cards.forEach((card,index)=>{
+        const col=index%columns;
+        card.style.position='absolute';
+        card.style.width=cardWidth+'px';
+        card.style.left=(col*(cardWidth+gap))+'px';
+        card.style.top=heights[col]+'px';
         card.style.gridRowEnd='auto';
-        const height=card.getBoundingClientRect().height;
-        card.style.gridRowEnd='span '+Math.max(1,Math.ceil((height+gap)/(row+gap)));
+        heights[col]+=card.getBoundingClientRect().height+gap;
       });
+      gallery.style.height=Math.max(0,...heights)-gap+'px';
     });
-  };
+  }
   gallery.querySelectorAll('.art img').forEach(img=>{
-    if(!img.complete)img.addEventListener('load',layout,{once:true});
-    img.addEventListener('error',layout,{once:true});
+    img.addEventListener('load',layout);
+    img.addEventListener('error',layout);
   });
   window.addEventListener('resize',layout,{passive:true});
-  if(document.fonts?.ready)document.fonts.ready.then(layout);
+  if(window.ResizeObserver)new ResizeObserver(layout).observe(gallery.parentElement||gallery);
+  document.fonts?.ready.then(layout);
   layout();
 }
+
+/* Gallery category links, available directly on each gallery page. */
+function setupGalleryCategoryNavigation(){
+ const current=document.body.dataset.category;
+ if(!current)return;
+ const pagehead=document.querySelector('.pagehead');
+ const gallery=document.querySelector('.gallery');
+ if(!pagehead||!gallery||document.querySelector('.gallery-category-nav'))return;
+ const nav=document.createElement('nav');
+ nav.className='gallery-category-nav wrap';
+ nav.setAttribute('aria-label','Browse artwork galleries');
+ const links=[['Portraits','portraits.html','portraits'],['Queer','queer.html','queer'],['Star Wars','star-wars.html','star-wars'],['Various','various.html','various']];
+ for(const [label,href,slug] of links){
+   const a=document.createElement('a');a.href=href;a.textContent=label;
+   if(current===slug)a.setAttribute('aria-current','page');
+   nav.append(a);
+ }
+ pagehead.insertAdjacentElement('afterend',nav);
+}
+setupGalleryCategoryNavigation();

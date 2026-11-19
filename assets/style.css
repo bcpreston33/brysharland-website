@@ -196,11 +196,13 @@ body.artwork-viewer-open{overflow:hidden}
 .lightbox figure>figcaption{grid-column:2;grid-row:1 / span 2}
 @media(max-width:800px){.lightbox figure>figcaption{grid-column:1;grid-row:3}}
 
-/* Responsive masonry galleries, preserving image proportions and CMS order. */
-.gallery{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-auto-rows:1px;gap:20px!important;align-items:start!important}
-.gallery .art{align-self:start!important;min-width:0;overflow:visible}
-.gallery .art img{width:100%;height:auto!important;max-height:none!important;aspect-ratio:auto!important;object-fit:contain!important}
+/* Exact, consistent masonry gutters in all four galleries. */
+.gallery{display:block!important;position:relative!important;gap:0!important;row-gap:0!important;column-gap:0!important;min-height:0}
+.gallery .art{box-sizing:border-box;align-self:start!important;margin:0!important;min-width:0;overflow:visible}
+.gallery .art img{display:block;width:100%;height:auto!important;max-height:none!important;aspect-ratio:auto!important;object-fit:contain!important}
 .gallery .art .info{min-height:0}
-.gallery .gallery-empty{grid-column:1/-1}
-@media(max-width:900px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
-@media(max-width:600px){.gallery{grid-template-columns:minmax(0,1fr)!important}}
+.gallery-category-nav{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;margin:0 auto 30px;padding-top:4px;padding-bottom:4px}
+.gallery-category-nav a{color:#eee;text-decoration:none;font:700 17px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;padding:8px 2px;border-bottom:2px solid transparent}
+.gallery-category-nav a:hover,.gallery-category-nav a:focus-visible{color:var(--pink);border-bottom-color:var(--pink)}
+.gallery-category-nav a[aria-current="page"]{color:var(--pink);border-bottom-color:var(--pink)}
+@media(max-width:600px){.gallery-category-nav{gap:6px 14px;margin-bottom:24px}.gallery-category-nav a{font-size:16px}}
