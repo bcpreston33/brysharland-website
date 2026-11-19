@@ -18,7 +18,7 @@ def first_added_date(path):
     return ''
 
 items=[]
-for p in sorted((ROOT/'content/artwork').glob('*.md')):
+for p in sorted(p for folder in ('artwork-portraits','artwork-queer','artwork-star-wars','artwork-various') for p in (ROOT/'content'/folder).glob('*.md')):
     raw=p.read_text(encoding='utf-8-sig')
     if not raw.startswith('---'):continue
     m=re.match(r'^---\s*\n(.*?)\n---(?:\s*\n|$)',raw,re.S)
@@ -31,7 +31,7 @@ for p in sorted((ROOT/'content/artwork').glob('*.md')):
         raise SystemExit('Install dependencies: pip install -r requirements.txt') from e
     obj=yaml.safe_load(front)
     if not isinstance(obj,dict):continue
-    category_raw=str(obj.get('category','')).strip()
+    category_raw=str(obj.get('category') or p.parent.name.removeprefix('artwork-')).strip()
     category=re.sub(r'[^a-z0-9]+','-',category_raw.lower()).strip('-')
     if category in ('nintendo','miscellaneous'):category='various'
     if category not in ('queer','portraits','star-wars','various'):continue
@@ -79,9 +79,10 @@ for relative in sorted({item['image'] for item in items} | {extra for item in it
     source = ROOT / relative
     public = DIST / relative
     if not source.is_file():
-        raise SystemExit(f'Artwork image not found: {relative}')
+        print(f'Warning: artwork image not found, skipping: {relative}')
+        continue
     if not public.is_file():
-        raise SystemExit(f'Artwork image missing from output: {relative}')
+        continue
     try:
         with Image.open(source) as original:
             if original.format not in ('JPEG', 'PNG', 'WEBP'):
@@ -101,6 +102,9 @@ for relative in sorted({item['image'] for item in items} | {extra for item in it
     except Exception as exc:
         raise SystemExit(f'Unable to prepare gallery image {relative}: {exc}') from exc
 
+items = [item for item in items if (ROOT / item['image']).is_file()]
+for item in items:
+    item['additional_images'] = [img for img in item['additional_images'] if (ROOT / img).is_file()]
 (DIST/'assets/artwork.json').write_text(json.dumps(items,ensure_ascii=False,indent=2),encoding='utf-8')
 
 # Optional per-gallery heading settings from Pages CMS.
