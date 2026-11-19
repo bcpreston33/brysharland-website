@@ -129,7 +129,7 @@ function setupArtworkMasonry(gallery){
         card.style.gridRowEnd='auto';
         heights[col]+=card.getBoundingClientRect().height+gap;
       });
-      gallery.style.height=Math.max(0,...heights)-gap+'px';
+      gallery.style.height=Math.max(0,Math.max(...heights)-gap)+'px';
     });
   }
   gallery.querySelectorAll('.art img').forEach(img=>{
