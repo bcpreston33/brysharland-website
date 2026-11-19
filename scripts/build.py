@@ -41,6 +41,7 @@ for p in sorted((ROOT/'content/artwork').glob('*.md')):
     image=image.lstrip('/')
     item={k:str(obj.get(k) or '') for k in ('title','category','year','medium','dimensions','description')}
     item['print_url']=str(obj.get('print_url') or '').strip()
+    item['additional_images']=[str(v).lstrip('/') for v in (obj.get('additional_images') or []) if isinstance(v,str) and str(v).startswith(('/assets/uploads/','assets/uploads/'))]
     item['category']=category
     item['image']=image
     item['featured']=obj.get('featured') is True
@@ -74,7 +75,7 @@ if uploads.exists():
         if any(part in GALLERY_FOLDERS for part in folder_parts):
             if source_file.suffix.lower() in ('.jpg', '.jpeg', '.png', '.webp'):
                 category_images.add(source_file.relative_to(ROOT).as_posix())
-for relative in sorted({item['image'] for item in items} | category_images):
+for relative in sorted({item['image'] for item in items} | {extra for item in items for extra in item['additional_images']} | category_images):
     source = ROOT / relative
     public = DIST / relative
     if not source.is_file():

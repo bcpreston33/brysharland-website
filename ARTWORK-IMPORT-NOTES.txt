@@ -1,0 +1,5 @@
+ARTWORK IMPORT STATUS
+135 CMS artwork entries imported from the supplied Excel workbook.
+135 low-resolution JPGs included across four galleries.
+Two artwork entries do not have matching image files in the supplied ZIP: jaina-and-mara (Star Wars), wiccan (Queer). Add these images to assets/uploads/<category>/ or update their CMS main image paths before deployment.
+Every artwork supports optional additional_images in Pages CMS.
