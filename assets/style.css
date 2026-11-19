@@ -298,3 +298,7 @@ body[data-category] .gallery-category-nav a[aria-current="page"]{
 body[data-category] .gallery-category-nav a::before,
 body[data-category] .gallery-category-nav a::after{display:none!important;content:none!important}
 body[data-category] .gallery-category-nav a[aria-current="page"]{color:var(--pink)!important}
+
+/* CMS-managed masonry spacing; use one shared value in both directions. */
+body[data-category] .gallery{--gallery-masonry-gap:20px}
+body[data-category] .gallery-category-nav a[aria-current="page"]{text-decoration:none!important;border:0!important;box-shadow:none!important}

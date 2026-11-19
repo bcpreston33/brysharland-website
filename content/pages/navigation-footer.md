@@ -7,4 +7,7 @@ nav_about: ABOUT
 nav_contact: CONTACT
 nav_store: STORE
 logo_width: 100
+footer_heading: FOLLOW ME
+footer_heading_color: cyan
+footer_top_padding: 42
 ---

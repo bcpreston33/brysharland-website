@@ -115,7 +115,7 @@ function setupArtworkMasonry(gallery){
       const cards=[...gallery.querySelectorAll('.art')];
       if(!cards.length)return;
       const columns=window.innerWidth<=600?1:window.innerWidth<=900?2:3;
-      const gap=20;
+      const gap=Math.max(0,parseFloat(getComputedStyle(gallery).getPropertyValue('--gallery-masonry-gap'))||20);
       const width=gallery.clientWidth;
       const cardWidth=(width-gap*(columns-1))/columns;
       const heights=Array(columns).fill(0);
