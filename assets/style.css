@@ -242,3 +242,29 @@ body[data-category] .gallery-category-nav a:focus-visible{outline:2px solid var(
  body[data-category] .pagehead p{margin-top:22px!important}
  body[data-category] .gallery{padding-bottom:100px!important}
 }
+
+
+/* Gallery category navigation: matching full-width rules, color-only active state. */
+body[data-category] .gallery-category-nav{
+  box-sizing:border-box!important;
+  width:min(1320px,calc(100% - 64px))!important;
+  margin:0 auto 36px!important;
+  padding:15px 0!important;
+  border-top:2px solid var(--pink)!important;
+  border-bottom:2px solid var(--pink)!important;
+  border-left:0!important;
+  border-right:0!important;
+}
+body[data-category] .gallery-category-nav a,
+body[data-category] .gallery-category-nav a:hover,
+body[data-category] .gallery-category-nav a:focus-visible,
+body[data-category] .gallery-category-nav a[aria-current="page"]{
+  border:0!important;border-bottom:0!important;
+  text-decoration:none!important;text-decoration-line:none!important;
+  box-shadow:none!important;background:transparent!important;
+  transform:none!important;
+}
+body[data-category] .gallery-category-nav a:hover,
+body[data-category] .gallery-category-nav a:focus-visible,
+body[data-category] .gallery-category-nav a[aria-current="page"]{color:var(--pink)!important}
+@media(max-width:600px){body[data-category] .gallery-category-nav{width:calc(100% - 32px)!important}}
