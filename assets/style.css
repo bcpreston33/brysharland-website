@@ -195,3 +195,12 @@ body.artwork-viewer-open{overflow:hidden}
 .lightbox figure>img{grid-column:1;grid-row:1}
 .lightbox figure>figcaption{grid-column:2;grid-row:1 / span 2}
 @media(max-width:800px){.lightbox figure>figcaption{grid-column:1;grid-row:3}}
+
+/* Responsive masonry galleries, preserving image proportions and CMS order. */
+.gallery{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-auto-rows:1px;gap:20px!important;align-items:start!important}
+.gallery .art{align-self:start!important;min-width:0;overflow:visible}
+.gallery .art img{width:100%;height:auto!important;max-height:none!important;aspect-ratio:auto!important;object-fit:contain!important}
+.gallery .art .info{min-height:0}
+.gallery .gallery-empty{grid-column:1/-1}
+@media(max-width:900px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:600px){.gallery{grid-template-columns:minmax(0,1fr)!important}}

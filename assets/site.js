@@ -20,6 +20,7 @@
         const info=document.createElement('div');info.className='info';const title=document.createElement('strong');title.textContent=x.title;
         const details=document.createElement('small');details.textContent=[x.medium,x.dimensions,x.year].filter(Boolean).join(' · ');
         info.append(title,details);b.append(im,info);gallery.append(b)});
+      if(typeof window.setupArtworkMasonry==='function')window.setupArtworkMasonry(gallery);
       if(typeof window.setupArtworkLightbox==='function')window.setupArtworkLightbox();
     }
   }
@@ -103,3 +104,29 @@ document.querySelectorAll('nav a').forEach(link=>{
    link.setAttribute('aria-current','page');
  }
 });
+
+/* Fit each artwork into masonry rows while retaining CMS display order. */
+function setupArtworkMasonry(gallery){
+  if(!gallery)return;
+  let frame=0;
+  const layout=()=>{
+    cancelAnimationFrame(frame);
+    frame=requestAnimationFrame(()=>{
+      const style=getComputedStyle(gallery);
+      const row=parseFloat(style.gridAutoRows)||1;
+      const gap=parseFloat(style.rowGap)||20;
+      gallery.querySelectorAll('.art').forEach(card=>{
+        card.style.gridRowEnd='auto';
+        const height=card.getBoundingClientRect().height;
+        card.style.gridRowEnd='span '+Math.max(1,Math.ceil((height+gap)/(row+gap)));
+      });
+    });
+  };
+  gallery.querySelectorAll('.art img').forEach(img=>{
+    if(!img.complete)img.addEventListener('load',layout,{once:true});
+    img.addEventListener('error',layout,{once:true});
+  });
+  window.addEventListener('resize',layout,{passive:true});
+  if(document.fonts?.ready)document.fonts.ready.then(layout);
+  layout();
+}
