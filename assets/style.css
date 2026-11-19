@@ -302,3 +302,6 @@ body[data-category] .gallery-category-nav a[aria-current="page"]{color:var(--pin
 /* CMS-managed masonry spacing; use one shared value in both directions. */
 body[data-category] .gallery{--gallery-masonry-gap:20px}
 body[data-category] .gallery-category-nav a[aria-current="page"]{text-decoration:none!important;border:0!important;box-shadow:none!important}
+
+/* Preserve author-entered line breaks in gallery description fields. */
+body[data-category] .pagehead p{white-space:pre-line;overflow-wrap:anywhere}

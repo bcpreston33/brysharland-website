@@ -142,6 +142,11 @@ for slug in ('queer','portraits','star-wars','various'):
     font=allowed_fonts.get(str(obj.get('title_font') or 'Barlow Condensed'),allowed_fonts['Barlow Condensed'])
     try:size=max(48,min(180,int(obj.get('title_size') or 110)))
     except (ValueError,TypeError):size=110
+    # Legacy Star Wars settings used a 180px italic title unlike the other galleries.
+    # Normalize only that exact legacy combination; new CMS choices remain respected.
+    if slug=='star-wars' and size==180 and str(obj.get('title_font') or '')=='Barlow Condensed Italic':
+        size=110
+        obj['title_font']='Barlow Condensed'
     italic='italic' in str(obj.get('title_font') or '').lower()
     style=f'--heading-slant:{"italic" if italic else "normal"};--heading-color:{color};--heading-shadow:{shadow};--heading-font:{font};--heading-size:clamp(52px,10vw,{size}px)'
     head=f'<div class="eyebrow">{html.escape(eyebrow)}</div><h1 data-shadow-text="{html.escape(title,quote=True)}" style="{html.escape(style,quote=True)}">{html.escape(title)}</h1>'
