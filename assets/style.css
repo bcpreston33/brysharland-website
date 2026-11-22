@@ -418,3 +418,6 @@ body[data-category="queer"] .gallery .art .info strong,
 body[data-category="star-wars"] .gallery .art .info strong,
 body[data-category="various"] .gallery .art .info strong{font-size:19px!important;text-align:left}
 }
+.portrait-hover-name {
+  color: #000000 !important;
+}
