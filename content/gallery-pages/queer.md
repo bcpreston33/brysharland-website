@@ -2,8 +2,7 @@
 slug: queer
 eyebrow: Artwork / Queer
 title: Queer
-description: A dedicated gallery for Bry’s queer artwork. Explore original
-  artwork in this collection.
+description: Artwork featuring some of my favorite singers, actors, and people!
 artwork_sequence: |-
   Bentley
   Bentley Robles
