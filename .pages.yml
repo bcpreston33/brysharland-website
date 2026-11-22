@@ -52,6 +52,7 @@ content:
   - name: description
     label: Description (optional)
     type: text
+    description: "Optional artwork description. To add a clickable link, write [link text](https://example.com). Links open in a new tab."
   - name: print_url
     label: Print purchase link (optional)
     type: string
@@ -111,6 +112,7 @@ content:
   - name: description
     label: Description (optional)
     type: text
+    description: "Optional artwork description. To add a clickable link, write [link text](https://example.com). Links open in a new tab."
   - name: print_url
     label: Print purchase link (optional)
     type: string
@@ -170,6 +172,7 @@ content:
   - name: description
     label: Description (optional)
     type: text
+    description: "Optional artwork description. To add a clickable link, write [link text](https://example.com). Links open in a new tab."
   - name: print_url
     label: Print purchase link (optional)
     type: string
@@ -229,6 +232,7 @@ content:
   - name: description
     label: Description (optional)
     type: text
+    description: "Optional artwork description. To add a clickable link, write [link text](https://example.com). Links open in a new tab."
   - name: print_url
     label: Print purchase link (optional)
     type: string
