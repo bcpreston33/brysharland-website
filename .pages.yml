@@ -1294,6 +1294,10 @@ content:
     label: Space above gallery description (px)
     type: number
     description: Distance from heading to description, currently 28px.
+  - name: gallery_hover_text
+    label: Portrait rollover name color (hex)
+    type: string
+    description: Text color for artwork titles displayed over the image on hover. Example: #000000.
 - name: navigation-footer
   label: Navigation & Footer
   type: file
