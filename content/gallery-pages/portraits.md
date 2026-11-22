@@ -2,8 +2,7 @@
 slug: portraits
 eyebrow: Artwork / Portraits
 title: Portraits
-description: A dedicated gallery for Bry’s portraits artwork. Explore original
-  artwork in this collection.
+description: A dedicated gallery for my portraits
 artwork_sequence: |-
   25 Years
   Alex
