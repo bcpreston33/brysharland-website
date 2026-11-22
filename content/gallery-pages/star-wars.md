@@ -2,7 +2,7 @@
 slug: star-wars
 eyebrow: ARTWORK / STAR WARS
 title: STAR WARS
-description: A gallery of artwork
+description: My Star Wars artwork through the years, mostly expanded universe stuff!
 artwork_sequence: |-
   Aayla Secura
   Kit Fisto
@@ -74,8 +74,8 @@ intro_brush_color: pink
 eyebrow_color: orange
 eyebrow_font: Barlow Condensed
 eyebrow_size: 24
-title_color: orange
-shadow_color: purple
+title_color: yellow
+shadow_color: pink
 title_font: Barlow Condensed Italic
 title_size: 180
 ---
