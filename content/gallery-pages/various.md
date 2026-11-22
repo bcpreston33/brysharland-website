@@ -2,8 +2,7 @@
 slug: various
 eyebrow: Artwork / Various
 title: Various
-description: A dedicated gallery for Bry’s various artwork. Explore original
-  artwork in this collection.
+description: Nintendo, pop culture, random things in my head...
 artwork_sequence: |-
   Are you feeling lucky, hippie?
   Bayonetta Christmas Shopping
