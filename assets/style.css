@@ -313,12 +313,18 @@ body[data-category] .pagehead p{white-space:pre-line;overflow-wrap:anywhere}
 
 /* Gallery-only hover treatment: full-image neon wash and centered artwork title.
    Scoped to the four category pages; homepage and all other site rollovers remain unchanged. */
-body[data-category] .gallery .art{
-  position:relative!important;
+body[data-category="portraits"] .gallery .art,
+body[data-category="queer"] .gallery .art,
+body[data-category="star-wars"] .gallery .art,
+body[data-category="various"] .gallery .art{
+  /* Keep the masonry script's inline position:absolute on each artwork card. */
   isolation:isolate;
   overflow:hidden!important;
 }
-body[data-category] .gallery .art::before{
+body[data-category="portraits"] .gallery .art::before,
+body[data-category="queer"] .gallery .art::before,
+body[data-category="star-wars"] .gallery .art::before,
+body[data-category="various"] .gallery .art::before{
   content:"";
   position:absolute;
   inset:0;
@@ -328,9 +334,18 @@ body[data-category] .gallery .art::before{
   pointer-events:none;
   transition:opacity .2s ease;
 }
-body[data-category] .gallery .art .info,
-body[data-category] .gallery .art:hover .info,
-body[data-category] .gallery .art:focus-visible .info{
+body[data-category="portraits"] .gallery .art .info,
+body[data-category="queer"] .gallery .art .info,
+body[data-category="star-wars"] .gallery .art .info,
+body[data-category="various"] .gallery .art .info,
+body[data-category="portraits"] .gallery .art:hover .info,
+body[data-category="queer"] .gallery .art:hover .info,
+body[data-category="star-wars"] .gallery .art:hover .info,
+body[data-category="various"] .gallery .art:hover .info,
+body[data-category="portraits"] .gallery .art:focus-visible .info,
+body[data-category="queer"] .gallery .art:focus-visible .info,
+body[data-category="star-wars"] .gallery .art:focus-visible .info,
+body[data-category="various"] .gallery .art:focus-visible .info{
   position:absolute!important;
   inset:0!important;
   z-index:2;
@@ -347,7 +362,10 @@ body[data-category] .gallery .art:focus-visible .info{
   pointer-events:none;
   transition:opacity .2s ease;
 }
-body[data-category] .gallery .art .info strong{
+body[data-category="portraits"] .gallery .art .info strong,
+body[data-category="queer"] .gallery .art .info strong,
+body[data-category="star-wars"] .gallery .art .info strong,
+body[data-category="various"] .gallery .art .info strong{
   display:block;
   margin:0;
   color:#fff!important;
@@ -356,20 +374,47 @@ body[data-category] .gallery .art .info strong{
   text-align:center;
   text-shadow:0 2px 12px rgba(0,0,0,.45);
 }
-body[data-category] .gallery .art .info small{display:none!important}
-body[data-category] .gallery .art:hover::before,
-body[data-category] .gallery .art:focus-visible::before{opacity:.8}
-body[data-category] .gallery .art:hover .info,
-body[data-category] .gallery .art:focus-visible .info{opacity:1}
-body[data-category] .gallery .art:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+body[data-category="portraits"] .gallery .art .info small,
+body[data-category="queer"] .gallery .art .info small,
+body[data-category="star-wars"] .gallery .art .info small,
+body[data-category="various"] .gallery .art .info small{display:none!important}
+body[data-category="portraits"] .gallery .art:hover::before,
+body[data-category="queer"] .gallery .art:hover::before,
+body[data-category="star-wars"] .gallery .art:hover::before,
+body[data-category="various"] .gallery .art:hover::before,
+body[data-category="portraits"] .gallery .art:focus-visible::before,
+body[data-category="queer"] .gallery .art:focus-visible::before,
+body[data-category="star-wars"] .gallery .art:focus-visible::before,
+body[data-category="various"] .gallery .art:focus-visible::before{opacity:.8}
+body[data-category="portraits"] .gallery .art:hover .info,
+body[data-category="queer"] .gallery .art:hover .info,
+body[data-category="star-wars"] .gallery .art:hover .info,
+body[data-category="various"] .gallery .art:hover .info,
+body[data-category="portraits"] .gallery .art:focus-visible .info,
+body[data-category="queer"] .gallery .art:focus-visible .info,
+body[data-category="star-wars"] .gallery .art:focus-visible .info,
+body[data-category="various"] .gallery .art:focus-visible .info{opacity:1}
+body[data-category="portraits"] .gallery .art:focus-visible,
+body[data-category="queer"] .gallery .art:focus-visible,
+body[data-category="star-wars"] .gallery .art:focus-visible,
+body[data-category="various"] .gallery .art:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
 @media(hover:none){
-  body[data-category] .gallery .art::before{display:none}
-  body[data-category] .gallery .art .info{
+  body[data-category="portraits"] .gallery .art::before,
+body[data-category="queer"] .gallery .art::before,
+body[data-category="star-wars"] .gallery .art::before,
+body[data-category="various"] .gallery .art::before{display:none}
+  body[data-category="portraits"] .gallery .art .info,
+body[data-category="queer"] .gallery .art .info,
+body[data-category="star-wars"] .gallery .art .info,
+body[data-category="various"] .gallery .art .info{
     position:static!important;
     display:block!important;
     opacity:1!important;
     padding:8px 2px 2px!important;
     text-align:left;
   }
-  body[data-category] .gallery .art .info strong{font-size:19px!important;text-align:left}
+  body[data-category="portraits"] .gallery .art .info strong,
+body[data-category="queer"] .gallery .art .info strong,
+body[data-category="star-wars"] .gallery .art .info strong,
+body[data-category="various"] .gallery .art .info strong{font-size:19px!important;text-align:left}
 }
