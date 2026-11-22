@@ -5,7 +5,8 @@ additional_images: []
 year: ''
 medium: Prismacolor Pencils
 dimensions: ''
-description: ''
+description: I corrected Ahsoka’s montrals to be their proper longer length and added the top cannon to the E-wings which
+  was missing in the show.
 featured: false
 order: ''
 ---

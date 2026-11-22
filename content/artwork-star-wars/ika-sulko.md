@@ -5,7 +5,8 @@ additional_images: []
 year: ''
 medium: Prismacolor Pencils
 dimensions: ''
-description: ''
+description: Ika Sulko, B-Wing Ace Pilot. B-Wings and E-Wings have always been my favorite starfighters. Here’s Mon Calamari
+  Ika Sulko during the Battle of Endor, raining destruction down on the Imperial Fleet.
 featured: false
 order: ''
 ---

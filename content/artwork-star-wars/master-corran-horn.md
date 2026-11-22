@@ -5,7 +5,8 @@ additional_images: []
 year: '2021'
 medium: Prismacolor Pencils
 dimensions: ''
-description: ''
+description: A character that reminds me of birthdays and going to Bradlee’s to buy X-wing books. Master Corran Horn, New
+  Jedi Council member, rogue squadron ace pilot, and owner of a super unique dual phase lightsaber going from purple to silver
 featured: false
 order: ''
 ---

@@ -5,7 +5,7 @@ additional_images: []
 year: ''
 medium: Prismacolor Pencils
 dimensions: ''
-description: ''
+description: Grand Admiral Thrawn and Captain Pellaeon.
 featured: false
 order: ''
 ---

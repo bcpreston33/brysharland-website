@@ -5,7 +5,7 @@ additional_images: []
 year: ''
 medium: Prismacolor Pencils
 dimensions: ''
-description: ''
+description: One of my great child heroes, Commander Wedge Antilles.
 featured: false
 order: ''
 ---

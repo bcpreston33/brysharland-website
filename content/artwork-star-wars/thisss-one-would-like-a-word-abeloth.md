@@ -5,7 +5,8 @@ additional_images: []
 year: ''
 medium: Digital
 dimensions: ''
-description: ''
+description: Saba Sebatyne, the mighty Barabel Jedi Master of Princess Leia, takes care of some business at the end of Fate
+  of the Jedi.
 featured: false
 order: ''
 ---

@@ -5,7 +5,7 @@ additional_images: []
 year: ''
 medium: Prismacolor Pencils
 dimensions: ''
-description: ''
+description: Kleya Marki and Jan Ors, two amazing ladies of the Alliance to Restore the Republic.
 featured: false
 order: ''
 ---

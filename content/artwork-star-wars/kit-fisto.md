@@ -5,7 +5,7 @@ additional_images: []
 year: ''
 medium: Prismacolor Pencils
 dimensions: ''
-description: ''
+description: Artwork featuring Jedi Master Kit Fisto a companion piece to my other work of Aayla Secura.
 featured: false
 order: ''
 ---

@@ -5,7 +5,7 @@ additional_images: []
 year: ''
 medium: Digital
 dimensions: ''
-description: ''
+description: Luke, Ahsoka, and Mara all together would be awesome.
 featured: false
 order: ''
 ---

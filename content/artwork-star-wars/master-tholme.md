@@ -5,7 +5,7 @@ additional_images: []
 year: ''
 medium: Prismacolor Pencils
 dimensions: ''
-description: ''
+description: Master Tholme as a companion piece with Master T’ra Saa.
 featured: false
 order: ''
 ---

@@ -5,7 +5,7 @@ additional_images: []
 year: '2021'
 medium: Prismacolor Pencils
 dimensions: ''
-description: ''
+description: Depiction of Obi Wan meeting Darth Maul on Tatooine.
 featured: false
 order: ''
 ---

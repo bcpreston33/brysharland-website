@@ -1,9 +1,9 @@
 ---
-title: Truth to Power 1
-image: /assets/uploads/Star Wars/truth-to-power-1-LR.jpg
+title: 'Truth to Power 1'
+image: '/assets/uploads/Star Wars/truth-to-power-1-lr.jpg'
 additional_images: []
 year: '2025'
-medium: Prismacolor Pencils
+medium: 'Prismacolor Pencils'
 dimensions: ''
 description: ''
 featured: false

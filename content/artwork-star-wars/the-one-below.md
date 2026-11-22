@@ -5,7 +5,8 @@ additional_images: []
 year: ''
 medium: Prismacolor Pencils
 dimensions: ''
-description: ''
+description: The beautiful Yaddle, an enigma criminally ignored in the prequels and both Clone Wars shows. Drawn in polychromos
+  pencils.
 featured: false
 order: ''
 ---

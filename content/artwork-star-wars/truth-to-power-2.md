@@ -5,7 +5,7 @@ additional_images: []
 year: ''
 medium: Prismacolor and Watercolor
 dimensions: ''
-description: ''
+description: Chief of State Mon Mothma Speaking out against Emperor Palpatine
 featured: false
 order: ''
 ---

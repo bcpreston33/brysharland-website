@@ -5,7 +5,8 @@ additional_images: []
 year: ''
 medium: Digital
 dimensions: ''
-description: ''
+description: Chewbacca brings Yoda’s dear Kybuck to visit on Dagobah. A rare moment of happiness and nostalgia in the dark
+  times.
 featured: false
 order: ''
 ---

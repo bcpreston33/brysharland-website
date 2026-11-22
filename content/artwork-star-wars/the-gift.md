@@ -5,7 +5,7 @@ additional_images: []
 year: '2021'
 medium: Prismacolor and Watercolor
 dimensions: ''
-description: ''
+description: Vima da Boda presenting her lightsaber to Leia Organa Solo.
 featured: false
 order: ''
 ---
