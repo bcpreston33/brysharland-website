@@ -1,6 +1,6 @@
 ---
 title: Encounter On Clak'Dor VII
-image: /assets/uploads/Star Wars/encounter-on-clakdor-vii-LR.jpg
+image: /assets/uploads/Star Wars/encounter-on-clakdor-vii-lr.jpg
 year: ''
 medium: Digital
 dimensions: ''

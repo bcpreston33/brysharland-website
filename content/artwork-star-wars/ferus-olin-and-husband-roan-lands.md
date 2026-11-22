@@ -1,6 +1,6 @@
 ---
 title: Ferus Olin and Husband Roan Lands
-image: /assets/uploads/Star Wars/ferus-olin-and-husband-roan-lands-LR.jpg
+image: /assets/uploads/Star Wars/ferus-olin-and-husband-roan-lands-lr.jpg
 year: ''
 medium: Prismacolor Pencils
 dimensions: ''

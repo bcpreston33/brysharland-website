@@ -305,3 +305,7 @@ body[data-category] .gallery-category-nav a[aria-current="page"]{text-decoration
 
 /* Preserve author-entered line breaks in gallery description fields. */
 body[data-category] .pagehead p{white-space:pre-line;overflow-wrap:anywhere}
+
+/* Artwork description links */
+.lightbox .caption-description a{color:#05dff2;text-decoration:underline;text-underline-offset:3px}
+.lightbox .caption-description a:hover,.lightbox .caption-description a:focus-visible{color:#fff023}

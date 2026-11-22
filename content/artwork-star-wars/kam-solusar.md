@@ -1,6 +1,6 @@
 ---
 title: Kam Solusar
-image: /assets/uploads/Star Wars/kam-solusar-LR.jpg
+image: /assets/uploads/Star Wars/kam-solusar-lr.jpg
 year: ''
 medium: Digital
 dimensions: ''

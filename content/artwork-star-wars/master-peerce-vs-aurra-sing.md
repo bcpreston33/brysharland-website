@@ -1,6 +1,6 @@
 ---
 title: Master Peerce vs. Aurra Sing
-image: /assets/uploads/Star Wars/master-peerce-vs-aurra-sing-LR.jpg
+image: /assets/uploads/Star Wars/master-peerce-vs-aurra-sing-lr.jpg
 year: ''
 medium: Prismacolor Pencils
 dimensions: ''

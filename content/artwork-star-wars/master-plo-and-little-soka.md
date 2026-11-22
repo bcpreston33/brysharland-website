@@ -1,6 +1,6 @@
 ---
 title: Master Plo and Little 'Soka'
-image: /assets/uploads/Star Wars/master-plo-and-little-soka-LR.jpg
+image: /assets/uploads/Star Wars/master-plo-and-little-soka-lr.jpg
 year: ''
 medium: Digital
 dimensions: ''

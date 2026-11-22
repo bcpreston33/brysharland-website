@@ -1,6 +1,6 @@
 ---
 title: Juhani and Belaya
-image: /assets/uploads/Star Wars/juhani-and-belaya-LR.jpg
+image: /assets/uploads/Star Wars/juhani-and-belaya-lr.jpg
 year: ''
 medium: Prismacolor Pencils
 dimensions: ''

@@ -1,6 +1,6 @@
 ---
 title: Tales from the Galaxies Opera House Full Cover
-image: /assets/uploads/Star Wars/star-wars-full-cover-3-LR.jpg
+image: /assets/uploads/Star Wars/star-wars-full-cover-3-lr.jpg
 year: ''
 medium: Prismacolor Pencils and Watercolor
 dimensions: ''

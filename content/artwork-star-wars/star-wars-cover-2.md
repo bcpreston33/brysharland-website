@@ -1,6 +1,6 @@
 ---
 title: Tales from the Outlander Club Front Cover
-image: /assets/uploads/Star Wars/star-wars-cover-2-LR.jpg
+image: /assets/uploads/Star Wars/star-wars-cover-2-lr.jpg
 year: ''
 medium: Prismacolor Pencils and Watercolor
 dimensions: ''

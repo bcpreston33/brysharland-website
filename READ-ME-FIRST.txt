@@ -1,0 +1,15 @@
+BRY SHARLAND WEBSITE: GALLERY AUDIT AND REPAIR
+
+Upload the included files preserving paths.
+IMPORTANT: Also DELETE this existing GitHub file:
+  content/artwork-star-wars/jaina-and-mara.md
+Deleting it is required to remove the obsolete artwork from Pages CMS.
+
+The Star Wars images were checked against the user's supplied Star Wars ZIP.
+The file star-wars-full-cover-5-lr.jpg was actually a Photoshop PSD despite its .jpg extension; it has been converted to a valid JPEG for web display.
+
+Gallery ordering parser repaired, Star Wars sequence refreshed, image paths corrected, and safe Markdown-style links supported in artwork descriptions across all galleries.
+
+Descriptions in the source for Portraits, Queer, and Various are blank. This patch cannot invent them. Restore those descriptions in Pages CMS or supply their spreadsheet data.
+
+Tested: site build completed and 70 Star Wars artwork entries were published with existing image files.

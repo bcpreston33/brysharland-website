@@ -22,13 +22,11 @@ artwork_sequence: |-
   Ika Sulko
   It was foolish of you to come here tonight
   Jacen and Jaina
-  Jaina and Mara
   Jesmin Ackbar
   Kit Fisto
   Kleya Marki and Jan Ors
   Last Stand of Ganner Rhysode
   Last Stand of the Lars Family
-  Luke, Ben, and Mara
   Mara Jade Redux
   Master Corran Horn
   Master Tholme
@@ -57,6 +55,25 @@ artwork_sequence: |-
   Victory at Endor!
   Winter Celchu
   Star Wars: Tales from the Jedi Academy Full Cover
+  Encounter On Clak'Dor VII
+  Enter Jedi Solo
+  Ferus Olin and Husband Roan Lands
+  Juhani and Belaya
+  Kam Solusar
+  Kyle Katarn
+  Luke, Ben, and Mara 
+  Master Peerce vs. Aurra Sing
+  Master Plo and Little 'Soka'
+  Star Wars ReExpanded Novel: Tales from Life Day Front Cover
+  Star Wars ReExpanded Novel: Tales from Life Day Full Cover
+  Star Wars: Tales from the Jedi Academy Front Cover
+  Tales from the Boonta Eve Classic Front Cover
+  Tales from the Boonta Eve Classic Full Cover
+  Tales from the Galaxies Opera House Front Cover
+  Tales from the Galaxies Opera House Full Cover
+  Tales from the Outlander Club Front Cover
+  Tales from the Outlander Club Full Cover
+  Tionne Solusar and Allana Solo
 intro_brush: explore the (expanded) universe
 intro_brush_color: pink
 eyebrow_color: orange

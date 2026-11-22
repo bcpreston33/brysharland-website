@@ -1,6 +1,6 @@
 ---
 title: 'Star Wars: Tales from the Jedi Academy Full Cover'
-image: /assets/uploads/Star Wars/star-wars-full-cover-5-LR.jpg
+image: /assets/uploads/Star Wars/star-wars-full-cover-5-lr.jpg
 year: ''
 medium: Prismacolor Pencils and Watercolor
 dimensions: ''

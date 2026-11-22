@@ -1,6 +1,6 @@
 ---
 title: Tales from the Boonta Eve Classic Full Cover
-image: /assets/uploads/Star Wars/star-wars-full-cover-1-LR.jpg
+image: /assets/uploads/Star Wars/star-wars-full-cover-1-lr.jpg
 year: ''
 medium: Prismacolor Pencils and Watercolor
 dimensions: 18" x 24"

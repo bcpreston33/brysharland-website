@@ -55,7 +55,19 @@ function setupArtworkLightbox(){
   const title=document.createElement('strong');title.textContent=item.dataset.title||'Untitled';title.id='artwork-dialog-title';caption.append(title);
   const meta=[item.dataset.medium,item.dataset.dimensions,item.dataset.year].filter(Boolean);
   if(meta.length){const m=document.createElement('span');m.className='caption-meta';meta.forEach(value=>{const line=document.createElement('span');line.style.display='block';line.textContent=value;m.append(line)});caption.append(m)}
-  if(item.dataset.description){const d=document.createElement('span');d.className='caption-description';d.textContent=item.dataset.description;caption.append(d)}
+  if(item.dataset.description){
+   const d=document.createElement('span');d.className='caption-description';
+   const desc=item.dataset.description;const linkPattern=/\[([^\]\n]+)\]\((https?:\/\/[^\s)]+)\)/g;let pos=0,match;
+   while((match=linkPattern.exec(desc))!==null){
+    d.append(document.createTextNode(desc.slice(pos,match.index)));
+    try{const url=new URL(match[2]);if(url.protocol==='http:'||url.protocol==='https:'){
+      const a=document.createElement('a');a.href=url.href;a.target='_blank';a.rel='noopener noreferrer';a.textContent=match[1];d.append(a);
+    }else d.append(document.createTextNode(match[0]));}
+    catch(e){d.append(document.createTextNode(match[0]));}
+    pos=linkPattern.lastIndex;
+   }
+   d.append(document.createTextNode(desc.slice(pos)));caption.append(d);
+  }
   const url=item.dataset.printUrl||'';
   if(/^https?:\/\//i.test(url)){
    const buy=document.createElement('a');buy.className='artwork-print-link';buy.href=url;buy.target='_blank';buy.rel='noopener noreferrer';buy.textContent='Buy a print';buy.setAttribute('aria-label','Buy a print of '+(item.dataset.title||'this artwork')+' (opens new tab)');caption.append(buy);

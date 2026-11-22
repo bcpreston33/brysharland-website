@@ -1,6 +1,6 @@
 ---
 title: 'Luke, Ben, and Mara '
-image: '/assets/uploads/Star Wars/luke-ben-and-mara-lr.jpg'
+image: '/assets/uploads/Star Wars/luke-ben-and-mara-LR.jpg'
 additional_images: []
 year: ''
 medium: 'Prismacolor Pencils'

@@ -1,6 +1,6 @@
 ---
 title: Tales from the Outlander Club Full Cover
-image: /assets/uploads/Star Wars/star-wars-full-cover-2-LR.jpg
+image: /assets/uploads/Star Wars/star-wars-full-cover-2-lr.jpg
 year: ''
 medium: Prismacolor Pencils and Watercolor
 dimensions: 20” x 17”

@@ -1,6 +1,6 @@
 ---
 title: Tionne Solusar and Allana Solo
-image: /assets/uploads/Star Wars/tionne-solusar-and-allana-solo-LR.jpg
+image: /assets/uploads/Star Wars/tionne-solusar-and-allana-solo-lr.jpg
 year: ''
 medium: Prismacolor Pencils
 dimensions: 14" x 17"

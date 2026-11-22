@@ -108,7 +108,7 @@ def gallery_sequence(slug):
     path=ROOT/'content/gallery-pages'/(slug+'.md')
     if not path.is_file():return []
     raw=path.read_text(encoding='utf-8-sig')
-    match=re.match(r'^---\\s*\\n(.*?)\\n---(?:\\s*\\n|$)',raw,re.S)
+    match=re.match(r'^---\s*\n(.*?)\n---(?:\s*\n|$)',raw,re.S)
     if not match:return []
     import yaml
     obj=yaml.safe_load(match.group(1)) or {}

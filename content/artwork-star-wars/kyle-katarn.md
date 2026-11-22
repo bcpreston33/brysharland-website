@@ -1,6 +1,6 @@
 ---
 title: Kyle Katarn
-image: /assets/uploads/Star Wars/kyle-katarn-LR.jpg
+image: /assets/uploads/Star Wars/kyle-katarn-lr.jpg
 year: ''
 medium: Prismacolor Pencils
 dimensions: 11" x 14"
