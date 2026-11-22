@@ -309,3 +309,67 @@ body[data-category] .pagehead p{white-space:pre-line;overflow-wrap:anywhere}
 /* Artwork description links */
 .lightbox .caption-description a{color:#05dff2;text-decoration:underline;text-underline-offset:3px}
 .lightbox .caption-description a:hover,.lightbox .caption-description a:focus-visible{color:#fff023}
+
+
+/* Gallery-only hover treatment: full-image neon wash and centered artwork title.
+   Scoped to the four category pages; homepage and all other site rollovers remain unchanged. */
+body[data-category] .gallery .art{
+  position:relative!important;
+  isolation:isolate;
+  overflow:hidden!important;
+}
+body[data-category] .gallery .art::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:var(--art-color,var(--purple));
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease;
+}
+body[data-category] .gallery .art .info,
+body[data-category] .gallery .art:hover .info,
+body[data-category] .gallery .art:focus-visible .info{
+  position:absolute!important;
+  inset:0!important;
+  z-index:2;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%;
+  min-height:0!important;
+  padding:20px!important;
+  background:transparent!important;
+  border:0!important;
+  opacity:0;
+  text-align:center;
+  pointer-events:none;
+  transition:opacity .2s ease;
+}
+body[data-category] .gallery .art .info strong{
+  display:block;
+  margin:0;
+  color:#fff!important;
+  font-size:clamp(22px,2.2vw,34px)!important;
+  line-height:1.05!important;
+  text-align:center;
+  text-shadow:0 2px 12px rgba(0,0,0,.45);
+}
+body[data-category] .gallery .art .info small{display:none!important}
+body[data-category] .gallery .art:hover::before,
+body[data-category] .gallery .art:focus-visible::before{opacity:.8}
+body[data-category] .gallery .art:hover .info,
+body[data-category] .gallery .art:focus-visible .info{opacity:1}
+body[data-category] .gallery .art:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+@media(hover:none){
+  body[data-category] .gallery .art::before{display:none}
+  body[data-category] .gallery .art .info{
+    position:static!important;
+    display:block!important;
+    opacity:1!important;
+    padding:8px 2px 2px!important;
+    text-align:left;
+  }
+  body[data-category] .gallery .art .info strong{font-size:19px!important;text-align:left}
+}
